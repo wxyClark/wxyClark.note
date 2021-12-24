@@ -1,4 +1,4 @@
-# wxyClark 的笔记本 总目录
+# 总目录
 
 source: `{{ page.path }}`
 

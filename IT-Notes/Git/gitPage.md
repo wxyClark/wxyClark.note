@@ -2,7 +2,7 @@
 
 source: `{{ page.path }}`
 
-![视频教程](https://video.zhihu.com/video/1412152151905316864?itemId=2073340305&itemType=answer&player=%7B%22shouldShowPageFullScreenButton%22%3Atrue%7D)
+[视频教程](https://video.zhihu.com/video/1412152151905316864?itemId=2073340305&itemType=answer&player=%7B%22shouldShowPageFullScreenButton%22%3Atrue%7D)
 
 # jekyll-rtd-theme
 
