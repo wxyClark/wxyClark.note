@@ -1,6 +1,9 @@
-# wxyClark 的笔记本 总目录
+---
+sort: 2
+---
+
+# 待归档笔记
 
 source: `{{ page.path }}`
 
 {% include list.liquid all=true %}
-  
