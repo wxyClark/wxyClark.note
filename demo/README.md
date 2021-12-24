@@ -2,10 +2,7 @@
 sort: 9
 ---
 
-# demo
+# MarkDowndemo
 
-```
-{% raw %}{% include list.liquid all=true %}{% endraw %}
-```
 
 {% include list.liquid all=true %}

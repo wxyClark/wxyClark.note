@@ -1,4 +1,4 @@
-# git-basic
+# 基础配置
 
 source: `{{ page.path }}`
 
