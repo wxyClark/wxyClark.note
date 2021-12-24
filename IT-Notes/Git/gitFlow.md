@@ -1,3 +1,3 @@
-# file3
+# gitFlow
 
 source: `{{ page.path }}`

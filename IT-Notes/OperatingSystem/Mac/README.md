@@ -1,3 +1,3 @@
-# file2
+# MAC
 
 source: `{{ page.path }}`

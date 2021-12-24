@@ -1,3 +1,3 @@
-# Docker
+# gitSkills
 
 source: `{{ page.path }}`
