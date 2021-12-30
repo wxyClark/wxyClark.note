@@ -6,6 +6,19 @@
 ## 插件
   [参考资料](https://www.cnplugins.com/tool/howtobackupchromeplugins.html)
   
+  [chrome 网上应用店](https://chrome.google.com/webstore)
+  
+### 推荐插件
+* Adblock Plus - 免费的广告拦截器
+* Octotree - GitHub code tree
+* SpanTree - GitLab Tree
+* Postman Interceptor
+* Xdebug helpe
+* Enable Copy
+* Image Downloader
+* Video Speed Controller
+*  购物党自动比价工具
+
 ### 插件打包备份
 * 浏览器地址栏输入:chrome://extensions/，选择开发模式，单击打包扩展程序
 * 进入chrome插件的安装目录，C:\Users\【当前用户名称】\AppData\Local\Google\Chrome\User Data\Default\Extensions目录下
