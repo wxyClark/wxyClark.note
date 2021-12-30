@@ -1,5 +1,5 @@
 ---
-sort: 9
+sort: 5
 text: |
   ABCDEFGHIJKLMNOPQRSTUVWXYZ
   abcdefghijklmnopqrstuvwxyz
@@ -8,7 +8,9 @@ text: |
   ‘?’“!”(%)[#]{@}/&\<-+÷×=>®©$€£¥¢:;,.*
 ---
 
-# Fonts Test
+# 字体-符号
+
+## 字体
 
 `{:.font-mono}`
 
@@ -26,7 +28,7 @@ text: |
 {:.font-head}
 {{ page.text }}
 
-## font-awesome
+## 样式
 
 ```html
 <i class="fa fa-check-circle text-green">checked</i>
@@ -35,3 +37,17 @@ text: |
 
 <i class="fa fa-check-circle text-green">checked</i>
 <i class="fa fa-battery-quarter text-red">battery</i>
+
+
+## Emoji
+[emoji cheat sheet](https://www.webfx.com/tools/emoji-cheat-sheet/)
+
+```
+I give this theme two :+1:!
+```
+
+I give this theme two :+1:!
+
+```tip
+Set config `plugins: [jemoji]`, Emoji searcher, see: [https://emoji.muan.co/](https://emoji.muan.co/)
+```

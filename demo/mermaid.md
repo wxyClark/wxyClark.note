@@ -2,8 +2,9 @@
 sort: 4
 ---
 
-# Mermaid Test
+# 结构图
 
+## 文本
     ```mermaid
     graph TB
         c1-->a2
@@ -17,7 +18,7 @@ sort: 4
         c1-->c2
         end
     ```
-
+## 跨部门流程图
 ```mermaid
 graph TB
     c1-->a2
@@ -32,6 +33,7 @@ graph TB
     end
 ```
 
+## 流程图
 ```mermaid
 graph TD;
     A-->B;
@@ -40,6 +42,7 @@ graph TD;
     C-->D;
 ```
 
+## 类图
 ```mermaid
 classDiagram
 classA <|-- classB
@@ -52,6 +55,7 @@ classM <|.. classN
 classO .. classP
 ```
 
+## E-R图
 ```mermaid
 erDiagram
     CUSTOMER ||--o{ ORDER : places
