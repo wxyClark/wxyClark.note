@@ -57,17 +57,24 @@ composer.lock这个文件主要是解决在协同开发中组件及其依赖的�
 
 ## 常用命令
 composer设置环境变量之后，可使用 composer 替换下面的 php composer.phar
-* 初始化           php composer.phar init
-* 安装            php composer.phar install
-* 更新            php composer.phar update
-* 自我更新        php composer.phar self-update  
-* 申明依赖        php composer.phar require
-* 依赖性检测       php composer.phar depends
-* 依赖包状态检测   php composer.phar status  
-* 有效性检测       php composer.phar validate  
-* 搜索            php composer.phar search keywords
-* 创建项目        php composer.phar create-project 包名/项目名 目标目录
-* 打印自动加载索引 php composer.phar dump-autoload
-* 诊断(有Bug时)   php composer.phar diagnose
-* 归档            php composer.phar archive vendor/package 2.0.21 --format=zip
-* 获取帮助信息     php composer.phar help install
+
+| 用途 | 全局 composer 环境变量 | composer.phar 模式 |
+| --- | --- | --- |
+| 初始化 | composer init | php composer.phar init |
+| 安装 | composer install | php composer.phar install |
+| 更新 | composer update | php composer.phar update |
+| 自我更新 | composer self-update | php composer.phar self-update |
+| 申明依赖 | composer require | php composer.phar require |
+| 依赖性检测 | composer depends | php composer.phar depends |
+| 依赖包状态检测 | composer status | php composer.phar status |
+| 有效性检测 | composer validate | php composer.phar validate |
+| 有效性检测 | composer validate | php composer.phar validate |
+| 搜索 | composer search keywords | php composer.phar search keywords |
+| 创建项目 | composer create-project pkg/project targetDir  | php composer.phar create-project pkg/project targetDir |
+| 打印自动加载索引 | composer dump-autoload | php composer.phar dump-autoload |
+| 诊断(有Bug时) | composer diagnose | php composer.phar diagnose |
+| 获取帮助信息 | composer help install | php composer.phar help install |
+
+归档
+    
+    composer archive vendor/package 2.0.21 --format=zip 

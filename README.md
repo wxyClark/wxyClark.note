@@ -1,6 +1,9 @@
 # 总目录
 
-source: `{{ page.path }}`
+## 资源推荐
+    [算法]
+    [工具]
 
-{% include list.liquid all=false %}
-  
+## 交个朋友
+    img:微信
+    img:支付宝
