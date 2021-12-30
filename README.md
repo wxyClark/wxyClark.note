@@ -2,5 +2,5 @@
 
 source: `{{ page.path }}`
 
-{% include list.liquid all=true %}
+{% include list.liquid all=false %}
   
