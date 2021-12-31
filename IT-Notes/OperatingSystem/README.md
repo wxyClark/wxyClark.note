@@ -15,12 +15,12 @@ Win11卓越性能模式未必输给 Linux轻量级发行版
 
 ## Linux
 模拟生产环境命令行模式 CentOS稳定版
+
 好奇心重的话，请止步于 UbuntuLTS 或 OpenSUSE, 一个就好！
 
 ```danger
 极度不建议频繁更换各种发行版本，会安装各种系统、会配置双系统都是屠龙之技
 ```
-
 
 
 {% include list.liquid all=true %}
