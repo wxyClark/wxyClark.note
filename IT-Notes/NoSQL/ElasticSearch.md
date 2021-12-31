@@ -1,7 +1,3 @@
----
-sort: 3
----
-
 # ElasticSearch
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
 [官方 中文](https://www.elastic.co/cn/elasticsearch/)
@@ -15,15 +11,17 @@ sort: 3
 ES集群对外提供RESTful API
 
 | 版本          | 差异          | date |
-| --------------- | -------------- | ---- |
+| --------------- | -------------- | -------------- |
 | Elastic 5.x | Lucene 6.x 的支持，磁盘空间少一半；索引时间少一半；查询性能提升25%；支持IPV6       | 2016.10.26 |
 | Elastic 6.x          | 开始不支持一个 index 里面存在多个 type。  | 2017.08.31 |
 | Elastic 7.x    | 正式废除单个索引下多Type的支持，7.1开始，Security功能免费使用，支持k8s | 2019.04.10 |
-Lucene是apache下的一个开源的，一套用java写的全文检索的工具包。
+
 
 ```tip
 【默认所有字段建索引】不需要索引的字段，一定要明确定义出来
+
 【string类型默认分词】对于String类型的字段，不需要analysis（分词）的也需要明确定义出来
+
 【选择有规律的ID很重要】随机性太大的ID（比如UUID）不利于查询
 ```
 

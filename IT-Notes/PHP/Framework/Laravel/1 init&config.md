@@ -1,4 +1,8 @@
-# 1、Laravel 安装&配置
+---
+sort: 1
+---
+
+# Laravel 安装&配置
 Laravel 8.x  PHP对应的版本>=7.3.0
 Laravel 7.x  PHP对应的版本>=7.2.5
 Laravel 6.x  PHP对应的版本>=7.2.0
@@ -7,6 +11,7 @@ Laravel>=5.6 PHP对应的版本>=7.1.3
 ## 通过 Composer 创建项目  
 
     composer create-project --prefer-dist laravel/laravel 目标目录
+
 ## 本地开发环境
 如果本地安装了 PHP 可使用 PHP 内置的服务器来为应用程序提供服务 http://localhost:8000
 
