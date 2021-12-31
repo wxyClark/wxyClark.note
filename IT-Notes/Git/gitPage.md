@@ -1,10 +1,11 @@
 # gitPage
 
-
 [视频教程](https://video.zhihu.com/video/1412152151905316864?itemId=2073340305&itemType=answer&player=%7B%22shouldShowPageFullScreenButton%22%3Atrue%7D)
 
 # jekyll-rtd-theme
 [Jekyll使用教程笔记](https://blog.csdn.net/weixin_34236869/article/details/91476448)
+
+README.MD文件 标识 当前目录是否自动展示的左侧目录上
 
 ![CI](https://github.com/rundocs/jekyll-rtd-theme/workflows/CI/badge.svg?branch=develop)
 ![jsDelivr](https://data.jsdelivr.com/v1/package/gh/rundocs/jekyll-rtd-theme/badge)
