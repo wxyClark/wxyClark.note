@@ -14,6 +14,7 @@ sort: 1
 
 ## Win10硬盘安装
 [知乎 无需PE，绕过TPM2.0限制升级Win11](https://zhuanlan.zhihu.com/p/417296843)
+
 [B站 不要PE，绕过TPM2.0限制升级Win11](https://www.bilibili.com/read/cv13789090)
 - 下载Win_11_Boot_And_Upgrade_FiX_KiT_v2.0
 - Windows11.iso下载 并移动到 TOOL_PATH\\Source_ISO\W11下
