@@ -1,3 +1,2 @@
 # demo
 
-source: `{{ page.path }}`

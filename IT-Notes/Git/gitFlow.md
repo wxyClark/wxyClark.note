@@ -1,3 +1,2 @@
 # gitFlow
 
-source: `{{ page.path }}`

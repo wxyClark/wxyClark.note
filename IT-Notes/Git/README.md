@@ -1,7 +1,2 @@
----
-sort: 1
----
+# 1. Git
 
-# Git
-
-source: `{{ page.path }}`

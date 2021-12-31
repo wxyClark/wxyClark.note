@@ -1,9 +1,4 @@
----
-sort: 0
----
+# 0. 工具集
 
-# 工具集
-
-source: `{{ page.path }}`
 
 {% include list.liquid all=true %}

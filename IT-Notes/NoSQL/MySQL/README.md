@@ -2,7 +2,7 @@
 sort: 1
 ---
 
-# MySQL
+# 1. MySQL
 
 ## 适用场景
 

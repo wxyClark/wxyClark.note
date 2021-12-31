@@ -1,9 +1,4 @@
----
-sort: 5
----
+# 5. PHP
 
-# PHP
-
-source: `{{ page.path }}`
 
 {% include list.liquid all=true %}

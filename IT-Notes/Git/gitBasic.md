@@ -1,6 +1,5 @@
 # 基础配置
 
-source: `{{ page.path }}`
 
 ## gitPage
     创建 username.github.io项目；必须使用【username】
