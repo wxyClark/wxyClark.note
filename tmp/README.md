@@ -1,7 +1,0 @@
----
-sort: 4
----
-
-# 待归档笔记
-
-{% include list.liquid all=true %}
