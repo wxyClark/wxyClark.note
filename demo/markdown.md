@@ -42,13 +42,26 @@ This is a code block following a header.
 2. This is an ordered list following a header.
 3. This is an ordered list following a header.
 
+
+| 1    | 2  |3  |
+| ---- | ---- |---- |
+| A | B |C |
+
 ###### Header 6
 
-| What    | Follows  |
-| ------- | -------- |
-| A table | A header |
-| A table | A header |
-| A table | A header |
+| 1    | 2  |3  |4  |5  |6  |7  |8  |9  |0  |1  |
+| ---- | ---- |---- |---- |---- |---- |---- |---- |---- |---- |---- |
+| A1 | B |C |D |E |F |G |H |I |J |K |
+| A2 | B |C |D |E |F |G |H |I |J |K |
+| A3 | B |C |D |E |F |G |H |I |J |K |
+| A4 | B |C |D |E |F |G |H |I |J |K |
+| A5 | B |C |D |E |F |G |H |I |J |K |
+| A6 | B |C |D |E |F |G |H |I |J |K |
+| A7 | B |C |D |E |F |G |H |I |J |K |
+| A8 | B |C |D |E |F |G |H |I |J |K |
+| A9 | B |C |D |E |F |G |H |I |J |K |
+| A0 | B |C |D |E |F |G |H |I |J |K |
+| A1 | B |C |D |E |F |G |H |I |J |K |
 
 ---
 
