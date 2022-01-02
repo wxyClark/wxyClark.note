@@ -2,6 +2,14 @@
 
 [视频教程](https://video.zhihu.com/video/1412152151905316864?itemId=2073340305&itemType=answer&player=%7B%22shouldShowPageFullScreenButton%22%3Atrue%7D)
 
+# skills
+## 目录变更
+建议使用先删除再创建的方式，通过两次git提交，验证导航栏不出现旧的目录
+
+直接修改目录名会导致gitPage页面出现新、旧两套目录
+
+补救方式：恢复目录+README.md文件，git提交；删除旧目录，git提交；
+
 # jekyll-rtd-theme
 [Jekyll使用教程笔记](https://blog.csdn.net/weixin_34236869/article/details/91476448)
 
