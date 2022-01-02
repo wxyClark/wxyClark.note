@@ -4,6 +4,10 @@
 ## gitPage
     创建 username.github.io项目；必须使用【username】
 
+[jekyll教程](http://jekyllcn.com/docs/github-pages/)
+
+resume 使用其他人的模板，完整的放在项目根目录下，删除README.md可默认不展示简历页面
+
 ## git-sshkey
     【git命令行下操作】
     git config --global user.name   "wxy"
