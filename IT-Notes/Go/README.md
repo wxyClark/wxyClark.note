@@ -1,8 +1,8 @@
 ---
-sort: 3
+sort: 6
 ---
 
-# NoSQL
+# Go
 
 
 {% include list.liquid all=true %}

@@ -1,8 +1,8 @@
 ---
-sort: 3
+sort: 6
 ---
 
-# NoSQL
+# 人文
 
 
 {% include list.liquid all=true %}
