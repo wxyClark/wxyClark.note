@@ -1,8 +1,5 @@
----
-sort: 1
----
-
 # 方法论
 
+delete
 
-{% include list.liquid all=true %}
+

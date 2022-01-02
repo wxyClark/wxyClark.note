@@ -1,8 +1,4 @@
----
-sort: 3
----
-
 # English
 
+delete
 
-{% include list.liquid all=true %}
