@@ -1,7 +1,3 @@
----
-sort: 3
----
-
 # ElasticSearch
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
 [官方 中文](https://www.elastic.co/cn/elasticsearch/)
