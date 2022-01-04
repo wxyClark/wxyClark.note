@@ -10,7 +10,7 @@ Laravel>=5.6 PHP对应的版本>=7.1.3
 
 ## 通过 Composer 创建项目  
 
-    composer create-project --prefer-dist laravel/laravel 目标目录
+    composer create-project --prefer-dist laravel/laravel=8.0.* 目标目录
 
 ## 本地开发环境
 如果本地安装了 PHP 可使用 PHP 内置的服务器来为应用程序提供服务 http://localhost:8000

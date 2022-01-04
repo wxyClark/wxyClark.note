@@ -4,6 +4,11 @@ sort: 1
 
 # Laravel
 
+## 设计模式
+### Facade 门面模式
+
+### 观察者模式 Event-Listener
+
 
 {% include list.liquid all=true %}
 

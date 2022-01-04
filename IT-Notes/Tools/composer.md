@@ -74,6 +74,7 @@ composer设置环境变量之后，可使用 composer 替换下面的 php compos
 | 打印自动加载索引 | composer dump-autoload | php composer.phar dump-autoload |
 | 诊断(有Bug时) | composer diagnose | php composer.phar diagnose |
 | 获取帮助信息 | composer help install | php composer.phar help install |
+| 获取建议 | composer suggest | php composer.phar suggest |
 
 归档
     
