@@ -35,9 +35,17 @@ php artisan migrate:
 
 ## 路由
 
+
 ## 事件监听绑定
 
 生成 事件 & 监听器 —— 【推荐】
+
+=======
+## 事件监听 event&listeners
+[csdn](https://blog.csdn.net/u011341352/article/details/106782564)
+[SYZ IT小站](http://www.xiaosongit.com/index/detail/id/750.html)
+### 绑定
+在App\Providers\EventServiceProvider 的 protected $listen 中 绑定 event-listener 关系，支持一对多
 
 ```angular2html
 在 App\Providers\EventServiceProvider绑定 event-listener 关系，支持一对多
