@@ -56,3 +56,50 @@ ONBOOT=no 设置为yes，激活网卡
 vim /etc/inittab
 id:3:initdefault:  
 ```   
+
+* 设定启动项
+
+    操作思路：先将3级别文本模式下默认开启的服务都关闭，然后开启需要开启的服务。
+    ```
+    chkconfig --list|grep 3：on <==查看设置结果
+    ```
+
+* 设置字符集,支持中文
+
+```
+echo ' LANG="zh_CN.UTF-8"' >/etc/sysconfig/i18n 
+#→相当于用vi /etc/sysconfig/i18n 添加LANG="zh_CN.UTF-8"内容
+```
+
+## 安全性配置
+### 关闭SELinux
+* SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现。
+
+```
+查看Selinux状态 getenforce
+
+临时使其关闭的命令 setenforce 0
+
+永久关闭 vim /etc/selinux/config 
+SELINUX=enforcing　　//修改此处为disabled
+
+这样在重启前后都可以使SELinux关闭生效
+```
+
+
+### 锁定关键文件系统，防止被提权篡改
+
+* 必须对账号密码文件及启动文件加锁
+* 上锁后，所有用户都不能对文件修改删除
+* 如需临时操作，解锁——修改——上锁
+```
+上锁命令: chattr +i /etc/passwd /etc/shadow /etc/group /etc/gshadow /etc/inittab 
+
+解锁命令：chattr -i /etc/passwd /etc/shadow /etc/group /etc/gshadow /etc/inittab
+```
+
+### 禁止ping
+比较好的策略是通过iptables设置让特定的IP可以ping，如让内网用户ping，其他外部用户不能ping
+```
+echo "net.ipv4.icmp_echo_ignore_all=1" >> /etc/sysctl.conf
+```
