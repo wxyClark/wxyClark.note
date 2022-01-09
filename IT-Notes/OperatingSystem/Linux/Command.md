@@ -6,8 +6,10 @@
 
 | 命令    | 用途  | 注释  |
 | ---- | ---- |---- |
-| cat /proc/cpuinfo  | 查看CPU信息(如：核数) | |
-
+| cat /proc/cpuinfo  | 查看CPU信息 | 如：核数 |
+| grep 'physical id' /proc/cpuinfo\|sort\|uniq\|wc -l  | 查看CPU核数 | 对physical id去重计数 |
+| top | 查看CPU运行情况 | 判定占用cpu高的进程 |
+| top 回车 1 | 查看CPU有几个内核 |  |
 
 ## 文件&目录
 
