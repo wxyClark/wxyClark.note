@@ -1,7 +1,3 @@
----
-sort: 1
----
-
 # Nginx Web服务
 
 【面试常考】Apache select和Nginx epoll模型的区别
