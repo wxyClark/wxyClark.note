@@ -12,7 +12,7 @@ sort: 1
 
 {% include list.liquid all=true %}
 
-## 闭坑
+## 避坑
 ### toArray()
 
 get() 、 pluck() 的结果集，在->toArray() 之前应先判空

@@ -3,6 +3,9 @@ sort: 3
 ---
 
 # artisan 命令
+
+[中文解释](https://www.cnblogs.com/myzan/p/12000857.html)
+
 查看所有可用的 Artisan 命令的列表
 ```angular2html
 php artisan list
@@ -11,6 +14,15 @@ php artisan list
 ```angular2html
 php artisan help COMMAND
 ```
+
+## controller-model
+```
+php artisan make:controller App\\Http\\Controllers\\ModuleName\\BusinessNameController
+php artisan make:model Models/ModuleName/TbaleNameModel
+//  command文件默认生成在 app\Console\Commands 目录下
+php artisan make:command ModuleName/HandleName
+```
+
 ## 加密key
 生成 .env 文件 APP_KEY 的值
 ```angular2html
