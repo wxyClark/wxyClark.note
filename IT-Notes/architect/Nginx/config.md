@@ -12,6 +12,8 @@
 
 ### /etc/nginx/nginx.conf
 
+[参考](https://blog.csdn.net/baiqian1909/article/details/101986471)
+
 ```
 # 设置nginx服务的系统使用用户
 user  nginx; 
@@ -55,7 +57,7 @@ http {
     # 一般要查看系统给出确切的值。这里一般是cpu L1 的4-5倍
     server_names_hash_max_size 512;
 
-    # 开启高效文件传输模式,可防止网络及磁盘I/O阻塞，提升Nginx工作效率
+    # 
     sendfile on;
     tcp_nopush on;
     tcp_nodelay on;
@@ -66,12 +68,58 @@ http {
 
     access_log  /var/log/nginx/access.log  main;
 
-    sendfile        on; //  快速发送
-    #tcp_nopush     on;
+    # 连接超时是服务的一种自我管理、自我保护的重要机制。
+    # (1)PHP程序建立连接消耗的资源和时间相对要少些，通常使用短连接
+    # (2)Java程序建立连接消耗的资源和时间更多，一般建议设置长连接
+    # 超过这个时间，服务器会关闭该连接
+    # 连接(服务端)超时时间，默认为75s，可以在http，server，location块。
+    keepalive_timeout 65;  
 
-    keepalive_timeout 65;  #连接(服务端)超时时间，默认为75s，可以在http，server，location块。
+    # 【快速发送】开启高效文件传输模式,可防止网络及磁盘I/O阻塞，提升Nginx工作效率
+    sendfile        on;  
+    tcp_nopush      on;
+    # 默认情况下当数据发送时，内核并等待更多的字节组成一个数据包才发送，这样可以提高I/O性能。
+    # 但是，在每次只发送很少字节的业务场景中，使用tcp_nodelay功能，等待时间会比较长。
+    # 激活或禁用TCP_NODELAY选项，当一个连接进入keep-alive状态时生效
+    tcp_nodelay     on;
 
-    #gzip  on;
+    # 设置读取客户端请求头数据的超时时间，15 是经验参考值，单位：秒
+    # 如果超时，客户端还没有发送完整的header数据，服务器端将返回“Request time out（408）”错误
+    client_header_timeout 15;
+
+    # 设置读取客户端请求主体的超时时间，默认值是60
+    # 这个超时仅仅为两次成功的读取操作之间的一个超时，非请求整个主体数据的超时时间
+    # 如果超时，客户端没有发送任何数据，Nginx将返回“Request time out（408）”错误
+    client_body_timeout 60;
+
+    # 指定响应客户端的超时时间
+    # 这个超时仅限于两个连接活动之间的时间
+    # 如果超时，客户端没有任何活动，Nginx将会关闭连接
+    # 默认值为60秒，可以改为参考值25秒
+    send_timeout 25；
+
+    # 调整上传文件的大小限制（http Request body size 最大的允许的客户端请求主体大小）
+    # 设置为0表示禁止检查客户端请求主体大小。此参数对提高服务器端的安全性有一定的作用
+    # 在请求头域有“Content-Length”，如果超过了此配置值，客户端会收到413错误
+    client_max_body_size 8m;
+
+    【gzip】
+    # 配置Nginx gzip压缩实现性能优化, 减少响应包的大小，压缩时会稍微消耗一些CPU资源，这个一般可以忽略
+    #  Nginx的gzip压缩功能依赖于ngx_http_gzip_module模块，默认已安装
+    gzip  on;
+    # 被压缩的纯文本文件必须要大于1KB，由于压缩算法的原因，极小的文件压缩后可能反而变大。
+    gzip_min_length  1k; 
+    # 压缩缓冲区大小。表示申请4个单位为16K的内存作为压缩结果流缓存
+    # 默认值是申请与原始数据大小相同的内存空间来存储gzip压缩结果
+    gzip_buffers     4 16k; 
+    # 压缩比率。用来指定gzip压缩比，1压缩比最小，速度最快；9压缩比最大，传输速度快，但处理最慢，也比较耗CPU资源。
+    gzip_comp_level 2; 
+    # 【指定压缩的类型】纯文本内容压缩比很高，最好进行压缩，例如：html、js、css、xml、shtml等格式的文件
+    # “text/html”类型总是会被压缩，这个就是HTTP原理部分讲的媒体类型
+    # 图片、视频（流媒体）等文件尽量不要压缩，因为这些文件大多都是经过压缩的。
+    gzip_types  text/plain application/x-javascript text/css application/xml; 
+    # vary header支持。该选项可以让前端的缓存服务器缓存经过gzip压缩的页面
+    gzip_vary on;
 
     include /etc/nginx/conf.d/*.conf;      // 读到这个地方是加载另一个默认配置配置文件default.conf
 }

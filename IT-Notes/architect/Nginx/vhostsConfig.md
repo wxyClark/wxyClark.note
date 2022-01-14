@@ -12,6 +12,7 @@ server {
     root /data/www/project_dir_name/;
     index index.php index.html index.htm;
 
+    # 特别注意，location内容一般放到虚拟主机配置中，即server标签中。
   
     location ~ \.php$ {
         # nginx会调用fastcgi接口
@@ -48,6 +49,35 @@ server {
         deny 127.0.0.1;  #拒绝的ip
         allow 172.18.5.54; #允许的ip           
     } 
+
+    # 【expires功能】是允许通过Nginx配置文件控制HTTP的"Expires"和"Cache-Control"响应头部内容
+    # 告诉客户端浏览器是否缓存和缓存多久以内访问的内容。
+    # 【本地缓存策略】
+    # 企业网站有可能不希望被缓存的内容：广告图片，用于广告服务，都缓存了就不好控制展示了。 
+    # 网站流量统计工具（JS代码），都缓存了流量统计就不准了。 
+    # 更新很频繁的文件（google的logo），这个如果按天，缓存效果还是显著的。
+    location ~ .*\.（gif|jpg|jpeg|png|bmp|swf）$
+    {   
+        # (1)根据文件扩展名进行判断,将图片设置在客户浏览器本地缓存 365~3650 天
+        expires      3650d;
+    }
+    
+    location ~ .*\.（js|css|html）$
+    {
+        # (2)将CSS、JS、html等代码缓存 10~30 天
+        expires      30d;
+    }
+
+    location ~ ^/（images|javascript|js|css|flash|media|static）/ {
+        # (3)根据URI中的路径（目录）进行判断，添加expires功能
+        expires 360d;
+    }
+
+    location ~（robots.txt） { 
+        expires 7d; 
+        break; 
+    }
+
 
     listen       443;   #监听端口 https
 }
