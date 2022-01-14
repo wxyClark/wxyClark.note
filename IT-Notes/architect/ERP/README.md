@@ -4,10 +4,10 @@ sort: 1
 
 # 电商ERP架构实践
 
-*  
+* analysis 大数据分析
 * BI 商务智能(Business Intelligence)
 * common 基础配置
-* data-analysis 大数据分析
+* downloads 下载中心
 * financial 财务系统 
 * goods 商品系统
 * instant-kill 秒杀/闪购 系统
@@ -28,6 +28,12 @@ sort: 1
 ### 网关校验
 
 ### 子系统
+
+* 前后端严格分离,解耦
+* 上传由前段把文件转为base64编码，加签传递给后端
+* 后端处理完上传，返回文件url给前段
+* 后端异步处理文件导入，在打入结果页展示结果和失败原因
+* 下载由后端处理数据生成下载文件，发送文件url给前端
 
 ## 调用
 前端调用 子系统 验签

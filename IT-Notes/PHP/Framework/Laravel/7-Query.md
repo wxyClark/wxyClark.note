@@ -8,7 +8,7 @@ sort: 7
 
 支持获取 key => value 数组，也可以只获取 value 数组
 ```
-$map = $this->model->where($condition)->pluck('value'[, 'key']);
+$map = $this->model->where($condition)->distinct()->pluck('value'[, 'key']);
 //  toArray前判空
 if ($map) {
     return $map->toArray();

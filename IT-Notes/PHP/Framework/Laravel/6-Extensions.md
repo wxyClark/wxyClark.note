@@ -7,7 +7,7 @@ sort: 6
 ## maatwebsite/excel
 
 ```
-composer require "maatwebsite/excel:~2.1.0"
+composer require "maatwebsite/excel:~3.1.25"
 ```
 
 * 安装完成后，修改 config/app.php 在 providers 数组内追加如下内容
@@ -64,3 +64,7 @@ Excel::create(time(), function ($excel) use ($rowList) {
                 });
             })->store('xlsx');
 ```
+
+### 注意事项
+
+导出数据指定key是否有效，Excel导出 按标题顺序对应
