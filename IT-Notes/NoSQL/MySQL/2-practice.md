@@ -5,7 +5,7 @@ sort: 2
 # MySQL实践
 
 
-## 开发规范
+## 开发总则
 
 * 禁止在开发环境做测试
 * 前后端必须会用一致的字符集(utf8mb4)
@@ -13,7 +13,7 @@ sort: 2
 * 建议使用预编译语句进行数据库操作
 * 关联字段的数量类型、范围 与源数据保持一致
 
-### 命名规范
+## 命名规范
 [分享一份大佬的MySQL数据库设计规范，值得收藏](https://zhuanlan.zhihu.com/p/165940906)
 
 ```danger
@@ -29,7 +29,7 @@ sort: 2
 * 【列的名称】32个字符以内，必须有comment，枚举值在comment中罗列
 * 【索引名称】主键的名称以“pk_”开头，唯一键以“uk_”或“uq_”开头，普通索引以“idx_”开头，一律使用小写格式，以表名/字段的名称或缩写作为后缀
 
-### 数据表设计规范
+## 数据表设计规范
 
 ```danger
 必须显式指定表存储引擎类型，如无特殊需求，一律为InnoDB
@@ -51,7 +51,7 @@ NULL值会存在每一行都会占用额外空间、数据迁移容易出错、�
 
 * 【反范式设计】把经常需要join查询的字段，在其他表里冗余一份，减少join查询
 
-### 字段设计规范
+## 字段设计规范
 
 ```danger
 优先选择符合存储需要的最小数据类型，优先使用整数类型
@@ -74,4 +74,81 @@ varchar最多存65535字节(在utf8字符集下最多存21844个字符,超过会
 * 不推荐使用enum，set，浪费空间，更新不方便。推荐使用tinyint或smallint。
 * 不推荐使用blob，text等类型。它们都比较浪费硬盘和内存空间。
 
-### SQL使用规范
+## SQL使用规范
+
+```danger
+禁止使用相同的账号跨库操作(各执其职，互不越权)
+禁止在WHERE语句中进行计算(索引失效)
+```
+```danger
+生产环境禁止使用hint，如sql_no_cache，force index，ignore key，straight join等。
+因为hint是用来强制SQL按照某个执行计划来执行，但随着数据量变化我们无法保证自己当初的预判是正确的，因此我们要相信MySQL优化器！
+```
+
+```danger
+【高危语句】
+* 禁用update|delete t1 … where a=XX limit XX; 这种带limit的更新语句会导致主从不一致，导致数据错乱。建议加上order by PK。
+* 禁止使用关联子查询，如update t1 set … where name in(select name from user);效率极其低下
+* 禁用procedure、function、trigger、views、event、外键约束。消耗数据库资源，降低数据库实例可扩展性。推荐都在程序端实现。
+* 禁用insert into …on duplicate key update…在高并发环境下，会造成主从不一致。
+* 禁止联表更新语句，如update t1,t2 where t1.id=t2.id…。
+* 禁止使用ORDER BY RAND()随机排序语句(符合查询条件的全量数据都会生成随机值)
+* 危险的SQL语句(update、delete)必须带上索引作为条件(WHERE)，量大需要分组操作，避免锁表
+```
+
+### 【INSERT】
+* 大批量写操作尽可能合理地分批次处理(500一组，防止死锁)
+* 禁止使用带有数据值却不带有字段键名的INSERT操作,显式声明字段
+```
+例如：INSERT INTO user (`username`,`age`) VALUES ('alicfeng',23);
+```
+
+### 【UPDATE】
+* 禁止一条语句同时对多个表进行写操作
+* 除静态表或小表（100行以内），DML语句必须有where条件，且使用索引查找。
+
+### 【JOIN】
+* 在多表join中，尽量选取结果集较小的表作为驱动表，来join其他表。
+* 禁止在业务的更新类SQL语句中使用join，比如update t1 join t2…。
+* 多表连接查询推荐使用别名
+* 合理拆分大SQL为多个小SQL（一个SQL只能用到一个cpu核心，多路并行）
+* 尽可能避免使用JOIN关联过多的表（尽量不超过3个表，最多不超过5个），MySQL上限61个表
+* 尽可能使用JOIN替代子查询操作(子查询的结果集会被存储到临时表中无法使用索引)
+
+### 【SEARCH】
+* 写入和事务发往主库，只读SQL发往从库，读写分离
+* 合并操作、减少与数据库的交互次数(见到foreach里的sql就要考虑能否向上提取)
+* 尽可能使用IN代替OR语句
+* 尽可能使用EXIST|NOT EXIST替代IN | NOT IN
+* IN语句参数的个数尽量控制在500以内(减少底层扫描，减轻数据库压力从而加速查询)
+* 尽可能避免使用LIKE添加%前缀进行模糊查询(左模糊会导致前缀索引失效)
+* 使用UNION ALL而不是使用UNION(重复值扫描),在已知数据没有重复或无须删除重复行的前提下
+* 严禁使用SELECT *查询字段(可能导致覆盖索引失效,浪费CPU、I/O、带宽)
+* 查询语句务必带上索引以提高查询效率(如user_id)
+* 必须避免数据类型隐式转换(验证int类型条件加引号)
+* 注意LIMIT分页查询效率，LIMIT越大效率越低，S2比S1效率高
+```
+S1   SELECT `username` FROM `user` LIMIT 10000,20;   
+S2   SELECT `username` FROM `user` WHERE id>10000 LIMIT 20;
+```
+
+### 分组、排序
+
+* 减少使用order by，和业务沟通能不排序就不排序，或将排序放到程序端去做。
+* 【order by、group by、distinct】这些语句较为耗费CPU，尽量利用索引直接检索出排序好的数据,where条件过滤出来的结果集请保持在1000行以内，否则SQL会很慢。
+```
+如where a=1 order by b可以利用key(a,b)
+```
+
+## 事务
+
+```danger
+涉及事务的所有表必须是InnoDB
+```
+
+* 批量处理的数据单次执行行数上限为500,array_chunk
+* 线上建议事务隔离级别为repeatable-read。
+* 事务里包含SQL尽可能少。过长的事务会导致锁数据较久，MySQL缓存、连接消耗过多等雪崩问题。
+* 尽量把一些典型外部调用移出事务，如调用webservice，访问文件存储等，从而避免事务过长。
+* 更新语句尽量基于主键或unique key，否则会产生间隙锁(内部扩大锁范围)，性能下降，产生死锁。
+* 对于MySQL主从延迟严格敏感的select语句，请开启事务强制访问主库。
