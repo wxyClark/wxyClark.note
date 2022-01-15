@@ -20,3 +20,6 @@ set global long_query_time = 1
 ```
 mysqldumpslow slow-mysql.log
 ```
+
+
+## 备份&恢复
