@@ -23,3 +23,5 @@ mysqldumpslow slow-mysql.log
 
 
 ## 备份&恢复
+
+mysqldump [OPTIONS] database [tables]
