@@ -41,7 +41,7 @@ sort: 1
 
 ```angular2html
 导航到 "HKEY_LOCAL_MACHINE\SYSTEM\Setup"，
-右击 创建一个名为“LabConfig”的项
+右击 创建一个名为 "LabConfig" 的项
  新建2个 DWORD（32位）值：
     输入名称：BypassTPMCheck 值：1
     输入名称：BypassSecureBootCheck 值：1
@@ -56,8 +56,8 @@ sort: 1
 | ---- | ---- |---- |- |
 | C盘 | 131200M / 131850M | 128G | 131078M + 100M + 16M [+ 654M]|
 | D盘 | 32774M | 32G | 备份重要文件 |
-| NTFS盘 | 65539M | 64G | D |
-| NTFS盘 | 102407M | 100G |D |
-| NTFS盘 | 204806M | 200G |D |
-| NTFS盘 | 262147M | 256G |D |
-| NTFS盘 | 512002M | 500G |D |
+| NTFS盘 | 65539M | 64G |  |
+| NTFS盘 | 102407M | 100G | |
+| NTFS盘 | 204806M | 200G | |
+| NTFS盘 | 262147M | 256G | |
+| NTFS盘 | 512002M | 500G | |

@@ -41,6 +41,12 @@ bool  spl_autoload_register ( [callback $autoload_function] )
 这个函数会自动在路径中查找具有小写类名和.php扩展或者.ini扩展名，或者任何注册到spl_autoload_extensions()函数中的其它扩展名的文件。
 ```
 
+
+如果你所在的代码位置访问不了 $app 变量，可以使用辅助函数resolve：
+```php
+$api = resolve('HelpSpot\API');
+```
+
 ## IOC容器
 
 Laravel 服务容器是一个用于管理类依赖和执行依赖注入的强大工具。
@@ -53,6 +59,74 @@ Laravel 服务容器是一个用于管理类依赖和执行依赖注入的强大
 【依赖注入】是从【应用程序的角度】在描述：应用程序依赖容器创建并注入它所需要的外部资源；
 【控制反转】是从【容器的角度】在描述，：容器控制应用程序，由容器反向的向应用程序注入应用程序所需要的外部资源。
 ```
+
+Laravel服务容器主要承担两个作用：绑定与解析。
+
+
+### 自动注入
+
+```php
+namespace App\Http\Controllers;
+use App\Users\Repository as UserRepository;
+class UserController extends Controller
+{
+    /**
+     * 用户仓库实例
+    */
+    protected $users;
+    /**
+     * 创建一个控制器实例
+    *
+    * @param UserRepository $users 自动注入
+    * @return void
+    */
+    public function __construct(UserRepository $users)
+    {
+        $this->users = $users;
+    }
+}
+```
+
+### call方法注入
+
+```php
+class TaskRepository{
+    public function testContainerCall(User $user,Task $task){
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertInstanceOf(Task::class, $task);
+    }
+    public static function testContainerCallStatic(User $user,Task $task){
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertInstanceOf(Task::class, $task);
+    }
+    public function testCallback(){
+        echo 'call callback successfully!';
+    }
+    public function testDefaultMethod(){
+        echo 'default Method successfully!';
+    }
+}
+```
+
+### 闭包函数注入
+
+```php
+public function testCallWithDependencies()
+{
+      $container = new Container;
+      $result = $container->call(function (StdClass $foo, $bar = []) {
+          return func_get_args();
+      });
+      $this->assertInstanceOf('stdClass', $result[0]);
+      $this->assertEquals([], $result[1]);
+      $result = $container->call(function (StdClass $foo, $bar = []) {
+          return func_get_args();
+      }, ['bar' => 'taylor']);
+      $this->assertInstanceOf('stdClass', $result[0]);
+      $this->assertEquals('taylor', $result[1]);
+}
+```
+
 
 ## Facade门面
 
