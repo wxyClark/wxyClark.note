@@ -11,7 +11,8 @@ composer 安装依赖的时候需要调用环境变量中的 php.exe，所以当
 
 ## 下载
 方法一
-```
+
+```php
     php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
     php composer-setup.php
     php -r "unlink('composer-setup.php');"
@@ -32,7 +33,8 @@ composer 安装依赖的时候需要调用环境变量中的 php.exe，所以当
     composer config repo.packagist composer https://packagist.phpcomposer.com
 
 上述命令将会在当前项目中的 composer.json 文件的末尾自动添加镜像的配置信息（你也可以自己手工添加）
-```
+
+```php
     "repositories": {
         "packagist": {
             "type": "composer",
@@ -78,4 +80,6 @@ composer设置环境变量之后，可使用 composer 替换下面的 php compos
 
 归档
     
-    composer archive vendor/package 2.0.21 --format=zip 
+```php
+ composer archive vendor/package 2.0.21 --format=zip 
+```

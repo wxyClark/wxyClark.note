@@ -7,11 +7,11 @@ sort: 5
 
 ## 触发
 
-```angular2html
+```php
 Event::fire(new XxxEvent($Xxx));
 ```
 或
-```angular2html
+```php
 event(new XxxEvent($Xxx));
 ```
 

@@ -9,8 +9,12 @@ sort: 0
 * 类的自动加载(autoload)机制 解决手动 require/include 造成的遗漏、包含不必要文件的问题。
 * Lazy loading (延迟加载) ：在使用类时才自动包含类文件，而不是一开始就将所有的类文件
 * PHP 自动加载函数 __autoload()
+
 ```
-bool  spl_autoload_register ( [callback $autoload_function] )    接受两个参数：一个是添加到自动加载栈的函数，另外一个是加载器不能找到这个类时是否抛出异常的标志。第一个参数是可选的，并且默认指向spl_autoload()函数，这个函数会自动在路径中查找具有小写类名和.php扩展或者.ini扩展名，或者任何注册到spl_autoload_extensions()函数中的其它扩展名的文件。
+bool  spl_autoload_register ( [callback $autoload_function] )    
+接受两个参数：一个是添加到自动加载栈的函数，另外一个是加载器不能找到这个类时是否抛出异常的标志。
+第一个参数是可选的，并且默认指向spl_autoload()函数，
+这个函数会自动在路径中查找具有小写类名和.php扩展或者.ini扩展名，或者任何注册到spl_autoload_extensions()函数中的其它扩展名的文件。
 ```
 
 ## Facade门面
@@ -28,7 +32,7 @@ Route::get('/path', 'PathController@actionName')
 
 当 门面没有指定静态函数时，PHP就会调用魔术函数__callStatic
 
-```
+```php
 abstract class Facade
 {
     public static function getFacadeRoot()
@@ -65,7 +69,7 @@ abstract class Facade
 
 每个门面类也就是重定义一下getFacadeAccessor函数
 
-```
+```php
 class DB extends Facade
 {
     /**

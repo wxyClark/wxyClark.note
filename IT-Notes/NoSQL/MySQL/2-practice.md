@@ -99,7 +99,8 @@ varchar最多存65535字节(在utf8字符集下最多存21844个字符,超过会
 ### 【INSERT】
 * 大批量写操作尽可能合理地分批次处理(500一组，防止死锁)
 * 禁止使用带有数据值却不带有字段键名的INSERT操作,显式声明字段
-```
+
+```sql
 例如：INSERT INTO user (`username`,`age`) VALUES ('alicfeng',23);
 ```
 
@@ -127,7 +128,8 @@ varchar最多存65535字节(在utf8字符集下最多存21844个字符,超过会
 * 查询语句务必带上索引以提高查询效率(如user_id)
 * 必须避免数据类型隐式转换(验证int类型条件加引号)
 * 注意LIMIT分页查询效率，LIMIT越大效率越低，S2比S1效率高
-```
+
+```sql
 S1   SELECT `username` FROM `user` LIMIT 10000,20;   
 S2   SELECT `username` FROM `user` WHERE id>10000 LIMIT 20;
 ```
@@ -136,7 +138,8 @@ S2   SELECT `username` FROM `user` WHERE id>10000 LIMIT 20;
 
 * 减少使用order by，和业务沟通能不排序就不排序，或将排序放到程序端去做。
 * 【order by、group by、distinct】这些语句较为耗费CPU，尽量利用索引直接检索出排序好的数据,where条件过滤出来的结果集请保持在1000行以内，否则SQL会很慢。
-```
+
+```sql
 如where a=1 order by b可以利用key(a,b)
 ```
 

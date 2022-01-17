@@ -2,7 +2,7 @@
 
 # CASE WHEN...THEN
 
-```
+```sql
 SELECT id, 
     CASE
         WHEN cast(`status` AS SIGNED) < 45 

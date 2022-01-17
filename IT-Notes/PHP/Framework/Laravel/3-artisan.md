@@ -59,7 +59,7 @@ php artisan migrate:
 ### 绑定
 在App\Providers\EventServiceProvider 的 protected $listen 中 绑定 event-listener 关系，支持一对多
 
-```angular2html
+```php
 在 App\Providers\EventServiceProvider绑定 event-listener 关系，支持一对多
 (1)在 protected $listen = [] 数组中配置 key => array() 映射
 php artisan event:generate 
@@ -77,7 +77,7 @@ public function boot()
 
 手动注册
 
-```angular2html
+```php
 php artisan make:event    XxxEvent
 php artisan make:listener XxxEventYyyHandlerListener
 php artisan make:listener XxxEventZzzHandlerListener

@@ -47,6 +47,7 @@ php artisan cache:table
 * 请务必启用 mod_rewrite 模块，让服务器能够支持 .htaccess 的解析
 * public/.htaccess 为前端控制器提供了隐藏 index.php
 * 如果 Laravel 附带的 .htaccess 文件不起作用，尝试下面的方法替代:
+
 ```
     Options +FollowSymLinks
     RewriteEngine On
@@ -57,6 +58,7 @@ php artisan cache:table
 ```
 ### Nginx
 * 入口文件 index.php
+
 ```
     location / {
         try_files $uri $uri/ /index.php?$query_string;

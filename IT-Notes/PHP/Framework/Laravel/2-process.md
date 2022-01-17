@@ -44,7 +44,7 @@ public function doSth(Repository $repository)
 }
 ```
 - Repository 使用的 Model 依赖注入 
-```angular2html
+```php
 public function querySth(XxxModel $model)
 {
     $list = $model->all();
@@ -62,7 +62,7 @@ public function querySth(XxxModel $model)
     你可以简单地使用「类型提示」的方式在由容器解析的类的构造函数中添加依赖项，
     包括 控制器、监听事件、队列任务、中间件 等。
     事实上，这是你的大多数对象也应该由容器解析。
-```angular2html
+```php
 /**
  * UserRepository 的实例对象
  */

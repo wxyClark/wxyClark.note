@@ -8,7 +8,7 @@
 ## 参数配置
 
 * 启用慢查询日志
-```
+```nginx
 # 设置日志文件
 set global slow_query_log_file = /PATH/slow_mysql.log  
 # 记录未使用索引的sql查询
@@ -17,7 +17,8 @@ set global log_queries_not_using_indexes = on
 set global long_query_time = 1   
 ```
 * 分析慢查询日志
-```
+
+```bash
 mysqldumpslow slow-mysql.log
 ```
 

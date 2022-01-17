@@ -14,7 +14,7 @@
 
 [参考](https://blog.csdn.net/baiqian1909/article/details/101986471)
 
-```
+```nginx
 # 设置nginx服务的系统使用用户
 user  nginx; 
 # 工作进程数，默认=CPU核数，高并发时可设置2倍
@@ -27,6 +27,10 @@ pid        /var/run/nginx.pid;      // nginx服务启动时候pid
 
 error_page   500 502 503 504  /50x.html
 
+```
+events
+
+```nginx
 events {        
     # 【事件处理模型】linux下默认 epoll, 手动配置的话需要在events模块下
     # Nginx官方文档建议，可以不指定，Nginx会自动选择最佳的事件处理模型服务
@@ -39,8 +43,11 @@ events {
     # 每个worker进程允许的最大连接数，默认1024
     worker_connections  1024;    
 }
+```
 
+http
 
+```nginx
 http {                                                  
     include       /etc/nginx/mime.types;  //设置contentType
     default_type  application/octet-stream;

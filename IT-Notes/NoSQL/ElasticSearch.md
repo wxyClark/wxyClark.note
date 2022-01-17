@@ -38,7 +38,8 @@ ES 适合做查询， mongoDB适合做CURD
 Elastic 需要 Java 8 环境。注意要保证环境变量JAVA_HOME正确设置。
 
 ### 安装配置
-```
+
+```bash
 $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.1.zip
 $ unzip elasticsearch-5.5.1.zip
 $ cd elasticsearch-5.5.1/ 
@@ -46,7 +47,7 @@ $ cd elasticsearch-5.5.1/
 ```
 
 * Elastic 就会在默认的9200端口运行
-```angular2html
+```bash
 curl localhost:9200
 ```
 
@@ -59,7 +60,8 @@ curl localhost:9200
   将它的值改成0.0.0.0（任何人都可以访问，线上不建议），然后重新启动 Elastic。
   
   去掉network.host的注释
-```
+
+```nginx
 network.host: 0.0.0.0
 ```
 ### 后置条件
@@ -111,7 +113,7 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 
 ### 新建 Index
 直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫weather的 Index
-```angular2html
+```bash
 $ curl -X PUT 'localhost:9200/weather'
 ```
 服务器返回一个 JSON 对象，里面的acknowledged字段表示操作成功。
@@ -120,7 +122,8 @@ $ curl -X PUT 'localhost:9200/weather'
 向指定的 /Index/Type 发送 PUT 请求，就可以在 Index 里面新增一条记录
 
 注：accounts/person/1 的1 是该条记录的 Id。它不一定是数字，任意字符串（比如abc）都可以
-```angular2html
+
+```json
 $ curl -X PUT 'localhost:9200/accounts/person/1' -d '
 {
   "user": "张三",
@@ -129,7 +132,8 @@ $ curl -X PUT 'localhost:9200/accounts/person/1' -d '
 }'
 ```
 也可以不指定ID，使用POST新增记录
-```angular2html
+
+```json
 $ curl -X POST 'localhost:9200/accounts/person' -d '
 {
   "user": "李四",
@@ -145,32 +149,37 @@ $ curl -X POST 'localhost:9200/accounts/person' -d '
 ### 查看 Index
 
 查看当前节点的所有 Index
-```angular2html
+
+```bash
 $ curl -X GET 'http://localhost:9200/_cat/indices?v'
 ```
 
 列出每个 Index 所包含的 Type
-```angular2html
+
+```bash
 $ curl 'localhost:9200/_mapping?pretty=true'
 ```
 
 ### 删除 Index
 
 发出 DELETE 请求，删除一个 Index
-```angular2html
+
+```bash
 $ curl -X DELETE 'localhost:9200/weather'
 ```
 
 
 ### 查看记录
 发送GET请求。 pretty=true表示以易读的格式返回。如果 Id 不正确，就查不到数据，found字段就是false。
-```angular2html
+
+```bash
 $ curl 'localhost:9200/accounts/person/1?pretty=true'
 ```
 
 ### 更新记录
 使用 PUT 请求，重新发送一次数据。
-```angular2html
+
+```json
 $ curl -X PUT 'localhost:9200/accounts/person/1' -d '
 {
     "user" : "张三",
@@ -181,7 +190,8 @@ $ curl -X PUT 'localhost:9200/accounts/person/1' -d '
 
 ### 删除记录
 发送DELETE请求
-```angular2html
+
+```bash
 $ curl -X DELETE 'localhost:9200/accounts/person/1'
 ```
 
@@ -223,13 +233,15 @@ $ curl -X DELETE 'localhost:9200/accounts/person/1'
 使用 GET 方法，直接请求/Index/Type/_search，就会返回所有记录。
 
 返回结果的 took字段表示该操作的耗时（单位为毫秒），timed_out字段表示是否超时;max_score：最高的匹配程度。
-```angular2html
+
+```bash
 $ curl 'localhost:9200/accounts/person/_search'
 ```
 
 ### 全文搜索
 Elastic 的查询非常特别，使用自己的查询语法，要求 GET 请求带有数据体。size 默认10 类似limit,from类似offset指定位移
-```angular2html
+
+```json
 $ curl 'localhost:9200/accounts/person/_search'  -d '
 {
     "query" : { "match" : { "desc" : "软件" }},
@@ -240,15 +252,16 @@ $ curl 'localhost:9200/accounts/person/_search'  -d '
 
 ### 逻辑运算
 如果有多个搜索关键字， Elastic 认为它们是or关系。例： 软件 or 系统
-```angular2html
+
+```json
 $ curl 'localhost:9200/accounts/person/_search'  -d '
 {
     "query" : { "match" : { "desc" : "软件 系统" }}
 }'
 ```
 如果要执行多个关键词的and搜索，必须使用布尔查询。
-```angular2html
 
+```json
 $ curl 'localhost:9200/accounts/person/_search'  -d '
 {
   "query": {

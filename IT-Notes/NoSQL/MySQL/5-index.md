@@ -26,10 +26,11 @@ sort: 5
 * 单个索引中每个【索引记录的长度】(EXPLAIN 分析SQL会有key_len数据)不能超过64KB
 
 * 考虑加索引的列：
-```
-    ELECT、UPDATE、DELETE语句中的WHERE从句中的列
-    ORDER BY、GROUP BY、DISTINCT中出现的列
-    在多表join的SQL里，保证被【驱动表的连接列】上有索引，这样join执行效率最高
+
+```sql
+    SELECT、UPDATE、DELETE 语句中的WHERE从句中的列
+    ORDER BY、GROUP BY、DISTINCT 中出现的列
+    在多表 JOIN 的 SQL 里，保证被【驱动表的连接列】上有索引，这样 JOIN 执行效率最高
 ```
 
 
@@ -44,8 +45,9 @@ sort: 5
 
 * 查询分析器任务使用索引的效率和全表扫描相当时会放弃使用索引(查询优化器也有开销)
 * where条件里等号左右字段类型必须一致，否则(数据类型隐式转换)无法利用索引
-```
-字段为数值类型, where条件传入 字符串类型 的数值, 索引有效
+
+```sql
+字段为数值类型, where 条件传入 字符串类型 的数值, 索引有效
 字段为字符串类型, where 条件传入 数值, 索引失效
 ```
 * 查询数据量超过表行数的25%, 不会利用索引
@@ -54,17 +56,17 @@ sort: 5
 
 * or连接
 
-```
-并不是所有的or都会使索引失效，
-如果or连接的所有字段都设置了索引，是会走索引的，
+```sql
+并不是所有的 or 都会使索引失效，
+如果 or 连接的所有字段都设置了索引，是会走索引的，
 一旦有一个字段没有索引，就会走全表扫描。
 【解决方案】
-可将or语句优化为union，然后在各个where条件上建立索引
+可将 or 语句优化为 union ，然后在各个 where 条件上建立索引
 ```
 
 * 分页查询，当limit起点较高时，索引失效
 
-```
+```sql
 如：where status = 1 offset 10000 limit 20
 【解决方案】
 可先用过滤条件进行过滤，分页请求参数带上last_id
@@ -72,8 +74,9 @@ sort: 5
 ```
 
 * 使用 NOT IN 条件, 索引失效
-```
-使用left join或 not exists来优化not in操作
+
+```sql
+使用 left join 或 not exists 来优化 not in 操作
 ```
 
 
@@ -87,7 +90,7 @@ sort: 5
 * 4.不同的字符集，1个字符占用字节数。latin1：1，gbk：2，utf8：3，utf8mb4：4。 
 * 5.索引长度 char()、varchar()索引长度的计算公式：
 
-```
+```bash
 Character Set：（字符集对应1,2,3,4）* 列长度+ 2(变长列—varchar) [ + 1(允许null) ]
 ```
 

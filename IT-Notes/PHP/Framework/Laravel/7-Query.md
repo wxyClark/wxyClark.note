@@ -7,7 +7,8 @@ sort: 7
 ## pluck
 
 支持获取 key => value 数组，也可以只获取 value 数组
-```
+
+```php
 $map = $this->model->where($condition)->distinct()->pluck('value'[, 'key']);
 //  toArray前判空
 if ($map) {
@@ -18,7 +19,8 @@ return [];
 ```
 
 二维数组使用pluck
-```
+
+```php
 $collection = collect([
     ['product_id' => 'prod-100', 'name' => 'Desk', 'price'=>10.2],
     ['product_id' => 'prod-200', 'name' => 'Chair', 'price'=>10.3],

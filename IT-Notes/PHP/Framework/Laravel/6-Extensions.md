@@ -6,13 +6,13 @@ sort: 6
 
 ## maatwebsite/excel
 
-```
+```php
 composer require "maatwebsite/excel:~3.1.25"
 ```
 
 * 安装完成后，修改 config/app.php 在 providers 数组内追加如下内容
 
-```
+```php
 'providers' => [
     ...
     Maatwebsite\Excel\ExcelServiceProvider::class,
@@ -21,7 +21,7 @@ composer require "maatwebsite/excel:~3.1.25"
 
 * 同时在 aliases 数组内追加如下内容
 
- ```
+ ```php
  'aliases' => [
     ...
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
@@ -29,22 +29,22 @@ composer require "maatwebsite/excel:~3.1.25"
 ```
 * 接下来运行以下命令生成此扩展包的配置文件 config/excel.php：
 
-```
+```php
 php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"
 ```
 
 * 修改 config/excel.php 的 to_ascii 配置
 
-```
+```php
     //  to_ascii 默认值为true，会导致excel文件中的中文无法读取
-    'to_ascii'                => false,
+    'to_ascii'             => false,
     //  设置特殊字符白名单
     'slug_whitelist'       => '._（）() */',    //  -
 ```
 
 ### 导入
 
-```
+```php
 $reader = Excel::load($excelFilePath);
 
 读取第一个sheet
@@ -57,7 +57,7 @@ $dataList = $reader->all()->toArray();
 ### 导出
 store(指定后缀名)保存到本地 storage/export 目录；export(指定后缀名)导出到页面
 
-```
+```php
 Excel::create(time(), function ($excel) use ($rowList) {
                 $excel->sheet('sheet1', function ($sheet) use ($rowList) {
                     $sheet->rows($rowList);

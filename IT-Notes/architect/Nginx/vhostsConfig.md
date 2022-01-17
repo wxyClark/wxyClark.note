@@ -1,7 +1,8 @@
 # 虚拟主机配置
 
-```
 vim /etc/nginx/conf.d/default.conf
+
+```nginx
 server {
     keepalive_requests 120; #单连接请求上限次数。
 

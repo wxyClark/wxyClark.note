@@ -20,8 +20,8 @@
 | Isolation | 隔离性 | 并行事务的改动必须与其它并行事务的改动相互独立。 | MVCC |
 | Durability | 持久性 | 事务结束后，事务处理的结果必须可以得到固化。| 内存+redo log |
 
-* 事务提交的时候通过redo log刷盘，宕机的时候可以从redo log恢复
-* undo log日志保证，它记录了需要回滚的日志信息，事务回滚时撤销已经执行成功的sql
+* 事务提交的时候通过 redo log 刷盘，宕机的时候可以从 redo log 恢复
+* undo log 日志保证，它记录了需要回滚的日志信息，事务回滚时撤销已经执行成功的 sql
 
 
 ## 锁
@@ -49,7 +49,7 @@
 
 * 加锁：lock tables tablename1 read, tablename2 read;
 * 解锁：Unlock tables;
-* 执行更新操作 （UPDATE、DELETE、INSERT等）前，会自动给涉及的表加写锁，这个过程并不需要用户干预，因此，用户一般不需要直接用LOCK TABLE命令给MyISAM表显式加锁。
+* 执行更新操作 （ UPDATE、DELETE、INSERT 等）前，会自动给涉及的表加写锁，这个过程并不需要用户干预，因此，用户一般不需要直接用LOCK TABLE命令给MyISAM表显式加锁。
 
 
 ### InnoDB行锁
@@ -116,7 +116,7 @@ MySQL InnoDB 的 REPEATABLE-READ（可重读）并不保证避免幻读，需要
 ## 隔离级别
 
 ```danger
-InnoDB 存储引擎在 分布式事务 的情况下一般会用到 SERIALIZABLE(可串行化) 隔离级别。
+InnoDB 存储引擎在 分布式事务 的情况下一般会用到 SERIALIZABLE(可串行化) 隔离级别。
 ```
 
 

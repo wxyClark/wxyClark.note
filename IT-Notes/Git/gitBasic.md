@@ -10,16 +10,19 @@ resume 使用其他人的模板，完整的放在项目根目录下，删除READ
 
 ## git-sshkey
     【git命令行下操作】
+
+```bash
     git config --global user.name   "wxy"
     git config --global user.email  "C18666211369@outlook.com"
-    检查信息
+    # 检查信息
     git config --global --list
 
     ssh-keygen -t rsa -C "C18666211369@outlook.com"
-    三次回车：默认~/.ssh路径下存放id_rsa.pub、id_rsa.pub文件
+    # 三次回车：默认~/.ssh路径下存放id_rsa.pub、id_rsa.pub文件
     cd ~/.ssh
     cat id_rsa.pub
-    复制内容粘贴到 github/gitlab 的 SSH-keys
+    # 复制内容粘贴到 github/gitlab 的 SSH-keys
+```
 
 ## git-CRLT
     问题表现：git提交代码时提示
@@ -34,9 +37,11 @@ resume 使用其他人的模板，完整的放在项目根目录下，删除READ
 
         方案一：
             在git命令行下修改全局参数
+                ```bash
                 git config --global core.autocrlf false
                 git config --global core.filemode false
                 git config --global core.safecrlf false
+                ```
         方案二：
             在git命令行vim C:\Users\[用户名]\.gitconfig 文件
             在[core]下添加

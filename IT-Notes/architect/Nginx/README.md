@@ -17,7 +17,8 @@ Nginx有Master进程和worker进程之分
 * 异步网络I/O事件模型epoll（Linux 2.6+）
 
 * 这条ln命令的意义十分深远重大。这可是生产环境的经验。
-```
+
+```sh
 ln -s /application/nginx-版本号 /application/nginx
 ```
 
