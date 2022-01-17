@@ -16,3 +16,9 @@ sort: 1
 * KISS - 「Keep it Simple, Stupid」提倡简单易读的代码，不写高深、晦涩难懂的代码，不过度设计；
 * 主厨精选 - 让有经验的人来为你选择方案，不独创方案；
 * 官方提倡 - 优先选择官方推崇的方案。
+
+
+## 代码约束
+
+* 代码调用自顶向下，单向调用：Controller ——> Service [通过Event ——> Service ] ——> Repository ——> Model
+* 同层级代码部允许互相调用(避免环形调用)
