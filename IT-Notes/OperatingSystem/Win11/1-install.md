@@ -41,7 +41,8 @@ sort: 1
 
 ```angular2html
 导航到 "HKEY_LOCAL_MACHINE\SYSTEM\Setup"，
-右击 选择“新建 -> DWORD（32位）值”，
+右击 创建一个名为“LabConfig”的项
+ 新建2个 DWORD（32位）值：
     输入名称：BypassTPMCheck 值：1
     输入名称：BypassSecureBootCheck 值：1
 ```

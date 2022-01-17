@@ -9,11 +9,14 @@
 * 推荐镜像 CentOS-7-x86_64-Minimal-2009.iso
 
 * 查看包组列表
-```
+
+```bash
 yum grouplist
 ```
+
 * 必装软件包 
-```
+
+```bash
 指定包组名安装，注意要带双引号
 yum groupinstall "Compatibility libraries" "Base" "Development tools"
 yum groupinstall "debugging Tools" "Dial-up Networking Support"
@@ -23,7 +26,8 @@ yum groupinstall "debugging Tools" "Dial-up Networking Support"
 * 更换国内源
 
 * 初次安装系统，建议更新。运行中的系统不建议更新
-```
+
+```bash
 yum upgrade-y
 ```
 
@@ -31,18 +35,22 @@ yum upgrade-y
 
 * 手工指定DNS
 * 激活网卡
+
 ```
 ONBOOT=no 设置为yes，激活网卡
 ```
+
 * 重启网卡
 
     尽量不要使用/etc/init.d/network restart重启网卡，因为这条命令会影响所有的网卡
     
     推荐制定网卡方式重启
-    ```
+
+    ```bash
     ifdown eht0 && ifup eth0
     ```
 * 设定运行级别为3(文本模式),需要重启
+
 ```
 # Default runlevel. The runlevels used are:
 #   0 - halt (Do NOT set initdefault to this)
@@ -66,7 +74,7 @@ id:3:initdefault:
 
 * 设置字符集,支持中文
 
-```
+```bash
 echo ' LANG="zh_CN.UTF-8"' >/etc/sysconfig/i18n 
 #→相当于用vi /etc/sysconfig/i18n 添加LANG="zh_CN.UTF-8"内容
 ```
@@ -92,14 +100,18 @@ SELINUX=enforcing　　//修改此处为disabled
 * 必须对账号密码文件及启动文件加锁
 * 上锁后，所有用户都不能对文件修改删除
 * 如需临时操作，解锁——修改——上锁
-```
-上锁命令: chattr +i /etc/passwd /etc/shadow /etc/group /etc/gshadow /etc/inittab 
 
-解锁命令：chattr -i /etc/passwd /etc/shadow /etc/group /etc/gshadow /etc/inittab
+```bash
+# 上锁命令: 
+chattr +i /etc/passwd /etc/shadow /etc/group /etc/gshadow /etc/inittab 
+
+# 解锁命令：
+chattr -i /etc/passwd /etc/shadow /etc/group /etc/gshadow /etc/inittab
 ```
 
 ### 禁止ping
 比较好的策略是通过iptables设置让特定的IP可以ping，如让内网用户ping，其他外部用户不能ping
-```
+
+```bash
 echo "net.ipv4.icmp_echo_ignore_all=1" >> /etc/sysctl.conf
 ```
