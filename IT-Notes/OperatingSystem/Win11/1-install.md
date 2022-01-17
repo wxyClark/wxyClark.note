@@ -14,8 +14,8 @@ sort: 1
 - BIOS: 支持UEFI安全启动
 - 显示器：9英寸，720P分辨率
 
-## Win10硬盘安装
-
+## 安装方式
+1、windows硬盘安装
 
 [知乎 无需PE，绕过TPM2.0限制升级Win11](https://zhuanlan.zhihu.com/p/417296843)
 
@@ -27,13 +27,13 @@ sort: 1
 - 输入 2 等待脚本执行结束，解压 Windows11_FIXED_2021-12-27.ISO 文件
 - 【断网】，执行解压的iso目录下的setup.exe
 
-## U盘安装
+2、U盘安装
 
 - [下载windows官方升级工具](https://www.microsoft.com/zh-cn/software-download/windows11)
 - [制作启动U盘【至少8G】](https://www.bilibili.com/read/cv13486273)
 - BIOS修改UEFI启动
 
-### 跳过TPM2.0
+## 跳过TPM2.0
 
 [Win11安装前跳过TPM](http://baijiahao.xitongzhijia.net/article/218025.html)
 - 按住"Win+R / Shift+F10"，输入 " regedit "，打开注册表编辑器
@@ -46,3 +46,17 @@ sort: 1
     输入名称：BypassSecureBootCheck 值：1
 ```
 - 点击ESC 返回，继续安装
+
+## 磁盘分区
+
+[NTFS整数G分区计算](https://www.iplaysoft.com/tools/partition-calculator/)
+
+| 磁盘  | 分配(M)  | 大小(G) | 备注 |
+| ---- | ---- |---- |- |
+| C盘 | 131200M / 131850M | 128G | 131078M + 100M + 16M [+ 654M]|
+| D盘 | 32774M | 32G | 备份重要文件 |
+| NTFS盘 | 65539M | 64G | D |
+| NTFS盘 | 102407M | 100G |D |
+| NTFS盘 | 204806M | 200G |D |
+| NTFS盘 | 262147M | 256G |D |
+| NTFS盘 | 512002M | 500G |D |
