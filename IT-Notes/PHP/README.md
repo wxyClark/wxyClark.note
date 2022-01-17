@@ -4,6 +4,10 @@ sort: 4
 
 # PHP
 
+PSR(Proposing a Standards Recommendation —— 提出标准建议)
+```
+PSR-4 比 PSR-0 更简洁，可以替换 
+```
 
 [php-fig WEB](https://www.php-fig.org/)
 
@@ -14,6 +18,10 @@ phpize是用来扩展PHP扩展模块的，通过phpize可以建立PHP的外挂�
 比如想在原来编译好的PHP中加入Memcached等扩展模块，可以使用phpize工具。
 
 ./configure后面可以指定的是php-config文件的路径。
+
+SPL是Standard PHP Library(标准PHP库)的缩写
+
+PHP 命名空间提供了一种将相关的类、函数和常量组合到一起的途径。
 
 
 ## 开发计划
