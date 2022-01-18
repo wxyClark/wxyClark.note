@@ -34,12 +34,14 @@ $kernel->terminate($request, $response);
 * Lazy loading (延迟加载) ：在使用类时才自动包含类文件，而不是一开始就将所有的类文件
 * PHP 自动加载函数 __autoload()
 
-```
+```php
 bool  spl_autoload_register ( [callback $autoload_function] )    
-接受两个参数：一个是添加到自动加载栈的函数，另外一个是加载器不能找到这个类时是否抛出异常的标志。
-第一个参数是可选的，并且默认指向spl_autoload()函数，
-这个函数会自动在路径中查找具有小写类名和.php扩展或者.ini扩展名，或者任何注册到spl_autoload_extensions()函数中的其它扩展名的文件。
 ```
+
+    接受两个参数：一个是添加到自动加载栈的函数，另外一个是加载器不能找到这个类时是否抛出异常的标志。
+    第一个参数是可选的，并且默认指向spl_autoload()函数，
+    这个函数会自动在路径中查找具有小写类名和.php扩展或者.ini扩展名，
+    或者任何注册到spl_autoload_extensions()函数中的其它扩展名的文件。
 
 
 如果你所在的代码位置访问不了 $app 变量，可以使用辅助函数resolve：
@@ -137,9 +139,9 @@ public function testCallWithDependencies()
 
 ```php
 App::make('router')->get('/path', 'PathController@actionName');
-使用门面模式方式：
+# 使用门面模式方式：
 Route::get('/path', 'PathController@actionName')
-门面最后调用的函数也是服务容器的make函数
+# 门面最后调用的函数也是服务容器的make函数
 ```
 
 当 门面没有指定静态函数时，PHP就会调用魔术函数__callStatic
