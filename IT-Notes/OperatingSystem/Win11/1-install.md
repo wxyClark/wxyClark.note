@@ -8,10 +8,10 @@ sort: 1
 [官方镜像下载](https://www.microsoft.com/zh-cn/software-download/windows11)
 
 升级Windows 11的最低系统要求：
-- CPU:1GHz 双核
+- CPU：1GHz 双核
 - 内存：4G RAM
 - 存储：64G
-- BIOS: 支持UEFI安全启动
+- BIOS：支持UEFI安全启动
 - 显示器：9英寸，720P分辨率
 
 ## 安装方式
@@ -53,11 +53,11 @@ sort: 1
 [NTFS整数G分区计算](https://www.iplaysoft.com/tools/partition-calculator/)
 
 | 磁盘  | 分配(M)  | 大小(G) | 备注 |
-| ---- | ---- |---- |- |
-| C盘 | 131200M / 131850M | 128G | 131078M + 100M + 16M [+ 654M]|
-| D盘 | 32774M | 32G | 备份重要文件 |
-| NTFS盘 | 65539M | 64G |  |
-| NTFS盘 | 102407M | 100G | |
-| NTFS盘 | 204806M | 200G | |
-| NTFS盘 | 262147M | 256G | |
-| NTFS盘 | 512002M | 500G | |
+| ---- | ---- | ---- | ----- |
+| C盘 | 131850M | 128G | 131078M + 100M + 16M [+ 654M]|
+| D盘 | 32774M | 32G | BackUp |
+| NTFS盘 | 65539M | 64G | Work |
+| NTFS盘 | 102407M | 100G | Do |
+| NTFS盘 | 204806M | 200G | File |
+| NTFS盘 | 262147M | 256G | Video |
+| NTFS盘 | 512002M | 500G | Library |
