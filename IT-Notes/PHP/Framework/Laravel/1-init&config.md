@@ -27,11 +27,56 @@ Laravel>=5.6 PHP对应的版本>=7.1.3
 * config/app.php 配置 timezone、locale、debug
 
 ### .env  
+
+```tip
+ENV 的加载功能由类 \Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class 完成
+```
+
+若想要自定义 env 文件，就可以在 bootstrap 文件夹中 app.php 文件
+
+```php
+//  定义路径
+$app->useEnvironmentPath('/customer/path');
+//  定义文件
+$app->loadEnvironmentFrom('customer.env');
+```
+
 * 将 .env.example 文件重命名为 .env 
 * .env 文件中列出的所有变量将被加载到 PHP 的超级全局变量 $_ENV 中,
+
+env变量配置规则
+```nginx
+key=value
+# 注释易 # 开始
+# value值 不使用引号包裹时 不允许出现空格
+# value值 使用引号包裹时 不允许出现 \, 只能使用转义符号 \\; 不允许出现内嵌 " , 只能使用 \"
+```
+
+可以在 env 文件中使用变量为变量赋值
+
+```nginx
+NVAR1="Hello"
+NVAR2="World!"
+NVAR3="{$NVAR1} {$NVAR2}"
+```
+
+代码中使用 env 配置的变量, xxkey 不能使用_ENV, value 才可以
+
+```php
+$this->assertEquals('xxkey', $_ENV['NVAR3']);
+```
+
+### config
+
 * Laravel 框架的所有配置文件都放在 config 目录中
 * config目录下使用 env('key', 'defaultValue') 设置默认值
 * 代码中使用 App::environment('configKey') 检查 当前的环境配置是否与给定值匹配
+
+
+```nginx
+APP_ENV 也可以直接在 nginx 中配置
+fastcgi_param  APP_ENV  production;
+```
 
 ### 缓存config/cache.php
 * laravel默认使用文件缓存file，将序列化的缓存对象存储在文件系统中
