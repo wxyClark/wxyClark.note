@@ -10,16 +10,23 @@ Laravel>=5.6 PHP对应的版本>=7.1.3
 
 ## 通过 Composer 创建项目  
 
+```bash
     composer create-project --prefer-dist laravel/laravel=8.0.* 目标目录
+```
 
 ## 本地开发环境
+
 如果本地安装了 PHP 可使用 PHP 内置的服务器来为应用程序提供服务 http://localhost:8000
 
+```bash
     php artisan serve
+```
 
 生成应用密钥  
 
+```bash
     php artisan key:generate
+```
 
 ## Laravel配置
 * 将 web 服务器根目录指向 laravel 目标目录/public
@@ -68,32 +75,41 @@ $this->assertEquals('xxkey', $_ENV['NVAR3']);
 
 ### config
 
+```tip
+config 配置文件由类 \Illuminate\Foundation\Bootstrap\LoadConfiguration::class 完成
+```
+
 * Laravel 框架的所有配置文件都放在 config 目录中
 * config目录下使用 env('key', 'defaultValue') 设置默认值
 * 代码中使用 App::environment('configKey') 检查 当前的环境配置是否与给定值匹配
 
 
 ```nginx
-APP_ENV 也可以直接在 nginx 中配置
+# APP_ENV 也可以直接在 nginx 中配置
 fastcgi_param  APP_ENV  production;
 ```
 
 ### 缓存config/cache.php
+
 * laravel默认使用文件缓存file，将序列化的缓存对象存储在文件系统中
 * 生成数据库缓存的migration文件
+
 ```
 php artisan cache:table 
 ```
+
 * Memcached缓存 需要安装 [Memcached PECL 扩展包](https://pecl.php.net/package/memcached)
 * Redis缓存 需要通过 Composer 安装 predis/predis 扩展包 (~1.0)
 
 ## Web 服务器配置
+
 ### Apache
+
 * 请务必启用 mod_rewrite 模块，让服务器能够支持 .htaccess 的解析
 * public/.htaccess 为前端控制器提供了隐藏 index.php
 * 如果 Laravel 附带的 .htaccess 文件不起作用，尝试下面的方法替代:
 
-```
+```apache
     Options +FollowSymLinks
     RewriteEngine On
 
@@ -101,7 +117,9 @@ php artisan cache:table
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 ```
+
 ### Nginx
+
 * 入口文件 index.php
 
 ```
@@ -110,12 +128,19 @@ php artisan cache:table
     }
 ```
 ## 生产环境优化
+
 ### 优化自动加载
+
 确保项目的源代码管理库中包含了 composer.lock
 
+```bash
     composer install --optimize-autoloader
+```
 ### 优化配置加载
+
 这个命令可以将所有 Laravel 的配置文件合并到单个文件中缓存， 此举能大大减少框架在加载配置值时必须执行的系统文件的数量
 
+```bash
     php artisan config:cache
+```
 
