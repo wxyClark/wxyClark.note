@@ -6,7 +6,7 @@ sort: 4
 
 [markdown 中流程图详解](https://blog.csdn.net/suoxd123/article/details/84992282)
 
-[在线编辑](https://stackedit.io/)
+[文档](https://www.wenjiangs.com/doc/markdown-markdownflowchart)
 
 * 默认节点： A
 * 矩形节点： B[矩形]
