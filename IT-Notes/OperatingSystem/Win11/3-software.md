@@ -20,8 +20,18 @@ sort: 3
 ### PHPStorm
 ### VS Code
 #### 插件
+
+* Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code
+* Paste JSON as Code
+* php
+* Code Runner
+* markdown preview enhanced
+* Markdown All in One 
+
 ### Navicat
 ### ApiPost
 ### WSL2
 ### Docker
 ### draw
+
+### Mark Test ?
