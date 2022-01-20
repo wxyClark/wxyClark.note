@@ -15,3 +15,17 @@ git stash pop
 ```bash
 git reset --hard origin/master
 ```
+
+## 重写最近commit message
+
+
+```bash
+git commit --amend '新的注释'
+```
+ 
+
+ ## 剪切
+
+ ```bash
+git cherry-pick 移花接木
+ ```
