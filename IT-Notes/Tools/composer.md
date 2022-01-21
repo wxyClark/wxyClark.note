@@ -88,5 +88,24 @@ composer设置环境变量之后，可使用 composer 替换下面的 php compos
 归档
     
 ```bash
- composer archive vendor/package 2.0.21 --format=zip 
+composer archive vendor/package 2.0.21 --format=zip 
 ```
+
+## composer安装指定包
+
+```bash
+composer require "packageName/appName:指定版本号"
+composer require "packageName/appName:~最低版本号"
+```
+
+版本约束可以加引号，也可以不加
+
+| 名称 | 实例  | 说明 |
+| ---- | ---- |---- |
+| 不指定版本 | packageName/appName | 根据当前Path环境变量中的php版本下载最合适的最新版 |
+| 确切的版本 | 6.0.1 | 指定下载的具体版本号；: 和 = 都可以 |
+| 范围 > < != | > 6.0，< 6.0 | 指定版本范围，自动下载该范围中的最新版 |
+| 通配符 * | 5.*，6.0.* | 5.* 代表版本范围 [5, 6.0)；6.0.* 代表版本范围 [6.0, 6.1) |
+| 赋值运算符（最低版本） ~ | ~1.2，~6.1.0 | ~1.2 代表版本范围 [1.2, 2.0) ；~6.1.0 代表版本范围 [6.1.0, 6.2)|
+| 脱字号版本（最低版本） ^ | ^1.2.3 | ^1.2.3 代表版本范围 [1.2.3, 2.0.0) |
+

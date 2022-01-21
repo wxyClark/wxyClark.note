@@ -68,3 +68,7 @@ Excel::create(time(), function ($excel) use ($rowList) {
 ### 注意事项
 
 导出数据指定key是否有效，Excel导出 按标题顺序对应
+
+## avinoo/laravel-batch
+
+    批量更新操作
