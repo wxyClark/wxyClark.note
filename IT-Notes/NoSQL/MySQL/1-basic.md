@@ -36,3 +36,8 @@ sort: 1
 
 ## 事务
 
+## join
+
+* innerJoin on条件字段 为null的数据为过滤掉
+* leftJoin on条件右表数据为null的数据不回过滤
+

@@ -4,10 +4,16 @@ sort: 1
 
 # 电商ERP架构实践
 
-* analysis 大数据分析
-* BI 商务智能(Business Intelligence)
-* common 基础配置
-* downloads 下载中心
+| 项目名 | 业务域  | 备注 |
+| ---- | ---- |---- |
+| analysis | 大数据计算 | 默认只有这个项目可以使用连表操作，其他项目make生成Repository单表操作代码 |
+| BI | 商务智能(Business Intelligence) | 采购分析、运营策略  |
+| common | 基础配置 | 系统控制，基础数据，规则 |
+| downloads | 下载中心 | C |
+| A | B | C |
+| A | B | C |
+
+
 * financial 财务系统 
 * goods 商品系统
 * instant-kill 秒杀/闪购 系统
