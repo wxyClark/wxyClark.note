@@ -68,4 +68,7 @@ sort: 2
 | 简称  | 全程  | 解释  |
 | ---- | ---- |---- |
 | CDN | Content Delivery Network | 内容分发网络 |
-| A | B |C |
+| LBC/LB | Load balancing clusters | 负载均衡集群 |
+| HAC | High-availability（HA）clusters | 高可用性集群 |
+| HPC | High-performance（HP）clusters | 高性能计算集群 |
+|  | Grid computing | 网格计算集群 |

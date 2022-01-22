@@ -4,8 +4,23 @@
 
 * json字段
 
+{% include list.liquid all=true %}
+
+<hr />
+
 ## 适用场景
 
 ## 不适用场景的替代方案
 
-{% include list.liquid all=true %}
+
+[MySQL数据库企业级核心知识精品](http://edu.51cto.com/course/course_id-4058.html)
+
+[MySQL数据库企业级应用实战](http://edu.51cto.com/pack/view/id-214.html)
+
+
+## 集群
+
+用途：可伸缩性（Scalability）、高可用性（Availability）
+
+简单地说，集群就是指一组（若干个）相互独立的计算机，利用高速通信网络组成的一个较大的计算机服务系统，每个集群节点（即集群中的每台计算机）都是运行各自服务的独立服务器。这些服务器之间可以彼此通信，协同向用户提供应用程序、系统资源和数据，并以单一系统的模式加以管理。当用户客户机请求集群系统时，集群给用户的感觉就是一个单一独立的服务器，而实际上用户请求的是一组集群服务器。
+

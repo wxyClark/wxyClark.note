@@ -15,6 +15,7 @@ sort: 10
 | 算法 | | | 
 | 网络 | | | 
 | HTTP | | | 
+| 运维 | 全自动化构建Linux企业级网站集群架构实战(老男孩) | | 
 
 
 {% include list.liquid all=true %}
