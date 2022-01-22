@@ -14,7 +14,7 @@
 
 [参考](https://blog.csdn.net/baiqian1909/article/details/101986471)
 
-```nginx
+```bash
 # 设置nginx服务的系统使用用户
 user  nginx; 
 # 工作进程数，默认=CPU核数，高并发时可设置2倍
@@ -30,7 +30,7 @@ error_page   500 502 503 504  /50x.html
 ```
 events
 
-```nginx
+```bash
 events {        
     # 【事件处理模型】linux下默认 epoll, 手动配置的话需要在events模块下
     # Nginx官方文档建议，可以不指定，Nginx会自动选择最佳的事件处理模型服务
@@ -47,7 +47,7 @@ events {
 
 http
 
-```nginx
+```bash
 http {                                                  
     include       /etc/nginx/mime.types;  //设置contentType
     default_type  application/octet-stream;
@@ -128,6 +128,12 @@ http {
     # vary header支持。该选项可以让前端的缓存服务器缓存经过gzip压缩的页面
     gzip_vary on;
 
+    # 【ngx_http_limit_conn_module】这个模块用于限制每个定义的key值的连接数，特别是单IP的连接数
+    # 不是所有的连接数都会被计数。一个符合计数要求的连接是整个请求头已经被读取的连接
+    # 限制单IP的并发连接为1
+    limit_conn addr 1;
+    # 测试 模拟并发连接1，访问10次服务器：ab-c 1 -n 10 http://10.0.0.3/
+
     include /etc/nginx/conf.d/*.conf;      // 读到这个地方是加载另一个默认配置配置文件default.conf
 }
 ```
@@ -147,3 +153,28 @@ last和break用来实现URL重写，浏览器地址栏的URL地址不变，但�
 ## Nginx访问认证
 * auth_basic "请输入授权账号"；用于设置认证提示字符串(web弹窗)"请输入授权账号"。 
 * auth_basic_user_file/application/nginx/conf/htpasswd；用于设置认证的密码文件
+
+## 禁用IP访问或恶意解析
+
+返回501错误
+```bash
+server {
+    listen 80 default_server;
+    server_name _;
+    return 501;
+}
+```
+或 通过301跳转到指定页面
+```bash
+server {
+    listen 80 default_server；
+    server_name _；
+    rewrite ^(.*) http：//blog.etiantian.org/$1 permanent；
+}
+```
+或 host主机名字段非指定域名,则301跳转到跳转到指定页面
+```bash
+if ($host !~ ^www/.eduoldboy/.com$) {
+    rewrite ^(.*)  http：//www.eduoldboy.com$1 permanent；
+} 
+```
