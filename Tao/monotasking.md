@@ -2,7 +2,7 @@
 sort: 1
 ---
 
-# 单核工作法(Monotasking)
+# 单核工作法
 
 source: `{{ page.path }}`
 
