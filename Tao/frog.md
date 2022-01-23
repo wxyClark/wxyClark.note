@@ -97,7 +97,7 @@ graph LR
     end
 
     style A1 stroke:#F00,stroke-width:8px;  
-    style D8 stroke:#F00,stroke-width:8px; 
+    style D7 stroke:#F00,stroke-width:8px; 
     style R3 stroke:#F00,stroke-width:8px;  
 
     style O1 fill:#2ff,fill-opacity:0.1,stroke:#faa,stroke-width:4px
