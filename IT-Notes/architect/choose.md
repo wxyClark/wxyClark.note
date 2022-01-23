@@ -35,7 +35,7 @@
 | 注册中心 | Nacos,Eureka、Zookeeper、Redis、Etcd、Consul | C |
 | 认证鉴权 | **OAuth2.0**(对外开放接口),**JWT**（内部）,自定义token（内部） | C |
 | 消费队列 | **Kafka** 、RabbitMQ、ZeroMQ、Redis、ActiveMQ| redis负载低 |
-| 系统监控 | **Prometheus**、Grafana、Influxdb、Telegraf、Lepus | 普罗米修斯 |
+| 系统监控 | **Prometheus**、**Nagios**、Grafana、Influxdb、Telegraf、Lepus | 普罗米修斯 |
 | 文件系统 | **OSS**、七牛,又拍，fastdfs ，NFS、MogileFS | 对象存储，自定义尺寸 |
 | RPC框架 | Dubbo、Motan、Thrift、grpc | C |
 | 工作流 | activity,Oozie | C |

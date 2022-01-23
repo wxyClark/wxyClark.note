@@ -130,9 +130,10 @@ http {
 
     # 【ngx_http_limit_conn_module】这个模块用于限制每个定义的key值的连接数，特别是单IP的连接数
     # 不是所有的连接数都会被计数。一个符合计数要求的连接是整个请求头已经被读取的连接
-    # 限制单IP的并发连接为1
+    # 限制单IP的并发连接为1   测试 模拟并发连接1，访问10次服务器：ab-c 1 -n 10 http://10.0.0.3/
     limit_conn addr 1;
-    # 测试 模拟并发连接1，访问10次服务器：ab-c 1 -n 10 http://10.0.0.3/
+    # 设置虚拟主机连接数为2   统计日志中200(成功)与503(过载)出现的次数：grep -c 200 access.log   
+    limit_conn perserver 2；
 
     include /etc/nginx/conf.d/*.conf;      // 读到这个地方是加载另一个默认配置配置文件default.conf
 }
