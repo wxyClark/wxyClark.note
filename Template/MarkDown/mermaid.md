@@ -8,6 +8,8 @@ sort: 4
 
 [文档](https://www.wenjiangs.com/doc/markdown-markdownflowchart)
 
+[web216安全色](http://www.h-ui.net/websafecolors.shtml)
+
 * 默认节点： A
 * 矩形节点： B[矩形]
 * 圆角矩形节点： C(圆角矩形)

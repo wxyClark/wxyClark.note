@@ -26,8 +26,8 @@ sort: 2
 ```mermaid
 
 graph LR
-    D2-.->R1
-    D2-.->A1
+    D2==>R1
+    D2==>A1
 
     D3-.->R2
 
@@ -36,6 +36,10 @@ graph LR
     D52-.->A3
 
     D7-.->R3
+
+    D51==>O1
+
+
 
     subgraph 结果Result
 
@@ -68,14 +72,15 @@ graph LR
             D6--减少-->D62(干扰-手机-聊天)
             D6--激励-->D63(积极-乐观)
         
-        D6==>D7[马上行动]
+        D6==>D7[马上行动 全力以赴]
             D7-->D71[全身心投入]
             D7-->D72[专注于A-1]
             D7-->D73[快速进入心流状态]
 
         D7==>D8[奖励回路]   
-            D8-->D81[写下成效]
+            D8--写下-->R3
             D8-->D82[奖励自己]
+            D82-->D8
     end
 
     subgraph 目标AD
@@ -88,18 +93,25 @@ graph LR
         A2==>A3>每天目标]
     end
 
-```
+    subgraph 区分任务优先级
 
+        O1[20%的重要活动贡献80%的成果]
+        O1--A-->O11(必须完成的事情-3只青蛙)
+        O1--B-->O12(应该做的事情)
+        O1--C-->O13(锦上添花的事情)
+        O1--D-->O14(可授权给他人的事情)
+        O1--E-->O15(可以不做的事情)
+    end
 
-```mermaid
-graph LR
-    D51[区分任务优先级]
-        D51-->D511(A必须完成的事情-3只青蛙)
-        D51-->D512(B应该做的事情)
-        D51-->D513(C锦上添花的事情)
-        D51-->D514(D可授权给他人的事情)
-        D51-->D515(E可以不做的事情)
+    
+    style A1 stroke:#F00,stroke-width:8px;  
+    style D8 stroke:#F00,stroke-width:8px; 
+    style R3 stroke:#F00,stroke-width:8px;  
 
+    style O1 fill:#2ff,fill-opacity:0.1,stroke:#faa,stroke-width:4px
+    style A3 stroke:#000,stroke-width:8px;
+    
+    
 ```
 
 <hr />
