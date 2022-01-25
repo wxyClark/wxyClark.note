@@ -94,7 +94,7 @@ fastcgi_param  APP_ENV  production;
 * laravel默认使用文件缓存file，将序列化的缓存对象存储在文件系统中
 * 生成数据库缓存的migration文件
 
-```
+```bash
 php artisan cache:table 
 ```
 
@@ -122,7 +122,7 @@ php artisan cache:table
 
 * 入口文件 index.php
 
-```
+```nginx
     location / {
         try_files $uri $uri/ /index.php?$query_string;
     }
@@ -142,5 +142,136 @@ php artisan cache:table
 
 ```bash
     php artisan config:cache
+```
+
+## 文件系统
+
+./config/filesystems.php
+```php
+return [
+    'disks' => [
+
+        'local' => [
+            'driver' => 'local',
+            //  ./storage/app
+            'root' => storage_path('app'),
+
+            //  public 可见性 转换为目录的 0755 和文件的 0644
+            'permissions' => [
+                'file' => [
+                    'public' => 0664,
+                    'private' => 0600,
+                ],
+                'dir' => [
+                    'public' => 0775,
+                    'private' => 0700,
+                ],
+            ],
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            //  ./storage/app/public
+            'root' => storage_path('app/public'),
+            //  如果要使用 local 驱动为存储在磁盘上的文件预定义主机，可以向磁盘配置数组添加一个 url 选项
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        //  亚马逊云储存
+        's3' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+
+            //  给指定磁盘开启缓存功能
+            'cache' => [
+                'store' => 'memcached', //  缓存驱动名称
+                'expire' => 600,    //  单位为秒的过期时间
+                'prefix' => 's3-memcached-cache-prefix', //  缓存前缀 
+            ],
+        ],
+
+
+        //  Laravel 的文件系统集成能很好的支持 FTP、SFTP ,但是 默认配置文件没有包含示范配置
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => 'ftp.example.com',
+            'username' => 'your-username',
+            'password' => 'your-password',
+        // 可选的 FTP 配置项...
+            // 'port' => 21,
+            // 'root' => '',
+            // 'passive' => true,
+            // 'ssl' => true,
+            // 'timeout' => 30,
+        ],
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => 'example.com',
+            'username' => 'your-username',
+            'password' => 'your-password',
+            // 基于 SSH 密钥的身份验证设置...
+            // 'privateKey' => '/path/to/privateKey',
+            // 'password' => 'encryption-password',
+            // 可选的 SFTP 配置...
+            // 'port' => 22,
+            // 'root' => '',
+            // 'timeout' => 30,
+        ],
+    ],
+
+    'links' => [
+        public_path('storage') => storage_path('app/public'),
+
+        //  可配置额外的符号链接
+        public_path('images') => storage_path('app/images'),
+    ],
+];
+```
+
+【公共磁盘】public 磁盘适用于要公开访问的文件，public 磁盘使用 local 驱动
+【本地驱动】local
+php artisan storage:link 将在public目录下生成storage的软链接 指向 base_path(storage/app/public)
+
+```php
+//  文件路径
+$url = Storage::url('file.jpg');
+
+//  获取文件的大小（以字节为单位）
+$size = Storage::size('file.jpg');
+
+//  返回文件最后一次被修改的 UNIX 时间戳
+$time = Storage::lastModified('file.jpg');
+
+//  put 方法可用于将原始文件内容保存到磁盘上,强烈建议在处理大文件时使用
+Storage::put('file.jpg', $contents);
+Storage::put('file.jpg', $resource);
+
+//  下载文件
+return Storage::download('file.jpg', $name, $headers);
+
+// 使用 putFile 或 putFileAs 方法,将给定文件流式传输到你的存储位置
+Storage::putFile('photos', new File('/path/to/photo')); // 自动为文件名生成唯一的ID...
+Storage::putFileAs('photos', new File('/path/to/photo目录名'), 'photo.jpg');    // 手动指定文件名...
+//  如果你将文件存储在诸如 S3 的云盘上，并且想让该文件公开访问，则可以使用以下功能：
+Storage::putFile('photos', new File('/path/to/photo'), 'public');
+
+//  文件数据写入
+Storage::prepend('file.log', 'Prepended Text'); //  在文件的开头写入数据
+Storage::append('file.log', 'Appended Text');   //  在文件的结尾写入数据
+
+//  复制和移动文件
+Storage::copy('old/file.jpg', 'new/file.jpg');
+Storage::move('old/file.jpg', 'new/file.jpg');
+
+//  删除文件
+Storage::delete('file.jpg');
+Storage::delete(['file.jpg', 'file2.jpg']);
 ```
 

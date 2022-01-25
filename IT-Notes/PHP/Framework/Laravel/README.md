@@ -52,7 +52,7 @@ $app->singleton(
 
 ### 插件
 
-* 插件安装成功后，须在 config/app.php 中配置 别名
+* 插件安装成功后，须在 config/app.php 中配置 providers、aliases
 * 多项目须注意 依赖的插件 保持版本统一
 
 ### toArray()
