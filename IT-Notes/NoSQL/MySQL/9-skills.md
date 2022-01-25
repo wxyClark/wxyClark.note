@@ -18,3 +18,11 @@ SELECT id,
 FROM t_household 
 WHERE  del_flag = '0';
 ```
+
+
+## 分页查询
+
+当 offset 偏移量大的时候，sql执行回很慢
+
+* 1、使用 id > $page * $page_size offset 0 limit $page_size
+* 2、使用标识位标识 已执行过的数据，通过 do{} while (count($rs) == $page_size)

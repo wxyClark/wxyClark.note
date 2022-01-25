@@ -2,6 +2,10 @@
 sort: 3
 ---
 
+# App Store
+
+## Snipaste
+
 # 软件安装
 
 ## 基础软件
@@ -34,4 +38,3 @@ sort: 3
 ### Docker
 ### draw
 
-### Mark Test ?
