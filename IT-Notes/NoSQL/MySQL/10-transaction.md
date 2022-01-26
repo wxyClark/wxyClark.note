@@ -1,3 +1,7 @@
+---
+sort: 10
+---
+
 # 事务&锁
 
 [CSDN mysql数据库锁与隔离级别](https://blog.csdn.net/baidu_14922873/article/details/84777498)

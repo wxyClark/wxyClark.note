@@ -43,9 +43,9 @@ This is a code block following a header.
 3. This is an ordered list following a header.
 
 
-| 1    | 2  |3  |
+| 1 | 2 | 3 |
 | ---- | ---- |---- |
-| A | B |C |
+| A | B | C |
 
 ###### Header 6
 
