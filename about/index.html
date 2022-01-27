@@ -14,7 +14,8 @@
         owner: 'wxyclark',
         admin: ['wxyclark'],
         distractionFreeMode: true,
-        id: md5('{{ page.url }}'),
+        id: md5(new Date()),
+        labels: ['gitment'],
         perPage: 50,
     });
     gitalk.render('gitalk-container');

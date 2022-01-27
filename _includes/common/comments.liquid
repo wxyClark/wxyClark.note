@@ -11,7 +11,9 @@
         repo: '{{ site.gitalk.repo }}',
         owner: '{{ site.gitalk.owner }}',
         admin: ['{{ site.gitalk.admin }}'],
-        id: md5(location.pathname),
+        //  id: md5(location.pathname),
+        id: md5(new Date()),
+        labels: ['gitment'],
         perPage: 50,
     });
     gitalk.render('gitalk-container');
