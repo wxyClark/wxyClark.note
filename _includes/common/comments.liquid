@@ -4,6 +4,7 @@
 <script type="text/javascript" src="/assets/js/md5.min.js"></script>
 <div id="gitalk-container"></div>     
 <script type="text/javascript">
+    var dt = new Date();
     var gitalk = new Gitalk({
         // gitalk的主要参数
         clientID: '{{ site.gitalk.clientID }}',
@@ -11,7 +12,8 @@
         repo: '{{ site.gitalk.repo }}',
         owner: '{{ site.gitalk.owner }}',
         admin: ['{{ site.gitalk.admin }}'],
-         id: md5(location.pathname),
+        id: md5(location.pathname),
+        //  id: md5(dt.getTime()),
         labels: ['gitment'],
         title: location.pathname,
         perPage: 50,
