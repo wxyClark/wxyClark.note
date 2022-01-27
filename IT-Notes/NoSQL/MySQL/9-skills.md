@@ -4,7 +4,7 @@ sort: 9
 
 # 奇技淫巧
 
-# CASE WHEN...THEN
+## CASE WHEN...THEN
 
 ```sql
 SELECT id, 
