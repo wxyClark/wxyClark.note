@@ -6,10 +6,11 @@ theme: null
 comments_provider: gitalk
 
 gitalk:
-    owner: wxyclark
-    repo: wxyclark.github.io
-    clientID: bd9542005fed5648ca99
-    clientSecret: 3a211de3b3cb3c4318393cd70d3901bec8faa855
+  enable: true
+  owner: wxyClark
+  repo: wxyClark.github.io
+  clientID: bd9542005fed5648ca99
+  clientSecret: 3a211de3b3cb3c4318393cd70d3901bec8faa855
 
 # debug:
 #   compress: true
