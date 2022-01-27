@@ -3,14 +3,15 @@ description: PHP GO NoSQL 学 而 实习 之
 
 theme: null
 
-comments_provider: gitalk
-
-gitalk:
-  enable: true
-  owner: wxyClark
-  repo: wxyClark.github.io
-  clientID: bd9542005fed5648ca99
-  clientSecret: 3a211de3b3cb3c4318393cd70d3901bec8faa855
+# 评论功能
+comments:
+  gitalk: true
+  gitalk_clientID: 'bd9542005fed5648ca99'
+  gitalk_Secret: '3a211de3b3cb3c4318393cd70d3901bec8faa855'
+  gitalk_repo: 'wxyClark.github.io'
+  gitalk_owner: 'wxyClark'
+  gitalk_admin: 'wxyClark'
+  distractionFreeMode: true
 
 # debug:
 #   compress: true
