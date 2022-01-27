@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        // gitalk的主要参数
+        clientID: 'bd9542005fed5648ca99',
+        clientSecret: '3a211de3b3cb3c4318393cd70d3901bec8faa855',
+        repo: 'wxyClark.github.io',
+        owner: 'wxyClark',
+        admin: ['wxyClark'],
+        id: md5(location.pathname),
+        perPage: 50,
+    });
+    gitalk.render('gitalk-container');
+</script> 
+</head>
+
+<body>
+    
+</body>
+
+</html>
