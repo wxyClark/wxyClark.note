@@ -1,21 +1,20 @@
+{% if page.comments != false %}
 
-<!-- Link Gitalk 的支持文件  -->
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
-<script type="text/javascript" src="/assets/js/md5.min.js"></script>
-<div id="gitalk-container"></div>     
-<script type="text/javascript">
-    var gitalk = new Gitalk({
- 
-    // gitalk的主要参数
-        clientID: 'bd9542005fed5648ca99',
-        clientSecret: '3a211de3b3cb3c4318393cd70d3901bec8faa855',
-        repo: 'wxyclark.github.io',
-        owner: 'wxyclark',
-        admin: ['wxyclark'],
-        id: md5(location.pathname),
-        
-    });
-    gitalk.render('gitalk-container');
-</script> 
-<!-- Gitalk end -->
+    {% if site.comments_provider == 'gitalk' %}
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: '{{ page.url }}',
+            clientID: '{{ site.gitalk.clientID }}',
+            clientSecret: '{{ site.gitalk.clientSecret }}',
+            repo: '{{ site.gitalk.repo }}',
+            owner: '{{ site.gitalk.owner }}',
+            admin: ['{{ site.gitalk.owner }}'],
+            labels: ['gitment'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+    {% endif %}
+{% endif %}
