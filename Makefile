@@ -1,6 +1,6 @@
 DEBUG=JEKYLL_GITHUB_TOKEN=blank PAGES_API_URL=http://0.0.0.0
 ALIAS=jekyll-rtd-theme
-
+# checkout 	@git checkout assets/css/theme.min.css
 help:
 	@echo "HomePage: https://github.com/rundocs/${ALIAS}\n"
 	@echo "Usage:"
@@ -20,7 +20,6 @@ help:
 checkout:
 	@git checkout _config.yml
 	@git checkout assets/js/theme.min.js
-	@git checkout assets/css/theme.min.css
 
 install:
 	@gem install jekyll bundler
