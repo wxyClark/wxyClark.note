@@ -47,14 +47,38 @@ git stash pop
 git reset —hard <commit_id>
  ```
 
+## merge vs rebase
+
+* git rebase 和git merge 做的事其实是一样的,都是合并分支
+* merge 好在它是一个安全的操作; 缺点是 
+
+| **对比** | merge | rebase |
+| ---- | ---- |---- |
+| 优点 | 安全<br>现有的分支不会被更改 | 整个 feature 分支移动到 master 分支的后面<br>项目历史会非常整洁(完美的线性) |
+| 缺点 | 多人协作,log会出现分支交叉不方便回退 | rebase 为原分支上每一个提交创建一个新的提交，<br>重写了项目历史，并且不会带来合并提交<br>rebase 不会有合并提交中附带的信息——你看不到 feature 分支中并入了上游的哪些更改。 |
+| 命令 | git checkout feature<br>git merge master<br>也可以把它们压缩在一行里:<br>git merge master feature | git checkout feature<br>git rebase master<br >交互式的rebase:<br>git rebase -i master |
+
+
  ## 查看修改日志
 
 | 命令 | 用途 | 备注 |
 | ---- | ---- |---- |
-| git reflog | 查看命令历史 | 完整信息 |
+| git reflog | 查看命令历史 | 摘要 |
 | git log | 查看详细提交历史 | 完整信息 |
+| git log -n | 查看最近n次提交历史 | 完整信息 |
+| git log --after="2022-1-1" --before="2022-2-2" | 查看指定时段的提交历史 | 可只指定after或before |
+| git log --author="wxy" | 看某一特定作者的提交 | 完整信息 |
+| git log --grep="NoSQL" | 按提交信息 | 可以传入 -i 参数来忽略大小写匹配 |
+| git log -- <filePath> | 按文件路径 | -- 可以省略 |
+| git log -S "代码中的内容" | 按代码内容 | 可以使用 -G"<regex>" 正则匹配 |
+| git log master..feature | 按分支差异 | 在 feature 分支而不在 master 分支中所有的提交 |
+| git log --no-merges | 过滤合并提交 |  |
+| git log --merges | 只看合并提交 |  |
 | git log --pretty=oneline | 查看简化提交历史 | commit message |
+| git log --pretty=format:"<string>" | 自定义格式<br>使用像 printf 一样的占位符 | format:"%cn committed %h on %cd" |
 | git log --graph | 查看分支合并图 | 图 |
+| git shortlog | 显示提交信息的第一行(做了什么) | 创建发布声明设计的 |
+| git log -stat <file> | 显示每次提交的文件增删数量 | 详情 |
 | git log -p <file> | 显示特定文件随时间的修改 | 详情 |
 | git blame <file> | 查看特定文件什么时间被什么人修改了什么内容 | 列表 |
 
