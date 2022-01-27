@@ -18,3 +18,19 @@ sort: 3
 #### 查看死锁
 
 ### 怎样避免死锁
+
+## 查询优化
+
+### 发现问题：慢查询日志
+
+
+```conf
+[mysqld]
+log_output='FILE,TABLE';
+
+# 代表开启慢sql参数进行开启
+slow_query_log=ON 
+
+# 查询时间（秒）
+long_query_time=0.001
+```
