@@ -14,9 +14,10 @@
         admin: ['{{ site.gitalk.admin }}'],
         id: md5(location.pathname),
         //  id: md5(dt.getTime()),
-        labels: ['gitment'],
+        labels: ['gitalk','gitment'],
         title: location.pathname,
         perPage: 50,
+        distractionFreeMode: true,
     });
     gitalk.render('gitalk-container');
 </script> 
