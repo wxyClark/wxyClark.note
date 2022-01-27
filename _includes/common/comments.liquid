@@ -10,7 +10,7 @@
         clientSecret: '{{ site.gitalk.clientSecret }}',
         repo: '{{ site.gitalk.repo }}',
         owner: '{{ site.gitalk.owner }}',
-        admin: ['{{ site.gitalk.owner }}'],
+        admin: ['{{ site.gitalk.admin }}'],
         id: md5(location.pathname),
         perPage: 50,
     });
