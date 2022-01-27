@@ -3,6 +3,7 @@
 [视频教程](https://video.zhihu.com/video/1412152151905316864?itemId=2073340305&itemType=answer&player=%7B%22shouldShowPageFullScreenButton%22%3Atrue%7D)
 
 # skills
+
 ## 目录变更
 建议使用先删除再创建的方式，通过两次git提交，验证导航栏不出现旧的目录
 
@@ -10,7 +11,7 @@
 
 补救方式：恢复目录+README.md文件，git提交；删除旧目录，git提交；
 
-# jekyll-rtd-theme
+## jekyll-rtd-theme
 [Jekyll使用教程笔记](https://blog.csdn.net/weixin_34236869/article/details/91476448)
 
 README.MD文件 标识 当前目录是否自动展示的左侧目录上
@@ -19,6 +20,12 @@ README.MD文件 标识 当前目录是否自动展示的左侧目录上
 ![jsDelivr](https://data.jsdelivr.com/v1/package/gh/rundocs/jekyll-rtd-theme/badge)
 
 Just another documentation theme compatible with GitHub Pages
+
+## gitalk
+
+[申请gitalk](https://github.com/settings/applications/new)
+
+[Gitalk评论插件使用教程](https://segmentfault.com/a/1190000018072952)
 
 ## What it does?
 

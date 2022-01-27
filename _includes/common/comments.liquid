@@ -6,14 +6,12 @@
 <script type="text/javascript">
     var dt = new Date();
     var gitalk = new Gitalk({
-        // gitalk的主要参数
         clientID: '{{ site.gitalk.clientID }}',
         clientSecret: '{{ site.gitalk.clientSecret }}',
         repo: '{{ site.gitalk.repo }}',
         owner: '{{ site.gitalk.owner }}',
         admin: ['{{ site.gitalk.admin }}'],
         id: md5(location.pathname),
-        //  id: md5(dt.getTime()),
         labels: ['gitalk','gitment'],
         title: location.pathname,
         perPage: 50,
