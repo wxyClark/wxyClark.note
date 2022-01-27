@@ -6,7 +6,7 @@ theme: null
 # 评论功能
 gitalk:
   clientID: 'bd9542005fed5648ca99'
-  clientSecret: '3a211de3b3cb3c4318393cd70d3901bec8faa855'
+  clientSecret: '2e924f036f336bbd5289325bd60d24dde44eac61'
   repo: 'wxyClark.github.io'
   owner: 'wxyClark'
   admin: 'wxyClark'
