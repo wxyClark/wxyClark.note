@@ -100,7 +100,7 @@ sort: 5
 * 4.不同的字符集，1个字符占用字节数。latin1：1，gbk：2，utf8：3，utf8mb4：4。 
 * 5.索引长度 char()、varchar()索引长度的计算公式：
 
-```bash
+```cs
 Character Set：（字符集对应1,2,3,4）* 列长度+ 2(变长列—varchar) [ + 1(允许null) ]
 ```
 

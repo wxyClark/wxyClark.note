@@ -2,7 +2,7 @@
 
 主库配置
 
-```bash
+```conf
 [mysqld]
 log-bin = /data/3306/mysql-bin
 # 主从配置的每个实例的 server-id 不能冲突 推荐使用服务器IP地址最后一段(但不适合多实例交叉配置)
@@ -15,7 +15,7 @@ log_bin   | ON
 
 从库配置
 
-```bash
+```conf
 MASTER_HOST='10.0.0.7',         
 MASTER_PORT=3306,
 
@@ -42,7 +42,7 @@ expire_logs_days = 7
 ## 参数配置
 
 * 启用慢查询日志
-```bash
+```conf
 # 设置日志文件
 set global slow_query_log_file = /PATH/slow_mysql.log  
 # 记录未使用索引的sql查询
@@ -52,7 +52,7 @@ set global long_query_time = 1
 ```
 * 分析慢查询日志
 
-```bash
+```cs
 mysqldumpslow slow-mysql.log
 ```
 
@@ -60,7 +60,7 @@ mysqldumpslow slow-mysql.log
 
 * MySQL管理员的账号root密码默认为空，极不安全
 
-```bash
+```cs
 mysqladmin -u root -S /data/3306/mysql.sock password '至少8位' 
 ```
 
@@ -138,6 +138,7 @@ binlog记录模式，例如：row level模式就比默认的语句模式要好
 交叉做主从复制、数据备份及读写分离，
 这样就可达到9～15台服务器每个只装一个数据库才有的效果
 ```
+
 * 开启多个不同的服务器端口，同时运行多个MySQL服务进程，这些服务进程通过不同的socket监听不同的服务器端口来提供服务。
 
     不同实例的sock虽然名字相同，但是路径是不同的，因此是不同的文件。 

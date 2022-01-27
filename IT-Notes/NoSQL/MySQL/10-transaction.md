@@ -112,9 +112,12 @@ MySQL InnoDB 的 REPEATABLE-READ（可重读）并不保证避免幻读，需要
 * select 语句默认不会加任何锁类型
 * select …for update 语句加排他锁
 * select … lock in share mode 加共享锁
+  
 ```
 主要用在需要数据依存关系时来确认某行记录是否存在，并确保没有人对这个记录进行UPDATE或者DELETE操作。
+
 但是如果当前事务也需要对该记录进行更新操作，则很有可能造成死锁，
+
 对于锁定行记录后需要进行更新操作的应用，应该使用SELECT… FOR UPDATE方式获得排他锁。
 ```
 

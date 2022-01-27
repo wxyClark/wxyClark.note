@@ -26,13 +26,13 @@ composer 安装依赖的时候需要调用环境变量中的 php.exe，所以当
 ### 使用国内镜像
 方法一 修改 composer 的全局配置文件（推荐方式）
 
-```bash
+```cs
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
 ```
 
 方法二： 修改当前项目的 composer.json 配置文件
 
-```bash
+```cs
     composer config repo.packagist composer https://packagist.phpcomposer.com
 ```
 
@@ -48,7 +48,7 @@ composer 安装依赖的时候需要调用环境变量中的 php.exe，所以当
 ```
 ### 解除镜像
 
-```bash
+```cs
     composer config -g --unset repos.packagist
 ```
 
@@ -87,13 +87,13 @@ composer设置环境变量之后，可使用 composer 替换下面的 php compos
 
 归档
     
-```bash
+```cs
 composer archive vendor/package 2.0.21 --format=zip 
 ```
 
 ## composer安装指定包
 
-```bash
+```cs
 composer require "packageName/appName:指定版本号"
 composer require "packageName/appName:~最低版本号"
 ```

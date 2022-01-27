@@ -22,9 +22,10 @@ malloc的全称是memory allocation，中文名称动态内存分配，
 
 Memcached在集群中session共享案例——大量小数据缓存，不需要入库
 
+```cs
 session.save_handler = memcache
 session.save_path = "tcp：// 10.0.0.19：11211"
-
+```
 
 Memcached在集群中的session共享存储的优缺点 ： 
 

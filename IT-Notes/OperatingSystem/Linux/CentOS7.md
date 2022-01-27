@@ -10,13 +10,13 @@
 
 * 查看包组列表
 
-```bash
+```cs
 yum grouplist
 ```
 
 * 必装软件包 
 
-```bash
+```cs
 指定包组名安装，注意要带双引号
 yum groupinstall "Compatibility libraries" "Base" "Development tools"
 yum groupinstall "debugging Tools" "Dial-up Networking Support"
@@ -27,7 +27,7 @@ yum groupinstall "debugging Tools" "Dial-up Networking Support"
 
 * 初次安装系统，建议更新。运行中的系统不建议更新
 
-```bash
+```cs
 yum upgrade-y
 ```
 
@@ -36,8 +36,9 @@ yum upgrade-y
 * 手工指定DNS
 * 激活网卡
 
-```
-ONBOOT=no 设置为yes，激活网卡
+```conf
+# 设置为yes，激活网卡
+ONBOOT=no 
 ```
 
 * 重启网卡
@@ -46,12 +47,12 @@ ONBOOT=no 设置为yes，激活网卡
     
     推荐制定网卡方式重启
 
-    ```bash
+    ```cs
     ifdown eht0 && ifup eth0
     ```
 * 设定运行级别为3(文本模式),需要重启
 
-```
+```cs
 # Default runlevel. The runlevels used are:
 #   0 - halt (Do NOT set initdefault to this)
 #   1 - Single user mode
@@ -68,30 +69,32 @@ id:3:initdefault:
 * 设定启动项
 
     操作思路：先将3级别文本模式下默认开启的服务都关闭，然后开启需要开启的服务。
-    ```
+    ```cs
     chkconfig --list|grep 3：on <==查看设置结果
     ```
 
 * 设置字符集,支持中文
 
 ```bash
+# 相当于用vi /etc/sysconfig/i18n 添加LANG="zh_CN.UTF-8"内容
 echo ' LANG="zh_CN.UTF-8"' >/etc/sysconfig/i18n 
-#→相当于用vi /etc/sysconfig/i18n 添加LANG="zh_CN.UTF-8"内容
 ```
 
 ## 安全性配置
 ### 关闭SELinux
 * SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现。
 
-```
-查看Selinux状态 getenforce
+```conf
+# 查看Selinux状态 
+getenforce
 
-临时使其关闭的命令 setenforce 0
+# 临时使其关闭的命令 
+setenforce 0
 
-永久关闭 vim /etc/selinux/config 
-SELINUX=enforcing　　//修改此处为disabled
+# 永久关闭 vim /etc/selinux/config  修改此处为disabled
+SELINUX=enforcing
 
-这样在重启前后都可以使SELinux关闭生效
+# 这样在重启前后都可以使SELinux关闭生效
 ```
 
 

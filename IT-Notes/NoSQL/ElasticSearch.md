@@ -39,7 +39,7 @@ Elastic 需要 Java 8 环境。注意要保证环境变量JAVA_HOME正确设置�
 
 ### 安装配置
 
-```bash
+```cs
 $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.1.zip
 $ unzip elasticsearch-5.5.1.zip
 $ cd elasticsearch-5.5.1/ 
@@ -47,7 +47,7 @@ $ cd elasticsearch-5.5.1/
 ```
 
 * Elastic 就会在默认的9200端口运行
-```bash
+```cs
 curl localhost:9200
 ```
 
@@ -61,7 +61,7 @@ curl localhost:9200
   
   去掉network.host的注释
 
-```nginx
+```cs
 network.host: 0.0.0.0
 ```
 ### 后置条件
@@ -113,7 +113,7 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 
 ### 新建 Index
 直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫weather的 Index
-```bash
+```cs
 $ curl -X PUT 'localhost:9200/weather'
 ```
 服务器返回一个 JSON 对象，里面的acknowledged字段表示操作成功。
@@ -150,13 +150,13 @@ $ curl -X POST 'localhost:9200/accounts/person' -d '
 
 查看当前节点的所有 Index
 
-```bash
+```cs
 $ curl -X GET 'http://localhost:9200/_cat/indices?v'
 ```
 
 列出每个 Index 所包含的 Type
 
-```bash
+```cs
 $ curl 'localhost:9200/_mapping?pretty=true'
 ```
 
@@ -164,7 +164,7 @@ $ curl 'localhost:9200/_mapping?pretty=true'
 
 发出 DELETE 请求，删除一个 Index
 
-```bash
+```cs
 $ curl -X DELETE 'localhost:9200/weather'
 ```
 
@@ -172,7 +172,7 @@ $ curl -X DELETE 'localhost:9200/weather'
 ### 查看记录
 发送GET请求。 pretty=true表示以易读的格式返回。如果 Id 不正确，就查不到数据，found字段就是false。
 
-```bash
+```cs
 $ curl 'localhost:9200/accounts/person/1?pretty=true'
 ```
 
@@ -191,7 +191,7 @@ $ curl -X PUT 'localhost:9200/accounts/person/1' -d '
 ### 删除记录
 发送DELETE请求
 
-```bash
+```cs
 $ curl -X DELETE 'localhost:9200/accounts/person/1'
 ```
 
@@ -234,7 +234,7 @@ $ curl -X DELETE 'localhost:9200/accounts/person/1'
 
 返回结果的 took字段表示该操作的耗时（单位为毫秒），timed_out字段表示是否超时;max_score：最高的匹配程度。
 
-```bash
+```cs
 $ curl 'localhost:9200/accounts/person/_search'
 ```
 

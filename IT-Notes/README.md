@@ -2,10 +2,9 @@
 sort: 2
 ---
 
-
+{% include list.liquid all=true %}
 
 # IT
-
 
 ## 资源推荐
 [CN 数据结构和算法动态可视化](https://visualgo.net/zh)
@@ -15,7 +14,7 @@ sort: 2
 
 [书栈网](BookStack.CN)
 
-{% include list.liquid all=true %}
+
 
 <hr />
 

@@ -101,7 +101,7 @@ varchar最多存65535字节(在utf8字符集下最多存21844个字符,超过会
 * 禁止使用带有数据值却不带有字段键名的INSERT操作,显式声明字段
 
 ```sql
-例如：INSERT INTO user (`username`,`age`) VALUES ('alicfeng',23);
+INSERT INTO user (`username`,`age`) VALUES ('alicfeng',23);
 ```
 
 ### 【UPDATE】
