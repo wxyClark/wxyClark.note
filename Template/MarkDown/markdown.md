@@ -2,6 +2,10 @@
 sort: 1
 ---
 
+[数学公式](https://www.mathjax.org/)
+
+[MathJax 中文文档](https://mathjax-chinese-doc.readthedocs.io/en/latest/)
+
 # Markdown 基本元素
 
 Text can be **bold**, _italic_, or ~~strikethrough~~. [Links](https://github.com) should be blue with no underlines (unless hovered over).
@@ -186,3 +190,7 @@ Large images should always scale down and fit in the content container.
 ```
 This is the final element on the page and there should be no margin below this.
 ```
+
+This is the final[^1] element on the page and there should be no margin below this.
+
+[^1]final 1的注解

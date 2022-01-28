@@ -26,3 +26,7 @@ sort: 1
 
 * 代码调用自顶向下，单向调用：Controller ——> Service [通过Event ——> Service ] ——> Repository ——> Model
 * 同层级代码部允许互相调用(避免环形调用)
+
+
+## 代码评审
+[如何在团队内做代码评审](https://mp.weixin.qq.com/s/cvFjzRDaF7RGgzGR32Vqdw)

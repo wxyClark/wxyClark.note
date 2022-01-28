@@ -24,7 +24,7 @@ sort: 1
 * pms 采购系统(purchase)
 * Promotion 促销系统
 * report-form 报表系统
-* uua 用户系统
+* uc 用户中心
 * wms 仓库系统(warehourse)
 
 ## 分层

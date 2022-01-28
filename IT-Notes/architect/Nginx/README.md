@@ -2,6 +2,10 @@
 
 [Nginx官方文档](http://nginx.org/en/docs/http/ngx_http_core_module.html)
 
+[Nginx 管理可视化神器介绍](https://mp.weixin.qq.com/s/8oXGMeLeiw2Pog1Y8GnuBw)
+
+[nginx-gui](https://github.com/onlyGuo/nginx-gui)
+
 【面试常考】Apache select和Nginx epoll模型的区别
 
 Nginx有Master进程和worker进程之分
