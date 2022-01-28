@@ -4,7 +4,6 @@
 <script type="text/javascript" src="/assets/js/md5.min.js"></script>
 <div id="gitalk-container"></div>     
 <script type="text/javascript">
-    var dt = new Date();
     var gitalk = new Gitalk({
         clientID: '{{ site.gitalk.clientID }}',
         clientSecret: '{{ site.gitalk.clientSecret }}',
@@ -13,7 +12,7 @@
         admin: ['{{ site.gitalk.admin }}'],
         id: md5(location.pathname),
         labels: ['gitalk'],
-        title: location.pathname,
+        title: (location.pathname).replace(/\//g,"-"),
         perPage: 50,
         distractionFreeMode: true,
     });

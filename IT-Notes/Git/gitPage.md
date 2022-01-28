@@ -2,9 +2,12 @@
 
 [视频教程](https://video.zhihu.com/video/1412152151905316864?itemId=2073340305&itemType=answer&player=%7B%22shouldShowPageFullScreenButton%22%3Atrue%7D)
 
+[Git Pages + Jekyll/Hexo](https://blog.csdn.net/muzilanlan/article/details/81542917)
+
 # skills
 
 ## 目录变更
+
 建议使用先删除再创建的方式，通过两次git提交，验证导航栏不出现旧的目录
 
 直接修改目录名会导致gitPage页面出现新、旧两套目录
