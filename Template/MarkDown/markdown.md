@@ -47,9 +47,13 @@ This is a code block following a header.
 3. This is an ordered list following a header.
 
 
-| 1 | 2 | 3 |
-| ---- | ---- |---- |
-| A | B | C |
+| 1 | 2 | 3 | 4 | 5 |
+| ---- | ---- | ---- | ---- | ---- |
+| A | B | C | D | E |
+| A | B | C | D | E |
+| A | B | C | D | E |
+| A | B | C | D | E |
+| A | B | C | D | E |
 
 ###### Header 6
 
@@ -190,7 +194,3 @@ Large images should always scale down and fit in the content container.
 ```
 This is the final element on the page and there should be no margin below this.
 ```
-
-This is the final[^1] element on the page and there should be no margin below this.
-
-[^1]final 1的注解
