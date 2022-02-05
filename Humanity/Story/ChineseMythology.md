@@ -9,44 +9,47 @@ graph LR
     l3-.->杀死-.->P4
 
     subgraph 地上人类活动
-        Earth((地))
+        Earth{{ 三 地 三 }}
 
         M1{{不周山<br>西北擎天柱}}--倒下-->H((窟窿))
-        A[女娲]--造-->B[人<br>男/女]
+        A(( 女 娲 ))--造-->B[人<br>男/女]
 
         A--炼五彩石补天-->H
 
         M3{{西岳华山}}-->L1[二郎神]-->R8{兄妹}-->L2
         M3-->L2(三圣公主)-.->R9{夫妻}-.->l1[书生刘彦昌]
-        L2==>宝莲灯
+        L2==>D8{{ 宝 莲 灯 }}
         L2-->R0{儿}-->L3[沉香]
         l1-->R0
 
         l2[李靖]-->R13{儿}
-        R13-->l3[3哪吒]-->R14{师傅}-->L4[太乙真人]
+        R13-->l3[哪吒]-->R14{师傅}-->L4[太乙真人]
         
         
-        F1(伏羲)--教捕鱼打猎-->B
+        F1( 伏 羲 )--教捕鱼打猎-->B
 
-        F2(黄帝)-->R2{下属}-->F21(应龙<br>大将)
+        F2( 黄 帝 )-->R2{下属}-->F21(应龙<br>大将)
         R2{下属}-->F22(仓颉)
-        F22(仓颉)==以形造==>D2>字]
+        F22(仓 颉)==以形造==>D2>字]
         F2--造-->F23>指南车]
-        F2-->R4{妻子}-->F4(嫘祖)-.->C1(养蚕)
+        F2-->R4{妻子}-->F4(嫘 祖)-.->C1(养蚕)
         F3-->R5{女儿}-->F5(女娃<br>精卫)-->C2(填海)
         F3-->R3{下属}-->F31(蚩尤)
 
         F31==宣战==>F2
 
         R3{下属}-->F32(刑天)-.->M2(断头舞干戚<br>葬在常羊山)
-        F3(炎帝<br>神农氏)--尝百草-->D1{{神农百草经}}
+        F3( 炎 帝 <br>神农氏)--尝百草-->D1{{神农百草经}}
     end
 
     subgraph 混沌
-        0((盘古开天辟地))
+        0(( 混 一 沌 <br> <br> 盘 古 <br>开 天 辟 地))
         0--左眼-->1((太阳))
         0--右眼-->2((月亮))
-        0--头发-->3((星星))
+        0--胡须-->3{星星}
+        0--躯干-->4{{千里沃野}}
+        0--四肢-->5>三山五岳]
+        0--血液-->6(江河)
 
         D0{怒触}
     end
@@ -74,10 +77,26 @@ graph LR
         H5[东方天帝]--10个-->R7{儿子}-->C3
         H5-.-贬下凡-.->H3
 
-        Sky((天))
+        Sky(( 一 天 一 ))
     end
 
-    
+    style Sky stroke:#00F,stroke-width:12;  
+    style Earth stroke:#030,stroke-width:12;  
+
+    style F31 stroke:#333,stroke-width:4px;  
+    style F23 stroke:#faa,stroke-width:4px;  
+    style D1 stroke:#F00,stroke-width:4px; 
+    style D2 stroke:#F00,stroke-width:4px;  
+    style D8 stroke:#F00,stroke-width:6px;
+    style F1 stroke:#C90,stroke-width:6px; 
+    style F2 stroke:#C90,stroke-width:6px;  
+    style F3 stroke:#C00,stroke-width:6px; 
+    style F4 stroke:#C00,stroke-width:4px;
+
+
+    style 0 fill:#2ff,fill-opacity:0.1,stroke:#F00,stroke-width:8px
+    style A fill:#2ff,fill-opacity:0.1,stroke:#F00,stroke-width:8px
+    style P3 stroke:#000,stroke-width:4px;
 
 ```
 
