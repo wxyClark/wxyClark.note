@@ -177,6 +177,9 @@ ln -s /application/mysql/bin/* /usr/local/sbin/
 | ---- | ---- |---- |
 | 默认情况下自动解锁的时长 | show variables like '%timeout%' |  |
 | 查看主库状态 | show master status | 命令显示的信息要记录在案，后面的从库导入全备后，继续和主库复制时就是要从这个位置开始。 |
-| 默认情况下自动解锁的时长 | show variables like '%timeout%' |  |
+| 当前版本 | select version() |  |
+| 当前数据库 | select database() |  |
+| 当前表结构 | desc TABLE_NAME |  |
+| 当前表建表语句 | show create table TABLE_NAME |  |
 
 

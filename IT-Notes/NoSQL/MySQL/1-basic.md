@@ -8,9 +8,10 @@ sort: 1
 | 种类    | 完整名称  | 解释 | 解释 | 使用者 |
 | ---- | ---- |---- |---- |---- |
 | DCL |  Data Control Language | 数据库【控制】语言 | 权限分配、回收 | DBA |
-| DDL |  Data Definition Language | 数据库【定义】语言 | 建表、改结构、索引 | DBA、开发者 |
-| DML |  Data Manipulation Language | 数据库【操作】语言 | 增、删、改 | 开发者 |
-| DQL |  Data Query Language | 数据库【查询】语言 | 查 | 开发者 |
+| DDL |  Data Definition Language | 数据库【定义】语言 | 建表、改结构、索引 <br> create、drop、alter | DBA、开发者 |
+| DML |  Data Manipulation Language | 数据库【操作】语言 | 增、删、改 <br> insert 、update、delete | 开发者 |
+| DQL |  Data Query Language | 数据库【查询】语言 | 查 <br>	select | 开发者 |
+| TCL |  Transaction Control Language | 【事务】控制语⾔ | set autocommit=0 <br> start transaction <br> savepoint <br> commit <br >rollback | 开发者 |
 
 ## 版本差异
 
