@@ -25,6 +25,30 @@ class BaseRepository
     }
 
     /**
+     * @desc    单个或批量创建数据
+     *
+     * @param $attributesList
+     *
+     * @return mixed
+     */
+    public function insert($attributesList)
+    {
+        return $this->model->insert($attributesList);
+    }
+
+    /**
+     * @desc  批量更新数据,依赖 mavinoo/laravel-batch
+     * @param [包含 $index 的 model 数据] $data
+     * @param string $index
+     *
+     * @return bool|int
+     */
+    public function batchUpdate($data, $index = 'id')
+    {
+        return Batch::update($this->model, $data, $index);
+    }
+
+    /**
      * @desc    获取映射集
      *
      * @param $params
@@ -87,39 +111,15 @@ class BaseRepository
     }
 
     /**
-     * @desc    单个或批量创建数据
-     *
-     * @param $attributesList
-     *
-     * @return mixed
-     */
-    public function insert($attributesList)
-    {
-        return $this->model->insert($attributesList);
-    }
-
-    /**
-     * @desc  批量更新数据,依赖 mavinoo/laravel-batch
-     * @param [包含 $index 的 model 数据] $data
-     * @param string $index
-     *
-     * @return bool|int
-     */
-    public function batchUpdate($data, $index = 'id')
-    {
-        return Batch::update($this->model, $data, $index);
-    }
-
-    /**
      * @desc  单个或批量创建数据
      *
      * @param $condition
      * 
      * @return mixed
      */
-    public function delete($condition)
+    public function delete($params)
     {
-        return $this->condition($condition)->delete();
+        return $this->condition($params)->delete();
     }
 
     /**

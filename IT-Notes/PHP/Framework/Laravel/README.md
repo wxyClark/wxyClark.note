@@ -28,7 +28,7 @@ laravel框架的核心就是个Ioc容器即服务容器
 
 ./bootstrap/app.php
 
-```
+```php
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
     App\Http\Kernel::class

@@ -52,7 +52,7 @@ $app->loadEnvironmentFrom('customer.env');
 * .env 文件中列出的所有变量将被加载到 PHP 的超级全局变量 $_ENV 中,
 
 env变量配置规则
-```nginx
+```conf
 key=value
 # 注释易 # 开始
 # value值 不使用引号包裹时 不允许出现空格
@@ -61,7 +61,7 @@ key=value
 
 可以在 env 文件中使用变量为变量赋值
 
-```nginx
+```conf
 NVAR1="Hello"
 NVAR2="World!"
 NVAR3="{$NVAR1} {$NVAR2}"
@@ -84,7 +84,7 @@ config 配置文件由类 \Illuminate\Foundation\Bootstrap\LoadConfiguration::cl
 * 代码中使用 App::environment('configKey') 检查 当前的环境配置是否与给定值匹配
 
 
-```nginx
+```conf
 # APP_ENV 也可以直接在 nginx 中配置
 fastcgi_param  APP_ENV  production;
 ```
@@ -95,7 +95,7 @@ fastcgi_param  APP_ENV  production;
 * 生成数据库缓存的migration文件
 
 ```bash
-php artisan cache:table 
+    php artisan cache:table 
 ```
 
 * Memcached缓存 需要安装 [Memcached PECL 扩展包](https://pecl.php.net/package/memcached)

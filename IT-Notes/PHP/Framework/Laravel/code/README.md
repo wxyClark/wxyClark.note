@@ -1,4 +1,12 @@
+---
+sort: 8
+---
+
 # 代码模板
+
+{% include list.liquid all=true %}
+
+<hr />
 
 ## Route
 
@@ -13,6 +21,33 @@
 
 
 ## Repository
+
+```php
+class TableNameRepository extends BaseRepository
+{
+    /** @var TableNameModel  */
+    protected $model;
+
+    public function __construct(TableNameModel $model)
+    {
+        $this->model = $model;
+    }
+
+    public function insert($attributesList)
+
+    public function batchUpdate($data, $index = 'id')
+
+    public function getMap($params, $value_column, $key_column = null){}
+
+    public function getTotalCount($params){}
+
+    public function getList($params, $fields = ['*']){}
+
+    public function delete($params){}
+
+    private function condition($params){}
+}
+```
 
 ## Model
 
@@ -44,7 +79,5 @@
 </IfModule>
 
 ```
-
-
 
 
