@@ -233,3 +233,6 @@ ln -s /application/mysql/bin/* /usr/local/sbin/
 | 当前表建表语句 | show create table TABLE_NAME |  |
 
 
+## SQLMODE
+
+ONLY_FULL_GROUP_BY

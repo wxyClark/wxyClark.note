@@ -78,7 +78,22 @@ DELETE [别名1,别名2] FROM 表1 [[AS] 别名1],表2 [[AS] 别名2] [WHERE条�
 ## 查询
 
 ```sql
-SELECT A.xx_id, A.xx_code, B.yy_code
+--  如果使用了 GROUP BY, 则 SELECT 后⾯出现的列必须在 group by中或者必须使⽤聚合函数   
+SELECT 
+    A.xx_id, A.xx_code, B.yy_code, count(A.id) as cnt,
+    CASE <表达式>
+        WHEN <值1> THEN <操作>
+        WHEN <值2> THEN <操作>
+        ...
+        ELSE <操作>
+    END CASE;
+    CASE <表达式>
+        WHEN <条件1> THEN <命令>
+        WHEN <条件2> THEN <命令>
+        ...
+        ELSE <命令>
+    END CASE;
+
 FROM table_a AS A
 LEFT JOIN table_b AS B ON A.xx_id = B.xx_id
 --  WHERE 条件顺序：
@@ -89,7 +104,10 @@ LEFT JOIN table_b AS B ON A.xx_id = B.xx_id
 --      不等匹配(推荐使用<>)
 --      安全等于<=>(可用于null值比较，如： where t.a<=>null) 【不建议使用】
 WHERE A.xx_code IN (code1,code2,code3) AND B.yy_code = code4
-GROUP BY A.id
+--  GROUP BY保证分页完整性(每页数据量相同), 
+--  HAVING 对分组之后的数据进⾏过滤(HAVING count(id)>=2 或 HAVING cnt >= 2)
+--  使用 GROUP BY 在 SELECT 中应有 聚合函数(count、sum、)
+GROUP BY A.id,B.id [HAVING group_condition]
 --  排序尽可能使用左表的字段并命中索引，
 --  排序要避免二义性(排序规则使用的字段联合起来具有唯一性)，
 --  默认 ASC 可省略
@@ -97,5 +115,5 @@ ORDER BY A.create_at ASC
 --  LIMIT 中不能使用表达式，只能跟明确的正整数
 --  命令行脚本，尽可能使用 WHERE条件 使得 偏移量 = 0
 --  偏移量默认 = 0 可省略
-LIMIT 0,20
+LIMIT [0,]20
 ```
