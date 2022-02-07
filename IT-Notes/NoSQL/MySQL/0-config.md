@@ -38,6 +38,56 @@ expire_logs_days = 7
 
 * 程序使用的数据库账号不能使用super
 * 对于程序连接数据库账号，遵循权限最小原则，不越权，不跨库
+* 权限生效：flush privileges;之后 用户重新登录
+* 权限验证: 
+
+  +  连接权限——用户名@来源(ip或主机名)；
+        
+```sql
+create user ⽤户名[@主机名] [identified by '密码'];
+例：create user 'test2'@'localhost' identified by '123';
+例：create user 'test4'@'192.168.11.%' identified by '123';
+SET PASSWORD FOR '⽤户名'@'主机' = PASSWORD('密码');
+
+update user set password|authentication_string = password('321') where user = 'test1' and host = '%';
+flush privileges;
+```
+
+  + 操作权限——create(table、index)、select、delete、update、alter
+
+```sql
+grant privileges ON database.table TO 'username'[@'host'] [with grant option]
+
+--  给test1授权可以操作所有库所有权限，相当于dba
+例：grant all on *.* to 'test1'@‘%’;
+
+--  test1可以对seata库中所有的表执⾏select、update
+例：grant select,update on seata.* to 'test1'@'%';
+
+--  test1⽤户只能查询mysql.user表的user,host字段
+例：grant select(user,host) on mysql.user to 'test1'@'localhost';
+```
+
+查看用户权限配置
+```sql
+--  查看当前用户的权限
+show grants;
+
+--  查看指定用户的权限
+show grants for '⽤户名'[@'主机']
+例：show grants for 'test1'@'localhost';
+
+--  撤销用户权限
+revoke privileges ON database.table FROM '⽤户名'[@'主机'];
+例：revoke select(host) on mysql.user from test1@localhost;
+
+--  删除用户
+drop user '⽤户名'[@‘主机’]
+例： drop user test1@localhost;
+
+delete from user where user='⽤户名' and host='主机';
+flush privileges;
+```
 
 ## 参数配置
 
