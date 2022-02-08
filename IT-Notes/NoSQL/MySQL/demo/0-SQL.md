@@ -132,7 +132,7 @@ SELECT id,
         WHEN cast(`status` AS SIGNED) > 44 
             THEN '4'
         ELSE '99'
-    END AS `status`
+    END [CASE] AS `status`
 FROM t_household 
 WHERE  del_flag = '0';
 ```

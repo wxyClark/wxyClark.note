@@ -13,6 +13,8 @@ sort: 0
 | DQL |  Data Query Language | 数据库【查询】语言 | 查 <br> select | 开发者 |
 | TCL |  Transaction Control Language | 【事务】控制语⾔ | set autocommit=0 <br> start transaction <br> savepoint <br> commit <br >rollback | 开发者 |
 
+declare创建的局部变量常⽤于存储过程和函数的创建中
+
 ## 版本差异
 
 ## 概念
@@ -36,11 +38,6 @@ sort: 0
 ### 普通索引
 
 ## 事务
-
-## join
-
-* innerJoin on条件字段 为null的数据为过滤掉
-* leftJoin on条件右表数据为null的数据不回过滤
 
 
 ## 函数
@@ -85,3 +82,157 @@ sort: 0
 | ---- | --- | ---- | ---- | 
 | datediff(date1, date2) | 获取两个⽇期的时间间隔天数 <br> date1 和 date2 为⽇期或 date-time 表达式 |  datediff('2017-11-30','2017-11-29') <br> datediff('2017-11-30','2017-12-15') | 1 <br> -15 | 
 | A | B | C | D | 
+
+
+## 流程控制语句
+
+* if 函数    if(条件表达式,值1,值2); **条件表达式为** true 的时候，返回 **值1**，否则返回 **值2**。 常用语 select
+* case 语句  case when then [when then] else end    主要⽤在select、begin end中,begin end中使⽤不能省略case 例： end case
+* if 结构
+* while 循环
+* repeat 循环   类似 do while
+* loop 循环     类似 while(true){} 死循环
+* 循环体控制语句    continue、break、iterate(跳过)、leave(代码段前面加标签，退出对应的带没段)
+
+## 游标 Cursor
+
+```tip
+游标使⽤完毕之后⼀定要关闭。
+
+⼀个 begin end 中只能声明⼀个游标
+```
+
+* 用途：通过游标的⽅式来遍历select查询的结果集，然后对每⾏数据进⾏处理
+* 场景：游标只能在存储过程和函数中使⽤
+* 原理：游标相当于⼀个指针，这个指针指向select的第⼀⾏数据，可以通过移动指针来遍历后⾯的数据
+
+```sql
+--  【声明游标】
+DECLARE 游标名称 CURSOR FOR 查询语句;
+
+--  【打开游标】
+OPEN 游标名称;
+
+--  【遍历游标】
+FETCH 游标名称 INTO 变量列表;
+--  取出当前⾏的结果，将结果放在对应的变量中，并将游标指针指向下⼀⾏的数据。
+--  当调⽤fetch的时候，会获取当前⾏的数据，如果当前⾏⽆数据，会引发mysql内部的NOT FOUND错误。
+
+--  【关闭游标】
+CLOSE 游标名称;
+```
+
+示例：写⼀个函数，计算test1表中a、b字段所有的和。
+
+```sql
+/*删除函数*/
+DROP FUNCTION IF EXISTS fun1;
+/*声明结束符为$*/
+DELIMITER $
+/*创建函数*/
+CREATE FUNCTION fun1(v_max_a int)
+    RETURNS int
+    BEGIN
+        /*⽤于保存结果*/
+        DECLARE v_total int DEFAULT 0;
+        /*创建⼀个变量，⽤来保存当前⾏中a的值*/
+        DECLARE v_a int DEFAULT 0;
+        /*创建⼀个变量，⽤来保存当前⾏中b的值*/
+        DECLARE v_b int DEFAULT 0;
+        /*创建游标结束标志变量*/
+        DECLARE v_done int DEFAULT FALSE;
+
+        /*创建游标*/
+        DECLARE cur_test1 CURSOR FOR SELECT a,b from test1 where a<=v_max_a;
+        /*设置游标结束时v_done的值为true，可以v_done来判断游标是否结束了*/
+        DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done=TRUE;
+        /*设置v_total初始值*/
+        SET v_total = 0;
+        
+        /*打开游标*/
+        OPEN cur_test1;
+
+        /*使⽤Loop循环遍历游标*/
+        a:LOOP
+            /*先获取当前⾏的数据，然后将当前⾏的数据放⼊v_a,v_b中，如果当前⾏⽆数据，v_done会被置为true*/
+            FETCH cur_test1 INTO v_a, v_b;
+            /*通过v_done来判断游标是否结束了，退出循环*/
+                if v_done THEN
+                    LEAVE a;
+                END IF;
+            /*对v_total值累加处理*/
+            SET v_total = v_total + v_a + v_b;
+        END LOOP;
+
+        /*关闭游标*/
+        CLOSE cur_test1;
+
+        /*返回结果*/
+        RETURN v_total;
+    END $
+/*结束符置为;*/
+DELIMITER ;
+```
+
+示例：嵌套游标
+```sql
+/*删除存储过程*/
+DROP PROCEDURE IF EXISTS proc1;
+/*声明结束符为$*/
+DELIMITER $
+/*创建存储过程*/
+CREATE PROCEDURE proc1()
+    BEGIN
+        /*创建⼀个变量，⽤来保存当前⾏中a的值*/
+        DECLARE v_a int DEFAULT 0;
+        /*创建游标结束标志变量*/
+        DECLARE v_done1 int DEFAULT FALSE;
+        /*创建游标*/
+        DECLARE cur_test1 CURSOR FOR SELECT a FROM test2;
+        /*设置游标结束时v_done1的值为true，可以v_done1来判断游标cur_test1是否结束了*/
+        DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done1=TRUE;
+
+        /*打开游标*/
+        OPEN cur_test1;
+        /*使⽤Loop循环遍历游标*/
+        a:LOOP
+            FETCH cur_test1 INTO v_a;
+            /*通过v_done1来判断游标是否结束了，退出循环*/
+            if v_done1 THEN
+                LEAVE a;
+            END IF;
+
+            /* 第二层 begin end,【每层只能有一个游标】 */
+            BEGIN
+                /*创建⼀个变量，⽤来保存当前⾏中b的值*/
+                DECLARE v_b int DEFAULT 0;
+                /*创建游标结束标志变量*/
+                DECLARE v_done2 int DEFAULT FALSE;
+                /*创建游标*/
+                DECLARE cur_test2 CURSOR FOR SELECT b FROM test3;
+                /*设置游标结束时v_done1的值为true，可以v_done1来判断游标cur_test2是否结束了*/
+                DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done2=TRUE;
+
+                /*打开游标*/
+                OPEN cur_test2;
+                /*使⽤Loop循环遍历游标*/
+                b:LOOP
+                    FETCH cur_test2 INTO v_b;
+                    /*通过v_done1来判断游标是否结束了，退出循环*/
+                    if v_done2 THEN
+                        LEAVE b;
+                    END IF;
+                    /*将v_a、v_b插⼊test1表中*/
+                    INSERT INTO test1 VALUES (v_a,v_b);
+                END LOOP b;
+
+                /*关闭cur_test2游标*/
+                CLOSE cur_test2;
+            END;
+        END LOOP;
+        /*关闭游标cur_test1*/
+        CLOSE cur_test1;
+    END $
+/*结束符置为;*/
+DELIMITER ;
+```

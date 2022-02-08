@@ -184,3 +184,107 @@ MySQL InnoDB 的 REPEATABLE-READ（可重读）并不保证避免幻读，需要
 
 如果出现死锁，可以用SHOW INNODB STATUS命令来确定最后一个死锁产生的原因和改进措施。
 
+
+## 存储过程 procedure
+
+```tip
+存储过程不能修改，若涉及到修改的，可以先删除，然后重建。
+
+存储过程中是否需要开启事务？
+```
+
+```sql
+--  【创建存储过程】
+--  参数模式有3种：
+--      in：该参数可以作为输⼊，也就是该参数需要调⽤⽅传⼊值。
+--      out：该参数可以作为输出，也就是说该参数可以作为返回值。
+--      inout：该参数既可以作为输⼊也可以作为输出，也就是说该参数需要在调⽤的时候传⼊值，又可以作为返回值。
+--      参数模式默认为IN。
+--  ⼀个存储过程可以有多个输⼊、多个输出、多个输⼊输出参数
+CREATE PROCEDURE 存储过程名([参数模式] 参数名 参数类型)
+BEGIN
+    存储过程体
+END
+
+--  【调⽤存储过程】
+CALL 存储过程名称(参数列表);
+
+--  【删除存储过程】
+DROP PROCEDURE [if exists] 存储过程名称;
+
+--  【查看存储过程】
+SHOW CREATE PROCEDURE 存储过程名称;
+```
+
+实例：
+```sql
+--  【创建存储过程】
+/*设置结束符为$*/
+DELIMITER $
+/*如果存储过程存在则删除*/
+DROP PROCEDURE IF EXISTS proc2;
+/*创建存储过程proc2*/
+CREATE PROCEDURE proc2(id int,age int,in name varchar(16),out user_count int,out max_id int)
+BEGIN
+    INSERT INTO t_user VALUES (id,age,name);
+
+    /*查询出t_user表的记录，放⼊user_count中,max_id⽤来存储t_user中最⼩的id*/
+    SELECT COUNT(*),max(id) into user_count,max_id from t_user;
+END $
+/*将结束符置为默认 ';' */
+DELIMITER ;
+
+--  【调⽤存储过程：】
+/*创建了3个⾃定义变量*/
+SELECT @id:=3,@age:=56,@name:='张学友';
+/*调⽤存储过程*/
+CALL proc2(@id,@age,@name);
+```
+
+### 异常
+
+mysql内部异常：sql执行报错(如：违反唯一性约束导致insert失败)
+外部异常：sql执行成功，结果和预期不一致
+
+```sql
+/*删除存储过程*/
+DROP PROCEDURE IF EXISTS proc2;
+/*声明结束符为$*/
+DELIMITER $
+
+/*创建存储过程*/
+CREATE PROCEDURE proc2(a1 int,a2 int)
+BEGIN
+    /*声明⼀个变量，标识是否有sql异常*/
+    DECLARE hasSqlError int DEFAULT FALSE;
+    /*在执⾏过程中出任何异常设置hasSqlError为TRUE 【mysql内部异常】*/
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET hasSqlError=TRUE;
+    /*保存影响的⾏数*/
+    DECLARE v_insert_count INT DEFAULT 0;
+
+    /*开启事务*/
+    START TRANSACTION;
+    INSERT INTO test1(a) VALUES (a1);
+    INSERT INTO test1(a) VALUES (a2);
+
+    /*根据hasSqlError判断是否有异常，做回滚和提交操作*/
+    IF hasSqlError THEN
+        ROLLBACK;
+    ELSE
+        COMMIT;
+    END IF;
+
+    /*获取上⾯ insert 影响⾏数*/
+    /* ROW_COUNT() 可以获取 mysql 中 insert 或者 update 影响的⾏数 */
+    select ROW_COUNT() INTO v_insert_count;
+
+    /*业务逻辑校验 【外部异常】 */
+    IF v_insert_count=2 THEN
+        COMMIT;
+    ELSE
+        ROLLBACK;
+    END IF;
+END $
+/*结束符置为;*/
+DELIMITER
+```

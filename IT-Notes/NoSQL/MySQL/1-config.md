@@ -228,6 +228,11 @@ ln -s /application/mysql/bin/* /usr/local/sbin/
 
 | 参数  | 命令  |   |
 | ---- | ---- |---- |
+| 查看系统所有变量 | show [global | session] variables; |---- |
+| 查看全局变量 | show global variables; |---- |
+| 查看会话变量 | show session variables; <br> show variables; |---- |
+| ---- | ---- |---- |
+| ---- | ---- |---- |
 | 默认情况下自动解锁的时长 | show variables like '%timeout%' |  |
 | 查看隔离级别 | show variables like 'transaction_isolation' | 默认 READ-COMMITTED |
 | 查看主库状态 | show master status | 命令显示的信息要记录在案，后面的从库导入全备后，继续和主库复制时就是要从这个位置开始。 |

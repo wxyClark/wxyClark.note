@@ -140,10 +140,16 @@ range
     FROM a INNER JOIN b 
     FROM a JOIN b 
     FROM a b
+
+* inner Join on 条件字段为 null 的数据**会过滤掉**
+
+
 * 外连接分为2种：
 
     左外链接：FROM 主表 LEFT JOIN b JOIN 从表
     右外连接：FROM 从表 RIGHT JOIN b JOIN 主表
+
+* left Join on 条件从表数据为 null 的数据**不会过滤**
 
  ## 子查询  
 
