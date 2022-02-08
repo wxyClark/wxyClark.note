@@ -1,8 +1,8 @@
 ---
-sort: 2
+sort: 6
 ---
 
-# MySQL实践
+# MySQL规范
 
 
 ## 开发总则
@@ -155,3 +155,17 @@ S2   SELECT `username` FROM `user` WHERE id>10000 LIMIT 20;
 * 尽量把一些典型外部调用移出事务，如调用webservice，访问文件存储等，从而避免事务过长。
 * 更新语句尽量基于主键或unique key，否则会产生间隙锁(内部扩大锁范围)，性能下降，产生死锁。
 * 对于MySQL主从延迟严格敏感的select语句，请开启事务强制访问主库。
+
+## Null导致的神坑
+
+```danger
+NULL 导致的坑让⼈防不胜防，强烈建议创建字段的时候字段不允许为NULL，给个默认值
+```
+
+* **判断是否为空只能⽤ IS NULL、IS NOT NULL**
+* NULL作为布尔值的时候，不为1也不为0
+* 任何值和NULL使⽤运算符（>、<、>=、<=、!=、<>）或者（in、notin、any、some、all），返回值都为NULL
+* 当IN和NULL⽐较时，⽆法查询出为NULL的记录
+* **当NOTIN后⾯有NULL值时，不论什么情况下，整个sql的查询结果都为空**
+* count(字段) ⽆法统计字段为NULL的值，count(*)可以统计值为null的⾏
+* 当字段为主键的时候，字段会⾃动设置为 not null

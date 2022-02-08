@@ -1,5 +1,5 @@
 ---
-sort: 4
+sort: 2
 ---
 
 # 字段类型
@@ -84,3 +84,4 @@ varchar(n) 如果值的长度过大，则被转换为 TEXT 类型
 
 * bit
 * BLOBs (Binary Large OBjects)
+
