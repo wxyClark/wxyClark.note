@@ -166,10 +166,9 @@ Character Set：（字符集对应1,2,3,4）* 列长度+ 2(变长列—varchar) 
 mysql中的⻚ 默认16k(相当于4个磁盘块, 4k=4096)
 | Page的结构 | 存储位置 |
 | ---- | ---- |
-| ![mysql中的page 摘要](../../../img/NoSQL/MySQL-pageSummary.png) | ![mysql中的page 存储](../../../img/NoSQL/MySQL-pageStorage.png) |
+| <img src="/img/NoSQL/MySQL-pageSummary.png" alt="mysql中的page 摘要"/> | <img src="/img/NoSQL/MySQL-pageStorage.png" alt="mysql中的page 存储"/> |
 
 ![mysql中的page](../../../img/NoSQL/MySQL-page.png)
-
 
 ## 分表
 
