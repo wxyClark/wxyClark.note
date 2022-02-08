@@ -17,6 +17,7 @@ sort: 3
 | MyISAM <br> 非聚簇索引 | <img src="/img/NoSQL/MyISAM-PrimaryKey.png" alt="MyISAM-PrimaryKey"/> | <img src="/img/NoSQL/MyISAM-SecondaryKey.png" alt="MyISAM-SecondaryKey"/> |
 | InnoDB <br> 主键-聚簇索引 <br> 辅助-非聚簇索引 | <img src="/img/NoSQL/InnoDB-PrimaryKey.png" alt="InnoDB-PrimaryKey"/> | <img src="/img/NoSQL/InnoDB-SecondaryKey.png" alt="InnoDB-SecondaryKey"/> |
 
+![B+Tree B加棰]([../../../../../img/NoSQL/queryWithIndex.png)
 
 ```tip
 InnoDB 主键索引B+Tree(聚簇索引 叶子节点是data + 指针)，辅助索引B+Tree(非聚簇索引，叶子节点是主键值)
@@ -32,14 +33,9 @@ MyISAM 主键索引索引B+Tree(非聚簇索引 叶子节点是主键值)，，�
 ```danger
 理解索引是如何工作的非常重要，应该根据这些理解来创建最合适的索引
 
-
 而不是根据一些诸如 
-
-    “在多列索引中将选择性最高的列放在第一列”
-    或 “应该为WHERE子句中出现的所有列创建索引”
-
+    “在多列索引中将选择性最高的列放在第一列” 或 “应该为WHERE子句中出现的所有列创建索引”
 之类的经验法则及推论
-
 
 如何判定索引是否合理——按响应时间来对查询进行分析
 ```
@@ -116,10 +112,12 @@ MyISAM 主键索引索引B+Tree(非聚簇索引 叶子节点是主键值)，，�
 ```sql
 字段为数值类型, where 条件传入 字符串类型 的数值, 索引有效
 字段为字符串类型, where 条件传入 数值, 索引失效
+select * from test1 where name = '1';   --  索引有效
+ select * from test1 where name = 1;    --  索引失效
 ```
 * 查询数据量超过表行数的25%, 不会利用索引
 * Like 左模糊无法利用索引
-* 在索引列上会用函数或表达式，索引失效
+* 在索引列上会用函数或运算符，索引失效
 
 * or连接
 
@@ -162,7 +160,16 @@ Character Set：（字符集对应1,2,3,4）* 列长度+ 2(变长列—varchar) 
 ```
 
 ### mysql中的⻚
+
+[一文理解MySQL中的page页](https://blog.csdn.net/weixin_34364239/article/details/114329240)
+
 mysql中的⻚ 默认16k(相当于4个磁盘块, 4k=4096)
+| Page的结构 | 存储位置 |
+| ---- | ---- |
+| ![mysql中的page 摘要](../../../img/NoSQL/MySQL-pageSummary.png) | ![mysql中的page 存储](../../../img/NoSQL/MySQL-pageStorage.png) |
+
+![mysql中的page](../../../img/NoSQL/MySQL-page.png)
+
 
 ## 分表
 

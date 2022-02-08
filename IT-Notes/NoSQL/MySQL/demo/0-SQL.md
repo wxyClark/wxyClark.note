@@ -29,8 +29,17 @@ ALTER TABLE 表名 CHANGE column 列名 新列名 新类型 [约束];
 ALTER TABLE 表名 DROP column 列名;
 
 --  添加索引
+--      如果字段是char、varchar类型，length可以⼩于字段实际长度，
+--      如果是blog、text等长⽂本类型，必须指定length。
+CREATE [unique] INDEX 索引名称 ON 表名(列名[(length)]);
 ALTER TABLE `TABLE_name` ADD PRIMARY KEY |UNIQUE  (`column1`, `column2`, `column3`);
 ALTER TABLE `TABLE_name` ADD INDEX  index_name (`column1`, `column2`, `column3`);
+
+--  修改索引
+先删除，再创建
+
+--  删除索引
+DROP INDEX 索引名称 ON 表名;
 
 --  只复制表结构
 CREATE TABLE 表名 LIKE 被复制的表名;
