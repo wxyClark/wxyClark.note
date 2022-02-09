@@ -10,10 +10,75 @@ sort: 1
 
 laravel框架的核心就是个Ioc容器即服务容器
 
+[Laravel 2018使用数据分析](https://www.pilishen.com/posts/laravel-numbers-2018-07)
 
+## 最佳实践
+
+[Laravel最佳实践](https://github.com/alexeymezenin/laravel-best-practices/blob/master/chinese.md)
+
+代码严格分层、封装，**单向 向下调用**
+
+| 类 | 注入 | 处理 | 常用方法 |
+| ---- | ---- | ---- | ---- |
+| Controller | Request <br> Service | 权限校验，参数校验 <br> 调用 service 处理业务逻辑 <br> 返回 | index、detail、add、edit、export、changeStatus | 
+| Service | Repository | 接收参数，处理业务逻辑 <br> 复杂业务使用事务处理 <br> 调用 repository 与数据库交互 | getIndex、getDetail、add、edit、exportData、changeStatus | 
+| Repository | Model | 与数据库交互 <br> 封装基础方法 | insert、batchUpdate、totalCount、getList、getMap、delete、condition、 | 
+| Model |  | 定义关联的数据表、主键、更新时间字段名 |  | 
+| Request |  | 定义校验规则 <br> 校验参数 | rules | 
+| Enums |  | 定义常量 <br> 获取常量映射 <br> 定义常量分组 | getNameByconst() | 
+| Helper |  | 分装常用数据处理 func | getSth | 
+
+* 使用社区认可的标准Laravel工具
+* 遵循laravel命名约定
+* 一个类和一个方法应该只有一个职责(单一职责SRP)。
+* 在代码中使用配置、语言包和常量，而不是使用硬编码
+* 注释你的代码，但是更优雅的做法是使用描述性的语言来编写你的代码
+* 尽可能使用简短且可读性更好的语法
+* 避免直接从 .env 文件里获取数据; 推荐在config目录下的文件中使用 env('CONST_PARAM'), 在代码中使用 config(config_file_name.param_name)
+* 永远不要在路由文件中放任何的逻辑代码。
+* 使用 IoC 容器(依赖注入，解耦)或 facades 代替 new ClassName
+* 将验证从控制器移动到请求类
+* 集中处理数据：$category->article()->create($request->validated());
+* 最好倾向于使用 Eloquent 而不是 Query Builder 和原生的 SQL 查询。优先使用集合而不是数组
+* 不要重复你自己(DRY)
+
+```php
+public function scopeActive($q)
+{
+    return $q->where('重复使用的过滤条件');
+}
+
+public function getActive()
+{
+    return $this->active()->get();
+}
+
+public function getArticles()
+{
+    return $this->whereHas('user', function ($q) {
+            $q->active();
+        })->get();
+}
+```
+
+
+* 不要在模板中查询，尽量使用惰性加载；尽量把 sql 操作提到循环之外
+* 使用标准格式来存储日期，用访问器和修改器来修改日期格式
+
+```php
+// Model
+protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+public function getSomeDateAttribute($date)
+{
+    return $date->format('m-d');
+}
+
+// View
+{{ $object->ordered_at->toDateString() }}
+{{ $object->ordered_at->some_date }}
+```
 
 ## 设计模式
-
 
 
 ### Facade门面模式
