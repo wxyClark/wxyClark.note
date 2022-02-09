@@ -14,7 +14,8 @@ sort: 2
 
 [书栈网](BookStack.CN)
 
-
+[共享协议](https://spdx.org/licenses/)
+[CC4协议图标](https://creativecommons.org/choose/)
 
 <hr />
 
