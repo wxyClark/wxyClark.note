@@ -4,6 +4,10 @@ sort: 4
 
 # 4.PHP
 
+{% include list.liquid all=true %}
+
+
+
 PSR(Proposing a Standards Recommendation —— 提出标准建议)
 ```
 PSR-4 比 PSR-0 更简洁，可以替换 
@@ -36,4 +40,9 @@ php-gui
 * 支持 设置字体、字号
 
 
-{% include list.liquid all=true %}
+## 规范
+
+
+## 争议
+
+* 单引号、双引号 区别非常小以至于根本不用在意，对于负载极其高的应用来说，是有点作用的。
