@@ -23,6 +23,13 @@
 <hr>
 
 <div class="copyright text-center text-gray" role="contentinfo">
+    本作品采用 <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+    </a>
+    <a rel="license" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">知识共享署名-非商业性使用-禁止演绎 4.0国际许可协议</a>
+    进行许可。
+    <br />
+
     <i class="fa fa-copyright"></i>
     <span class="time">
         {%- assign created_time = rest_created_at | date: "%Y" -%}
@@ -53,11 +60,13 @@
     {% endunless %}
 
     <br>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
-        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" />
-    </a>
-    <br />
-    本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0国际许可协议</a>进行许可。
+    
+    <div class="license_icons">
+        <div id="cc_slot"><img src="https://creativecommons.org/images/chooser/chooser_cc.png" /></div>
+        <div id="by_slot"><img src="https://creativecommons.org/images/chooser/chooser_by.png" /></div>
+        <div id="nc_slot"><img src="https://creativecommons.org/images/chooser/chooser_nc.png" /></div>
+        <div id="sa_slot"><img src="https://creativecommons.org/images/chooser/chooser_nd.png" /></div>
+    </div>
 </div>
 
 
