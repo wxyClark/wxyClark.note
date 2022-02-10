@@ -22,8 +22,8 @@ CONTAINER：容器名称 或 容器ID
 | 容器停启用 | docker restart [OPTIONS] CONTAINER | start、stop、restart |  |  |
 | 杀掉一个运行中的容器 | docker kill [OPTIONS] CONTAINER <br> docker kill php |  | 强制结束 |
 | 删除一个或多个容器 | docker rm [OPTIONS] CONTAINER_LIST | -f :强制 <br> -v :删除与容器关联的卷 |  |
-| 在运行的容器中执行命令 | docker exec [OPTIONS] CONTAINER_(NAME or ID) COMMAND [ARG...] <br> docker exec -it CONTAINER /bin/sh  | -d :分离模式: 在后台运行 <br> -i :即使没有附加也保持STDIN 打开 <br> -t :分配一个伪终端 | |
-| 连接到正在运行中的容器 | docker attach [OPTIONS] CONTAINER |  | D |
+| 在运行的容器中执行命令 | docker exec [OPTIONS] CONTAINER_(NAME or ID) COMMAND [ARG...] <br> docker exec -it CONTAINER /bin/sh <br> docker exec -it nginx nginx -s reload  | -d :分离模式: 在后台运行 <br> -i :即使没有附加也保持STDIN 打开 <br> -t :分配一个伪终端 | |
+| 连接到正在运行中的容器 | docker attach [OPTIONS] CONTAINER |  |  |
 | 获取容器日志 | docker logs [OPTIONS] CONTAINER <br> docker logs --since="2016-07-01" --tail=10 myNginx | -f : 跟踪日志输出 <br> --since :显示某个开始时间的所有日志 <br> --tail :仅列出最新N条容器日志 <br> -t : 显示时间戳 |  |
 
 ## docker-compose
@@ -43,3 +43,10 @@ CONTAINER：容器名称 或 容器ID
 |  |  |  |
 | docker-compose rm php | 删除并且停止php容器 |  |
 | docker-compose down | 停止并删除容器，网络，图像和挂载卷 |  |
+
+## dnmp实践
+
+[github dnmp](https://github.com/yeszao/dnmp)
+
+* cp env.sample .env 修改应用版本前 执行 docker search 确认版本存在 
+* cp docker-compose.sample.yml docker-compose.yml 选择版本释放注释，注意缩进
