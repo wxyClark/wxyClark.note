@@ -1,5 +1,20 @@
 # Docker
 
+```angular2html
+windows系统下 DockerDesktop 依赖 WSL2
+```
+
+设置WSL2 最大内存
+
+```conf
+# 在 C:\Users\USER_NAME 目录下新建文件 .wslconfig
+[wsl2]
+memory=4GB
+swap=0
+localhostForwarding=true
+```
+在用户目录下新建文件 .wslconfig
+
 ## 基础命令
 
 CONTAINER：容器名称 或 容器ID
@@ -13,12 +28,13 @@ CONTAINER：容器名称 或 容器ID
 | 列出本地镜像 | docker images [OPTIONS] [REPOSITORY[:TAG]] | -a :列出本地所有的镜像(含中间映像层) <br> -f :显示满足条件的镜像； | 默认不显示中间映像层 |
 | 删除镜像 | docker rmi [OPTIONS] IMAGE [IMAGE...] <br> docker rmi php  | -f :强制删除；<br> --no-prune :不移除该镜像的过程镜像； | 默认移除过程镜像 |
 | 从容器创建一个新的镜像 | docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]] | -a :提交的镜像作者 <br> -c :使用Dockerfile指令来创建镜像；<br> -m :提交时的说明文字； <br> -p :在commit时，将容器暂停 |  |
+| 创建容器 | docker run --name=ALIAS -p  -d 2222:80 IMAGE_NAME |
 | 导入镜像 | docker import [OPTIONS] file- [REPOSITORY[:TAG]] <br> docker import  my_ubuntu_v3.tar runoob/ubuntu:v4   | -c :应用docker 指令创建镜像； <br> -m :提交时的说明文字； |  |
 |  |  |  |  |
 | 打包容器 | docker export [OPTIONS] CONTAINER <br> docker export -o mysql-`date +%Y%m%d`.tar mysql5 | -o :将输入内容写到文件 |  |
 | 检查容器里文件结构的更改 | docker diff [OPTIONS] CONTAINER |  |  |
 | 列出容器 | docker ps [OPTIONS] <br> docker ps -a | -a :显示所有的容器，包括未运行的 <br> -f :根据条件过滤显示的内容 <br> -s :显示总的文件大小。 | 状态：created、restarting、up、removing 、paused(暂停)、exited、dead|
-| 启动容器 | docker run -it php /bin/bash |  | 启动并打开命令行 |
+| 启动容器 | docker exec -it php /bin/bash |  | 启动并打开命令行 |
 | 容器停启用 | docker restart [OPTIONS] CONTAINER | start、stop、restart |  |  |
 | 杀掉一个运行中的容器 | docker kill [OPTIONS] CONTAINER <br> docker kill php |  | 强制结束 |
 | 删除一个或多个容器 | docker rm [OPTIONS] CONTAINER_LIST | -f :强制 <br> -v :删除与容器关联的卷 |  |
@@ -27,7 +43,6 @@ CONTAINER：容器名称 或 容器ID
 | 获取容器日志 | docker logs [OPTIONS] CONTAINER <br> docker logs --since="2016-07-01" --tail=10 myNginx | -f : 跟踪日志输出 <br> --since :显示某个开始时间的所有日志 <br> --tail :仅列出最新N条容器日志 <br> -t : 显示时间戳 |  |
 
 ## docker-compose
-
 
 | 命令 | 用途 | 备注 |
 | ---- | ---- | ---- |
