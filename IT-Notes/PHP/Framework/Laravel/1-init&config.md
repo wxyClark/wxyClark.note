@@ -12,9 +12,13 @@ Laravel>=5.6 PHP对应的版本>=7.1.3
 
 ```bash
     composer create-project --prefer-dist laravel/laravel=8.0.* 目标目录
+
+    # 加载依赖库
+    composer update
 ```
 
 ## 本地开发环境
+
 
 如果本地安装了 PHP 可使用 PHP 内置的服务器来为应用程序提供服务 http://localhost:8000
 
@@ -275,3 +279,7 @@ Storage::delete('file.jpg');
 Storage::delete(['file.jpg', 'file2.jpg']);
 ```
 
+## 插件
+
+中文语言包：composer require caouecs/laravel-lang:~3.0
+ide助手 - PHPStrom：composer require barryvdh/laravel-ide-helper

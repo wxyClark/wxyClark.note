@@ -9,7 +9,7 @@ sort: 0
 
 ```sql
 DROP DATABASE if exists 旧库名;
-CREATE DATABASE [if not exists] 库名;
+CREATE DATABASE [if not exists] 库名 [default character set = 'utf8mb4'];
 
 ```
 

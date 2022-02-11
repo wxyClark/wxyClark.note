@@ -34,7 +34,7 @@ CONTAINER：容器名称 或 容器ID
 | docker-compose up | 创建并且启动所有容器 |  |
 | docker-compose up -d | 创建并且后台运行方式启动所有容器 |  |
 | docker-compose up nginx php mysql | 创建并且启动 指定的多个容器 |  |
-| docker-compose up -d nginx php | 创建并且已后台运行的方式启动 指定的多个容器 |  |
+| docker-compose up -d nginx php | 创建并且已后台运行的方式启动 指定的多个容器 |  |s
 |  |  |  |
 | docker-compose start php | 启动服务 |  |
 | docker-compose stop php | 停止服务 |  |
@@ -48,5 +48,11 @@ CONTAINER：容器名称 或 容器ID
 
 [github dnmp](https://github.com/yeszao/dnmp)
 
-* cp env.sample .env 修改应用版本前 执行 docker search 确认版本存在 
+* cp env.sample .env，修改数据库密码； 修改应用版本前 执行 docker search 确认版本存在
 * cp docker-compose.sample.yml docker-compose.yml 选择版本释放注释，注意缩进
+* 逐个修改 nginx/conf.d下的conf文件  fastcgi_pass;
+```yaml
+  php80:
+
+  fastcgi_pass   php80:9000;
+```
