@@ -113,6 +113,8 @@ $app->singleton(
 ### 观察者模式 Event-Listener
 
 
+[laravel之设计模式](https://www.jianshu.com/p/cb8e9c354921)
+
 ## 避坑
 
 ### 插件

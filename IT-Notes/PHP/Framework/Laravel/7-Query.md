@@ -27,3 +27,13 @@ $collection = collect([
 ]);
 return $collection->pluck('name', 'product_id');
 ```
+
+## count
+
+按指定字段唯一值统计数量
+```php
+    public function getAccountTotalCount($params)
+    {
+        return $this->baseQuery($params)->count(DB::raw("distinct(account_code)"));
+    }
+```
