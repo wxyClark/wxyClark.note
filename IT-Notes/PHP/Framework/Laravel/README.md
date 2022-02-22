@@ -112,6 +112,34 @@ $app->singleton(
 
 ### 观察者模式 Event-Listener
 
+app/Providers/EventServiceProvider.php 
+
+```tip
+一个Event可以对应多个监听者
+一个监听者只能对应一个Event
+```
+
+```php
+protected $listen = [
+        //  商品编辑日志
+        'App\Events\ProductEditEvent'=> [
+            'App\Listeners\ProductEditLogListener',
+        ],
+        'App\Events\ProductDetailEditEvent'=> [
+            'App\Listeners\ProductVariationEditLogListener',
+        ],
+        'App\Events\ProductImageEditEvent'=> [
+            'App\Listeners\ProductVariationEditLogListener',
+        ],
+        'App\Events\ProductTagEditEvent'=> [
+            'App\Listeners\ProductVariationEditLogListener',
+        ],
+        'App\Events\ProductVariationEditEvent'=> [
+            'App\Listeners\ProductVariationEditLogListener',
+        ],
+    ];
+```
+
 
 [laravel之设计模式](https://www.jianshu.com/p/cb8e9c354921)
 
