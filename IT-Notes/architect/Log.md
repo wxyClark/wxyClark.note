@@ -1,5 +1,9 @@
 # 日志
 
+```tip
+日志按天切割，按业务指定独立文件
+```
+
 ## ElasticSearch VS MongoDB
 [Elasticsearch和MongoDB简要对比](https://www.cnblogs.com/wangzhen3798/p/10032898.html)
 

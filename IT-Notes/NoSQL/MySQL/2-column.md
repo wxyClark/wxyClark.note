@@ -85,3 +85,33 @@ varchar(n) 如果值的长度过大，则被转换为 TEXT 类型
 * bit
 * BLOBs (Binary Large OBjects)
 
+## bigIng类型
+
+```tip
+mysql 的 bigInt 类型 数值 传递给前段时 需要强转为 string 类型，否则会丢失最后一位精度(四舍五入)
+
+mysql 的 字段(如：goods_sn) char/varchar 类型 存储的值是 binInt 数值时， 字段作为查询条件，需要显式转换数据类型为 string,否则会出现异常
+```
+goods_sn = '29151271766196224**0**', 会查询到 goods_sn = '29151271766196224**1**'的记录
+
+```sql
+SELECT `goods_sn`, `tenant_id`, `column_type`, max( id ) AS id 
+FROM `ic_product_variation_edit_log` 
+WHERE `tenant_id` = 500001 AND `goods_sn` = 291512717661962240  
+GROUP BY `goods_sn`, `tenant_id`, `column_type`
+```
+| goods_sn | tenant_id | column_type | id |
+| ---- | ---- | ---- | ---- |
+| 291512717661962241 | 500001 | last_purchase_at | 1998 | 
+| 291512717661962241 | 500001 | re_purchase_price | 1984 |
+
+**binInt 数值作为 字符串列的查询参数时,应显式转换为字符串**
+```sql
+SELECT `goods_sn`, `tenant_id`, `column_type`, max( id ) AS id 
+FROM `ic_product_variation_edit_log` 
+WHERE `tenant_id` = 500001 AND `goods_sn` = '291512717661962240'
+GROUP BY `goods_sn`, `tenant_id`, `column_type`
+```
+| goods_sn | tenant_id | column_type | id |
+| ---- | ---- | ---- | ---- |
+| (N/A) | (N/A) | (N/A) | (N/A) | 
