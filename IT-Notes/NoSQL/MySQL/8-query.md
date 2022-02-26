@@ -4,6 +4,25 @@ sort: 8
 
 # query查询过程
 
+```sql
+SELECT A.id, B.id
+--  内链接 WHERE 条件必须同时满足
+FROM table_a AS A, table inner I
+LEFT JOIN table_b AS B 
+    --  ON 条件的过滤 必须满足，外链接 WHERE条件的过滤不满足时，B表字段以NULL显示
+    ON B.idx_key = A.idx_key AND (contition)
+WHERE 
+    --  条件顺序：先精准匹配，后范围，最后模糊；先索引，后普通列；先主表，后副表；
+    --  子查询
+    (A.id, A.column) IN (SELECT min(id), max(column) FROM table_a as T)
+    AND B.column_1 IN (限制枚举值在500以内，推荐分页数为200)
+    EXISTS (condition)
+GROUP BY [构成唯一标识的 分组条件]
+HAVING (聚合后的过滤条件)
+ORDER BY
+LIMIT $offset,$limit
+```
+
 ## 总流程图
 ```mermaid
 graph TB
@@ -211,4 +230,13 @@ SELECT *
 FROM employees a
 WHERE (a.employee_id, a.salary) in 
     (SELECT min(employee_id), max(salary) FROM employees);
+```
+
+
+## 排序
+
+```tip
+尽可能使得排序使用 主表的索引列
+
+确保排序规则具有唯一性，在必要的时候追加 unique 列 或 group by 列 左右排序规则
 ```
