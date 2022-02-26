@@ -6,24 +6,13 @@ sort: 4
 
 [markdown 中流程图详解](https://blog.csdn.net/suoxd123/article/details/84992282)
 
+[MarkDown绘图mermaid流程graph](https://www.jianshu.com/p/598b121bdbef)
+
 [文档](https://www.wenjiangs.com/doc/markdown-markdownflowchart)
 
 [web216安全色](http://www.h-ui.net/websafecolors.shtml)
 
-* 默认节点： A
-* 矩形节点： B[矩形]
-* 圆角矩形节点： C(圆角矩形)
-* 圆形节点： D((圆形))
-* 非对称节点： E>非对称]
-* 菱形节点： F{菱形}
 
-* 开始（椭圆形）：start
-* 结束（椭圆形）：end
-* 操作（矩形）：operation
-* 多输出操作（矩形）：parallel
-* 条件判断（菱形）：condition
-* 输入输出（平行四边形）：inputoutput
-* 预处理/子程序（圣旨形）：subroutine
 
 ## 文本
 
@@ -51,6 +40,29 @@ graph TD;
     A-->C;
     B-->D;
     C-->D;
+```
+
+## 符号
+
+符号内部不能出现 **·**、**：**、**【】**、**{}**、**<>**、**[]**
+
+```mermaid
+    graph TB
+        A[默认<br>矩形节点] 
+        B(圆角矩形节点)
+        C([圆边矩形<br>开始 结束])
+        D[(圆柱形节点)]
+        E((圆形节点))
+        F>标签<br>旗帜]
+        G{菱形<br>判定逻辑}
+        H{{六边形<br>github不支持}}
+        I[/平行四边形<br> 输出/]
+        J[\平行四边形<br> 输入\]
+
+        C --> B ---直线箭头长度可控---> A
+        C -.-> D -.-虚线箭头-.-> E
+
+        J ==加粗直线箭头===> H ===> I
 ```
 
 ## 类图
@@ -125,4 +137,25 @@ erDiagram
         opt 另外补充
         李->> 张: 谢谢问候。
     end
+```
+
+## 甘特图
+
+```mermaid
+gantt  
+    dateFormat  YYYY-MM-DD
+    title 甘特图的标题
+    excludes weekdays 2014-01-10
+
+    section 任务A
+    已完成的任务xxxA    :done,    des1, 2014-01-06,2014-01-08
+    进行中yyyA1         :active,  des2, 2014-01-09, 2d
+    进行中yyyA2         :         des3, after des2, 3d
+    未启动zzzA           :         des4, after des3, 4d
+
+    section 任务B
+    已完成的任务xxxB      :done,    des1, 2014-01-07,2014-01-08
+    进行中yyyB1           :active,  des2, 2014-01-09, 3d
+    进行中yyyB2           :         des3, after des2, 5d
+    未启动zzzB            :         des4, after des3, 5d
 ```
