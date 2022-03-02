@@ -68,3 +68,20 @@ if ($divisor == 0) {
 register_shutdown_function(callable $callback, mixed $parameter = ?, mixed $... = ?): void
 
 ```
+
+
+[array_column](https://www.php.net/manual/zh/function.array-column.php) — 返回输入数组中指定列的值
+
+* 
+
+```php
+# 返回 array 中键名为 column_key 的一列值。 如果指定了可选参数 index_key，则使用输入数组中 index_key 列的值将作为返回数组中对应值的键。
+# $array 多维数组或对象数组。
+#   如果提供的是对象数组，只有 public 的属性会被直接取出。 
+#   如果想取出 private 和 protected 的属性，类必须实现 __get() 和 __isset() 魔术方法。
+#       如果不提供 __isset()，会返回空数组
+# $column_key 也可以是 null ，此时将返回整个数组（配合 index_key 参数来重新索引数组时非常好用）。
+# $index_key 值会像数组键一样被 【强制转换】 
+array_column(array $array, int|string|null $column_key, int|string|null $index_key = null): array
+
+```
