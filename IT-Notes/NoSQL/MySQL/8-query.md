@@ -233,6 +233,39 @@ WHERE (a.employee_id, a.salary) in
 ```
 
 
+## JSON
+
+[关于json函数的官方文档](https://dev.mysql.com/doc/refman/5.7/en/json.html)
+[关于key存在的官网解释](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html)
+
+```sql
+--  返回的一般都是true or false 或者 1 和 0
+json_contains_path(json_doc, one_or_all, paths)
+--  json_doc就是json数据
+--  paths是指要找的key，可以传入多个的key参数
+--  one_or_all指一个值是one表示找出paths参数中的任意一个，all表示找出全部
+
+--  解析json一维数组 是否含有position
+select json_contains_path("{'name':'xxx', 'age':'保密','position':'php 工程师'}",
+ 'one', '$.position')
+--  返回的结果是1
+
+--  解析json一维数组 是否同时含有position，age
+select json_contains_path("{'name':'xxx', 'age':'保密','position':'php 工程师'}",
+ 'all', '$.position', '$.age');
+--  返回的结果是1
+
+--  解析二维json数组的某个key
+SELECT *
+FROM TABLE_NAME T
+WHERE JSON_CONTAINS(T.json_column,JSON_OBJECT("index_name", 'index_value'))
+
+--  判定json字段是否为空数组
+SELECT *
+FROM TABLE_NAME T
+WHERE T.json_column  like '[]'
+```
+
 ## 排序
 
 ```tip

@@ -140,7 +140,7 @@ graph LR
 * 生命方式：胎生、卵生、湿生、化生
 * 六道轮回：天道、阿修罗道、人道、畜生道、饿鬼道、地狱道
 
-<img src="./img/Humanity/threeWorld.jpg" width = "300" alt="三界二十八天" align=center />
+<img src="../img/Humanity/threeWorld.jpg" width = "300" alt="三界二十八天" align=center />
 
 ## 戒律
 
