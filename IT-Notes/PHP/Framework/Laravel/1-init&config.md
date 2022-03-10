@@ -279,6 +279,20 @@ Storage::delete('file.jpg');
 Storage::delete(['file.jpg', 'file2.jpg']);
 ```
 
+## 跨应用调用
+[Weird Laravel 5 caching using wrong database name](https://stackoverflow.com/questions/32876066/weird-laravel-5-caching-using-wrong-database-name)
+【问题】：
+* windows11系统专业版
+* web容器是apache2
+* 本地Laravel5.6项目A 通 内部接口调用 本地Laravel5.6项目B
+* B项目的sql查询报错，错误信息：Adatabase.Btable 不存在
+
+【探究】：
+* 测试：在B项目打印 config() 、env() 参数，显示的结果和 B项目 .env 文件不一致
+* 原因：config 缓存
+
+【方法】：php artisan config:clear
+
 ## 插件
 
 中文语言包：composer require caouecs/laravel-lang:~3.0

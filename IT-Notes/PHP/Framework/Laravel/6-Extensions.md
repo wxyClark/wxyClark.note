@@ -8,23 +8,25 @@ sort: 6
 
 ```php
 composer require "maatwebsite/excel:~3.1.25"
+composer require "mavinoo/laravel-batch"
 ```
 
-* 安装完成后，修改 config/app.php 在 providers 数组内追加如下内容
+* 注意配置 **Provider** 和 **Facade**
 
 ```php
+//  安装完成后，修改 config/app.php 在 providers 数组内追加如下内容
 'providers' => [
     ...
     Maatwebsite\Excel\ExcelServiceProvider::class,
+    Mavinoo\Batch\BatchServiceProvider::class,
 ],
-```
+...
 
-* 同时在 aliases 数组内追加如下内容
-
- ```php
+// 同时在 aliases 数组内追加如下内容
  'aliases' => [
     ...
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+    'Batch' => Mavinoo\Batch\BatchFacade::class,
 ]
 ```
 * 接下来运行以下命令生成此扩展包的配置文件 config/excel.php：

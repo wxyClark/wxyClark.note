@@ -30,7 +30,12 @@ git commit --amend '新的注释'
 
  ```bash
 # 复制一个特定的提交到当前分支
-git cherry-pick <commit_id>
+git cherry-pick <commit_id>|分支名
+git checkout targetBranch
+git cherry-pick <commit_id>|分支名
+
+# 这是一个左开右闭的操作，就是commit1不会被合并
+git cherry-pick commit1..commit100
 
 # 未提交代码转移分支 使用stash
 git stash 
@@ -46,6 +51,8 @@ git stash pop
 # 删除误提交的代码
 git reset —hard <commit_id>
  ```
+
+phpstormIDE 选中要复制的若干分支，点击【cherry-pick】，到需要的分支上，点【推送】
 
 ## merge vs rebase
 
