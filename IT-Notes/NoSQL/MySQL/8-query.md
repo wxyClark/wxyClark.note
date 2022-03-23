@@ -266,7 +266,42 @@ WHERE JSON_CONTAINS(T.json_column,JSON_OBJECT("index_name", 'index_value'))
 SELECT *
 FROM TABLE_NAME T
 WHERE T.json_column  like '[]'
+
+--  判定json数组指定下表的元素
+SELECT *
+FROM TABLE_NAME T
+WHERE JSON_EXTRACT(`T.json_column`,'$[0].quantity')
+
+
+
+-- 需求：查找 config JSON字段（对象类型）中 fieldModels（数组类型）数组字段中 valueMapping（整形）值等于 17 的记录
+-- 表字段：id, config
+-- config字段格式：
+/*
+{
+    "fieldModels": [{
+        "key": 0,
+        "guid": "1",
+        "field": "Id",
+        "dataType": 1,
+        "showName": "标识",
+        "textFormat": "",
+        "valueMapping": 17
+    }, {
+        "key": 1,
+        "guid": "2",
+        "field": "orderid",
+        "dataType": 0,
+        "showName": "orderid",
+        "textFormat": "",
+        "valueMapping": -1
+    }
+}
+*/
+SELECT id, config FROM `sql_model` 
+WHERE JSON_CONTAINS(JSON_EXTRACT(`config`,'$.fieldModels'), JSON_OBJECT('valueMapping', @valueMapping)) > 0;
 ```
+
 
 ## 排序
 
