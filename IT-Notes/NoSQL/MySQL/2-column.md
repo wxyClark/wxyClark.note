@@ -115,3 +115,9 @@ GROUP BY `goods_sn`, `tenant_id`, `column_type`
 | goods_sn | tenant_id | column_type | id |
 | ---- | ---- | ---- | ---- |
 | (N/A) | (N/A) | (N/A) | (N/A) | 
+
+
+# json
+
+* 存储前建议排序，比如存商品规格，应避免重复，排序后更方便
+* 注意数据类型格式化，避免 [{"goods_sn": "326540296949071872", "quantity": "1"}] 和 [{"goods_sn": "326540296949071872", "quantity": 1}]
