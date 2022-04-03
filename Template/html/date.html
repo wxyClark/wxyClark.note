@@ -37,11 +37,16 @@
 
         .time {
           padding-top: 20px;
-          font-size: 16rem;
+          font-size: 8rem;
         }
 
         .date {
-          padding-top: 40px;
+          padding-top: 20px;
+          font-size: 4rem;
+        }
+
+        .week {
+          padding-top: 20px;
           font-size: 6rem;
         }
     </style>
@@ -79,30 +84,30 @@
             startDay = firstDay.getDay();
             document.write("<TABLE BORDER='0' CELLSPACING='2' CELLPADDING='3' ALIGN='CENTER' BGCOLOR='#0080FF'>")
             document.write("<TR><TD><table border='0' cellspacing='2' cellpadding='3' bgcolor='Silver'>");
-            document.write("<TR><th colspan='7' bgcolor='#C8E3FF'>");
+            document.write("<TR><th colspan='7' bgcolor='#C8E3FF'>苟日新，日日新，又日新");
             var dayNames = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
             var monthNames = new Array("1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
             var now = new Date();
             
-            document.writeln("</TH></TR><TR><TH BGCOLOR='#0080FF'><FONT STYLE='font-size:32pt;Color:Red'>日</FONT></TH>");
-            document.writeln("<th bgcolor='#0080FF'><FONT STYLE='font-size:32pt;Color:White'>一</FONT></TH>");
-            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:32pt;Color:White'>二</FONT></TH>");
-            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:32pt;Color:White'>三</FONT></TH>");
-            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:32pt;Color:White'>四</FONT></TH>");
-            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:32pt;Color:White'>五</FONT></TH>");
-            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:32pt;Color:Red'>六</FONT></TH>");
+            document.writeln("</TH></TR><TR><TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:Red'>日</FONT></TH>");
+            document.writeln("<th bgcolor='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>一</FONT></TH>");
+            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>二</FONT></TH>");
+            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>三</FONT></TH>");
+            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>四</FONT></TH>");
+            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>五</FONT></TH>");
+            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:Red'>六</FONT></TH>");
             document.writeln("</TR><TR>");
             column = 0;
             for (i = 0; i < startDay; i++) {
-                document.writeln("\n<TD><FONT STYLE='font-size:32pt'> </FONT></TD>");
+                document.writeln("\n<TD><FONT STYLE='font-size:16pt'> </FONT></TD>");
                 column++;
             }
             for (i = 1; i <= nDays; i++) {
                 if (i == thisDay) {
-                    document.writeln("</TD><TD ALIGN='CENTER' BGCOLOR='#FF8040'><FONT STYLE='font-size:32pt;Color:#ffffff'><B>")
+                    document.writeln("</TD><TD ALIGN='CENTER' BGCOLOR='#FF8040'><FONT STYLE='font-size:16pt;Color:#ffffff'><B>")
                 }
                 else {
-                    document.writeln("</TD><TD BGCOLOR='#FFFFFF' ALIGN='CENTER'><FONT STYLE='font-size:32pt;font-family:Arial;font-weight:bold;Color:#330066'>");
+                    document.writeln("</TD><TD BGCOLOR='#FFFFFF' ALIGN='CENTER'><FONT STYLE='font-size:16pt;font-family:Arial;font-weight:bold;Color:#330066'>");
                 }
                 document.writeln(i);
                 if (i == thisDay) document.writeln("</FONT></TD>")
@@ -166,22 +171,20 @@
 <BODY BACKGROUND="bg1.jpg" onload="update();" onLoad="startclock(); timerONE=window.setTimeout" TEXT="#000000" TOPMARGIN="0">
     <div class="page">
         <div class="date_container">
-            <div class="date" id="date"></div>
-            <!-- <div class="date" id="week"></div> -->
+            <div class="time" id="time"></div>
+            <!-- <div class="week" id="week"></div> -->
         </div>
 
-        <B>
-            <DIV ALIGN="center"></DIV>
+        <DIV ALIGN="center"></DIV>
             <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
                 calendar();
             </SCRIPT>
-            <CENTER>
-                <FONT size="8rem">苟日新，日日新，又日新</FONT>
-            </CENTER>
-        </B>
+        <div class="date_container">
+            <div class="date" id="date"></div>
+        </div>
 
         <div class="date_container">
-            <div class="time" id="time"></div>
+            
         </div>
 
     </div>
