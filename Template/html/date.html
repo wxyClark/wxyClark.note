@@ -89,13 +89,13 @@
             var monthNames = new Array("1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
             var now = new Date();
             
-            document.writeln("</TH></TR><TR><TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:Red'>日</FONT></TH>");
+            document.writeln("</TH></TR><TR><TH BGCOLOR='White'><FONT STYLE='font-size:16pt;Color:#0080FF'>日</FONT></TH>");
             document.writeln("<th bgcolor='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>一</FONT></TH>");
             document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>二</FONT></TH>");
             document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>三</FONT></TH>");
             document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>四</FONT></TH>");
             document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:White'>五</FONT></TH>");
-            document.writeln("<TH BGCOLOR='#0080FF'><FONT STYLE='font-size:16pt;Color:Red'>六</FONT></TH>");
+            document.writeln("<TH BGCOLOR='White'><FONT STYLE='font-size:16pt;Color:#0080FF'>六</FONT></TH>");
             document.writeln("</TR><TR>");
             column = 0;
             for (i = 0; i < startDay; i++) {
@@ -171,23 +171,18 @@
 <BODY BACKGROUND="bg1.jpg" onload="update();" onLoad="startclock(); timerONE=window.setTimeout" TEXT="#000000" TOPMARGIN="0">
     <div class="page">
         
-        <div class="date_container">
-            <FONT STYLE='font-size:32pt;Color:Black'>当下不杂，专注于一</FONT>
-            <div class="time" id="time"></div>
-            <!-- <div class="week" id="week"></div> -->
-        </div>
+        <DIV ALIGN="center">
+            <FONT STYLE='font-size:24pt;Color:Black'>当下不杂，专注于一</FONT>
+            <div class="date_container">
+                <div class="time" id="time"></div>
+                <!-- <div class="week" id="week"></div> -->
+                <div class="date" id="date"></div>
+            </div>
 
-        <DIV ALIGN="center"></DIV>
             <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
                 calendar();
             </SCRIPT>
-        <div class="date_container">
-            <div class="date" id="date"></div>
-        </div>
-
-        <div class="date_container">
-            
-        </div>
+        </DIV>
 
     </div>
 
