@@ -71,3 +71,16 @@ CONTAINER：容器名称 或 容器ID
 
   fastcgi_pass   php80:9000;
 ```
+
+* mysql5 phpMyAdmin 访问不到数据库
+
+```tips
+  自己下载phpMyAdmin,配置nginx
+  复制 config.sample.inc.php 文件为 config.inc.php
+  修改 $cfg['Servers'][$i]['host'] = 'mysql5'; (对应docker-compose.yml文件的mysql配置)
+  访问 phpMyAdmin 报错：配置文件权限错误，不应任何用户都能修改！
+  在docker容器下 修改 phpMyAdmin 目录权限为755 
+
+  修改dnmp/services/phpmyadmin/config.user.inc.php文件，修改 PMA_HOST=mysql5 可访问mysql数据库
+```
+    

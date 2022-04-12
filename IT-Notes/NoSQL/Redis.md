@@ -21,4 +21,4 @@
 
 ## 实战
 
-* 登录 redis-cli -h DOMAIN
+* 登录 redis-cli -h host_ip -p port -a password

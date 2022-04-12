@@ -32,6 +32,11 @@ Laravel>=5.6 PHP对应的版本>=7.1.3
     php artisan key:generate
 ```
 
+```php
+// app/Providers/RouteServiceProvider.php 文件，去掉下面这行代码的注释
+protected $namespace = 'App\Http\Controllers';
+```
+
 ## Laravel配置
 * 将 web 服务器根目录指向 laravel 目标目录/public
 * 配置Web 读写权限：storage 目录和 bootstrap/cache，否则 Laravel 程序将无法运行
