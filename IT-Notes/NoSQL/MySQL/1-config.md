@@ -240,6 +240,13 @@ ln -s /application/mysql/bin/* /usr/local/sbin/
 | 当前数据库 | select database() |  |
 | 当前表结构 | desc TABLE_NAME |  |
 | 当前表建表语句 | show create table TABLE_NAME |  |
+| 当前表的状态 | SHOW TABLE STATUS LIKE 'user' \G | Rows 表中的行数。<br>对于MyISAM和其他一些存储引擎，该值是精确的，<br>但对于InnoDB，该值是估计值。 |
+
+## 参数设置
+
+| 参数  | 命令  |   |
+| ---- | ---- |---- |
+| 给了级别 | SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; | 在当前会话设置隔离级别  |
 
 ## SQLMODE
 
