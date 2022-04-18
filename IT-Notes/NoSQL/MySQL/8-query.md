@@ -310,3 +310,13 @@ WHERE JSON_CONTAINS(JSON_EXTRACT(`config`,'$.fieldModels'), JSON_OBJECT('valueMa
 
 确保排序规则具有唯一性，在必要的时候追加 unique 列 或 group by 列 左右排序规则
 ```
+
+
+## 跨表更新
+
+```sql
+UPDATE table_a AS A
+LEFT JOIN table_b AS B ON A.f_key = B.f_key
+UPDATE A.column_c = B.column_c
+WHERE A.column_d condition AND B.column_e condition
+```

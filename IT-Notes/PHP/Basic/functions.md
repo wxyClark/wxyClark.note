@@ -72,7 +72,7 @@ register_shutdown_function(callable $callback, mixed $parameter = ?, mixed $... 
 
 [array_column](https://www.php.net/manual/zh/function.array-column.php) — 返回输入数组中指定列的值
 
-* 
+* array_column key
 
 ```php
 # 返回 array 中键名为 column_key 的一列值。 如果指定了可选参数 index_key，则使用输入数组中 index_key 列的值将作为返回数组中对应值的键。
@@ -84,4 +84,10 @@ register_shutdown_function(callable $callback, mixed $parameter = ?, mixed $... 
 # $index_key 值会像数组键一样被 【强制转换】 
 array_column(array $array, int|string|null $column_key, int|string|null $index_key = null): array
 
+```
+
+* json转换
+```php
+// 加密不转换中文编码
+json_encode($array, JSON_UNESCAPED_UNICODE);
 ```
