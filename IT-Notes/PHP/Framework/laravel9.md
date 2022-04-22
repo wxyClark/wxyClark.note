@@ -1,6 +1,6 @@
 # laravel9探索
 
-(构建Laravel开发环境)[https://learnku.com/docs/laravel-development-environment/9.x/building-the-sail-environment-under-macos/12319]
+[构建Laravel开发环境](https://learnku.com/docs/laravel-development-environment/9.x/building-the-sail-environment-under-macos/12319)
 
 环境：
 
@@ -68,12 +68,13 @@ composer require laravel/breeze --dev
 
 # 设置host 
 127.0.0.1   laravel9_mysql_1
-
-php artisan migrate
 ```
 ## 组件
+
+### breeze
+
 ```sh
-# 下载入门套件：breeze 
+# 下载
 composer require laravel/breeze --dev
 php artisan breeze:install
 
@@ -88,4 +89,17 @@ yum install nodejs
 # 安装 npm
 npm install && npm run dev
 
+php artisan migrate
+```
+
+### jetstream
+[安装文档](https://jetstream.laravel.com/2.x/installation.html)
+```sh
+composer require laravel/jetstream
+
+npm install
+npm run dev
+php artisan migrate
+
+npm run dev
 ```
