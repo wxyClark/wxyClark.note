@@ -1,5 +1,7 @@
 # laravel9探索
 
+(构建Laravel开发环境)[https://learnku.com/docs/laravel-development-environment/9.x/building-the-sail-environment-under-macos/12319]
+
 环境：
 
 * Win11专业版系统
@@ -73,10 +75,17 @@ php artisan migrate
 ```sh
 # 下载入门套件：breeze 
 composer require laravel/breeze --dev
-
-# 安装 breeze
 php artisan breeze:install
-npm install
-npm run dev
-php artisan migrate
+
+# 安装 nodejs 有版本要求 >12.14
+yum remove npm
+curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+# curl -sL https://deb.nodesource.com/setup_15.x | bash - 
+yum install nodejs
+
+# 修改 package-lock.json, 删除 fsevents 依赖
+
+# 安装 npm
+npm install && npm run dev
+
 ```
