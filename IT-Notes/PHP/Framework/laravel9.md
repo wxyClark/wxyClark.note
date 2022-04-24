@@ -86,7 +86,8 @@ php artisan breeze:install
 # 安装 nodejs 有版本要求 >12.14
 yum remove npm
 curl -sL https://rpm.nodesource.com/setup_12.x | bash -
-# curl -sL https://deb.nodesource.com/setup_15.x | bash - 
+或
+curl -sL https://deb.nodesource.com/setup_15.x | bash - 
 yum install nodejs
 
 # 修改 package-lock.json, 删除 fsevents 依赖

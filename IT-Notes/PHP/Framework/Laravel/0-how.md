@@ -2,6 +2,13 @@
 sort: 0
 ---
 
+* public/index.php Kernel 接收 Requeset ,返回 Response
+* BeforeMiddleWare + Route + AfterMiddleWare, 前置中间件：检查请求,处理参数; Route 路由转发; 后置中间件：处理数据，后续动作
+* Controller + Action, 参数校验,调用service,返回
+* Service 处理业务(事务),调用 Repository,格式化数据,触发事件监听
+* Repository 处理 SQL增删改查, 建议 1个Repository注入多个Model,处理相关数据(如：父表-子表,数据表-日志表)
+* Model定义映射表
+
 # 运行原理
 
 入口文件 ./public/index.php
@@ -197,3 +204,7 @@ class DB extends Facade
     }
 }
 ```
+
+## 中间件
+
+* 最好将中间件设想为一系列「层」HTTP 请求在到达您的应用程序之前必须通过。每一层都可以检查请求，甚至完全拒绝它。
