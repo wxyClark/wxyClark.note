@@ -31,6 +31,7 @@ sort: 3
 * Code Runner
 * markdown preview enhanced
 * Markdown All in One 
+* remote-wsl
 
 ### Navicat
 ### ApiPost

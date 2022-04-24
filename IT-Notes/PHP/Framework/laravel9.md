@@ -40,13 +40,13 @@ php artisan sail:install
 useradd sail
 usermod -a -G sail sail
 .env 文件添加 WWWGROUP、WWWUSER配置为1000
-.env 文件配置 DB_HOST 当前用到的mysql容器名称
+.env 文件配置 DB_HOST=laravel_mysql_1 REDIS_HOST=laravel_reids_1
 关闭本地 mysql服务(如：xampp、phpStudy)
 # 启动容器
 ./vendor/bin/sail up -d
 
 # 配置本地host mysql容器指向本地
-127.0.0.1   laravel_mysql_1
+127.0.0.1   
 
 # 初始化数据库
 php artisan migrate
@@ -62,12 +62,17 @@ php artisan migrate
 # laravel9 是可以自定义的目录名
 curl -s "https://laravel.build/laravel9?with=mysql,redis&devcontainer" | bash
 
-./vendor/bin/sail up -d
+cd laravel9  
 
-composer require laravel/breeze --dev
+./vendor/bin/sail up -d
 
 # 设置host 
 127.0.0.1   laravel9_mysql_1
+127.0.0.1   laravel9_reids_1
+
+# .env 文件配置 
+DB_HOST=laravel_mysql_1 
+REDIS_HOST=laravel9_reids_1
 ```
 ## 组件
 

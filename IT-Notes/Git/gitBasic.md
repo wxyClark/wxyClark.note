@@ -24,6 +24,26 @@ resume 使用其他人的模板，完整的放在项目根目录下，删除READ
     # 复制内容粘贴到 github/gitlab 的 SSH-keys
 ```
 
+  
+```tip
+August 13, 2021 – Token (or SSH key) authentication will be required for all authenticated Git operations.
+
+# 如果提交代码到github遇到如下错误，需要使用token
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+
+(参考文献)[https://blog.csdn.net/qq_41646249/article/details/119777084]
+```
+* 使用token 替换 sshkey
+* github——>settings——>Developer setting——>Personal access tokens——>Generate new token
+  
+```danger
+记得把你的token保存下来，因为你再次刷新网页的时候，你已经没有办法看到它了
+```
+
+* cd <PROJECT_DIR>
+* git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git
+
 ## git-CRLT
     问题表现：git提交代码时提示
 
@@ -59,4 +79,3 @@ resume 使用其他人的模板，完整的放在项目根目录下，删除READ
 
     【二】下载
     https://cdn.jsdelivr.net/gh/521xueweihan/GitHub520@main/hosts
-
