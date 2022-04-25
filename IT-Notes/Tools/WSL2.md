@@ -40,7 +40,49 @@ yum install git
 
 # php8
 
+```shell
+# 首先确保您的系统是最新的
+sudo clean all
+sudo dnf update
+sudo dnf install dnf-utils
+
+sudo dnf install http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+# 重置模块并启用PHP 8.0：
+sudo dnf module reset php
+sudo dnf module install php:remi-8.0
+
+# 运行以下命令以安装PHP 8：
+sudo dnf install php
+
+# 安装一些常用的以下命令：php-extensions
+sudo dnf install php-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,fpm,mbstring,opcache,zip}
+```
+
 # zsh
 
 设置zsh默认
+
+## 安装xDebug
+
+【未生效】
+
+```shell
+yum install php-devel php-pear
+yum install gcc gcc-c++ autoconf automake
+
+pecl install Xdebug
+
+locate php.ini
+# 添加如下代码
+zend_extension="/usr/lib64/php/modules/xdebug.so"
+xdebug.remote_enable = 1
+
+cd /usr/lib64/php/modules/xdebug/
+chmod +x xdebug.so
+
+# xDebug 提示
+cp modules/xdebug.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20210902
+# Create /usr/local/php/conf.d/99-xdebug.ini and add the line:
+zend_extension = xdebug
 ```
