@@ -12,3 +12,12 @@ DB::table('students')->select('id','name','age')->get();
 $log = DB::getQueryLog();
 dd($log);
 ```
+
+## Excel导出数据为0的项展示空白
+
+```php
+use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+$number = '一个数值';
+$number = StringHelper::formatNumber($number);
+
+```
