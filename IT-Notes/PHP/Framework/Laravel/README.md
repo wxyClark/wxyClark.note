@@ -12,6 +12,10 @@ laravel框架的核心就是个Ioc容器即服务容器
 
 [Laravel 2018使用数据分析](https://www.pilishen.com/posts/laravel-numbers-2018-07)
 
+[Laravel 扩展排行榜](https://learnku.com/laravel/projects/filter/laravel-library)
+
+[Laravel 应用排行榜](https://learnku.com/laravel/projects/filter/laravel-app?order=github_stars)
+
 ## 最佳实践
 
 [Laravel最佳实践](https://github.com/alexeymezenin/laravel-best-practices/blob/master/chinese.md)

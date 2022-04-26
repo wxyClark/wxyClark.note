@@ -28,6 +28,17 @@ SPL是Standard PHP Library(标准PHP库)的缩写
 PHP 命名空间提供了一种将相关的类、函数和常量组合到一起的途径。
 
 
+## 调试
+
+* 在原生 PHP 中，可以通过 php -a 命令使用交互式 Shell
+* 还可以使用 PsySH ，相较于原生的 php -a，PsySH 拥有更多高级特性，功能更加强大
+```shell
+# 通过 Composer 全局安装：
+composer g require psy/psysh:@stable
+# 然后在命令行执行 psysh 即可进入交互式 Shell 了
+```
+* Laravel Tinker(基于 PsySH 实现)可以在命令行中实现与 Laravel 应用的各种交互，包括数据库的增删改查。
+
 ## 开发计划
 
 php-gui 
