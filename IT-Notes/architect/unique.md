@@ -9,6 +9,6 @@
 | Redis | B | 基于内存、速度库；使用简单；<br>可分布数据、扩展性强 | 需要独立搭建一套服务、增加了维护成本；<br>跨应用调用、存在网络开销 |
 | 数据库自增 | MySQL AUTO_INCREMENT | 代码层面无需任何特殊处理；利用MySQL特点实现数据递增 | 并发性能差；MySQL负担重 |
 
-```tip
-Godruoyi\Snowflake 连续获取存在重复问题
-```
+* UUID全称：Universally Unique Identifier，即通用唯一识别码。
+* UUID的是让分布式系统中的所有元素都能有唯一的辨识信息，而不需要通过中央控制端来做辨识信息的指定。
+* 理论上说，若每纳秒产生1兆个UUID，要花100亿年才会将所有UUID用完
