@@ -17,6 +17,8 @@ sort: 2
 [共享协议](https://spdx.org/licenses/)
 [CC4协议图标](https://creativecommons.org/choose/)
 
+[前段笔记](https://chokcoco.github.io/)
+
 <hr />
 
 
