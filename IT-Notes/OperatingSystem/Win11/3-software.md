@@ -5,6 +5,7 @@ sort: 3
 # App Store
 
 ## Snipaste
+## powertoys
 
 # 软件安装
 

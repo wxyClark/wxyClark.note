@@ -74,3 +74,4 @@ sort: 2
 | HAC | High-availability（HA）clusters | 高可用性集群 |
 | HPC | High-performance（HP）clusters | 高性能计算集群 |
 |  | Grid computing | 网格计算集群 |
+| TDD | Test-Driven Development | 测试驱动开发 |
