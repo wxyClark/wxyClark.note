@@ -4,6 +4,8 @@ sort: 2
 
 # 封装
 
+封装字段、封装记录(数据)、封装函数、封装类
+
 ## 封装记录（Encapsulate Record）
 
 | title | content |
