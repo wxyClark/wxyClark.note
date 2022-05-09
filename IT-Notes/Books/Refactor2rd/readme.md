@@ -29,6 +29,70 @@ sort: 2
 [博客园](https://www.cnblogs.com/pikaqiu/p/14275819.html)
 
 
+
+```mermaid
+graph LR
+    subgraph 测试
+        T(构筑测试体系)
+        T->T1(撰写测试代码的最有用时机是在开始编程之前)
+        T->T2(只要写好一点功能，就立即添加测试并执行)
+        T->T3(多运用单元测试)
+        T->T4(“花合理时间抓出大多数bug”<br>要好过<br>“穷尽一生抓出所有bug”)
+    end
+
+    subgraph 开发
+        D1(定义接口、参数、返回)—>D2
+        D2(参数校验)—>D3
+        D3(数据查询)—>D4
+        D4(数据更新)—>D5
+        D5(记录日志)—>D6
+        D6(触发事件)—>D7
+        D7(单元测试)—>D8
+        D8(集成测试)
+    end
+
+    subgraph codeReview
+        C1(检查调用链)->C11(检查接口调用方式，get接口是否有参数过长的风险)
+        C1->C12(检查参数列表、参数顺序、参数类型)
+        C1->C13(检查判定逻辑 if empty isset ??)
+        C1->C14(检查程序终止条件)
+        C1->C15(检查临时变量名称是否一致，是否有多个用途)
+
+        C2(检查业务逻辑)
+
+        C3(检查重复逻辑)
+
+        C4(检查注释的必要性)
+
+        C5(检查换行的合理性)
+    end
+
+    subgraph 重构
+        R1(重复代码封装)
+
+        R1(注释)
+    end
+
+    style Sky stroke:#00F,stroke-width:12;  
+    style Earth stroke:#030,stroke-width:12;  
+
+    style F31 stroke:#333,stroke-width:4px;  
+    style F23 stroke:#faa,stroke-width:4px;  
+    style D1 stroke:#F00,stroke-width:4px; 
+    style D2 stroke:#F00,stroke-width:4px;  
+    style D8 stroke:#F00,stroke-width:6px;
+    style F1 stroke:#C90,stroke-width:6px; 
+    style F2 stroke:#C90,stroke-width:6px;  
+    style F3 stroke:#C00,stroke-width:6px; 
+    style F4 stroke:#C00,stroke-width:4px;
+
+
+    style 0 fill:#2ff,fill-opacity:0.1,stroke:#F00,stroke-width:8px
+    style A fill:#2ff,fill-opacity:0.1,stroke:#F00,stroke-width:8px
+    style P3 stroke:#000,stroke-width:4px;
+
+```
+
 ## 相关书籍
 
 * 《解析极限编程》

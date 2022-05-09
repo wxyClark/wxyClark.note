@@ -22,7 +22,7 @@ sort: 4
 | 令人迷惑的暂时字段(Temporary Field) | 类中某个字段只为某些特殊情况而设置 | 命名准确，json |
 | 过度耦合的消息链(Message Chains) | 用户向一个对象请求另一个对象，然后再向后者请求另一个对象 | 委托 |
 | 中间人(Middle Man) | 无用的委托，过多的中间层 |  |
-| 狎昵关系(Inappropriate Intimacy) | 两个类过于亲密，一个类过于关注另一个类的成员 |  |
+| 狎昵关系(Inappropriate Intimacy) | 两个类过于亲密，一个类过于关注另一个类的成员 | 搬移函数 |
 | 异曲同工的类(Alternative Classes with DifferentInterfaces) | 不同名字的类或函数，作者相同的事 | 委托调用，替换调用 |
 | 不完美的库类(Incomplete Library Class) | 类库设计不可能完美 | C |
 | 纯数据类(Data Class) | 一个类拥有一些字段以及用于访问这些字段的函数，除此之外一无长物 |  |
