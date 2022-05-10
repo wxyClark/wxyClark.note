@@ -1,5 +1,13 @@
 # 重构类
 
+|中文名|英文名|时机|做法|意义 |
+|----|----|----|----|---- |
+|AA|AA|1 <br>2 <br> 3 <br>4 |①<br>②<br>③<br>④<br>⑤<br>⑥<br>⑦|AA|
+|AA|AA|1 <br>2 <br> 3 <br>4 |①<br>②<br>③<br>④<br>⑤<br>⑥<br>⑦|AA|
+| | | | | |
+|AA|AA|1 <br>2 <br> 3 <br>4 |①<br>②<br>③<br>④<br>⑤<br>⑥<br>⑦|AA|
+|AA|AA|1 <br>2 <br> 3 <br>4 |①<br>②<br>③<br>④<br>⑤<br>⑥<br>⑦|AA|
+
 ## 提炼类（Extract Class）
 
 | title | content |
