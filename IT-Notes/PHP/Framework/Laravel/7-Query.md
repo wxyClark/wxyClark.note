@@ -4,6 +4,10 @@ sort: 7
 
 # 查询
 
+## collect()
+
+同一组数据需要按不同维度聚合，可以一次查询，对结果集再做分组计算
+
 ## pluck
 
 支持获取 key => value 数组，也可以只获取 value 数组
@@ -36,4 +40,11 @@ return $collection->pluck('name', 'product_id');
     {
         return $this->baseQuery($params)->count(DB::raw("distinct(account_code)"));
     }
+```
+
+## DB::raw()
+
+* 或条件需要用()包一次
+```php
+$query->where(DB::raw("(is_reply = 2 OR (is_reply = 1 AND reply_at > '". '2022-5-14 00:00:00' ."'))"));
 ```
