@@ -26,3 +26,17 @@ sort: 2
 ## 规范
 
 单依职责：一个分支 要么提交功能代码，要么引入插件【**不交叉**】；一次提交完成一项任务
+
+
+## 疑难杂症
+
+### github提交没有记录到contribution
+
+* 原因：办公gitlab 与 github 在一台机上共用
+* 解决：进入.git文件夹，打开config文件，在里面添加如下信息
+
+```gitexclude
+[user]
+	email = github注册时用的邮箱
+	name = wxyClark
+```
