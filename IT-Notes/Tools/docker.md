@@ -84,3 +84,10 @@ CONTAINER：容器名称 或 容器ID
   修改dnmp/services/phpmyadmin/config.user.inc.php文件，修改 PMA_HOST=mysql5 可访问mysql数据库
 ```
     
+
+## 疑难杂症
+
+### Docker Desktop 启动失败：Docker failed to initialize
+
+* 删除 C:\Users\用户名\AppData\Roaming\Docker 文件夹。
+* Docker Desktop 会自动重启
