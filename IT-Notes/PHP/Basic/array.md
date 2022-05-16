@@ -32,3 +32,19 @@ array_intersect(array $array, array ...$arrays): array
 //注意，键名保留不变。结果保留了第一个$array的键名，下标类型的键名，强烈建议使用array_values()处理一下结果
 
 ```
+
+## 随机数-数组
+
+```php
+//  根据范围创建数组，包含指定的元素
+range(string|int|float $start, string|int|float $end, int|float $step = 1): array
+//  打乱数组
+shuffle(array &$array): bool
+//  从数组中随机取出一个或多个【随机键】
+array_rand(array $array, int $num = 1): int|string|array
+
+//  生成200个随机数
+$rangeArray = range(100, 999);
+$randKeys = array_rand($rangeArray, 200);     //  【这里取到的是键，不是随机数的值】
+$value = $rangeArray[$randKeys[0]];
+```
