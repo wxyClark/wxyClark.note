@@ -92,5 +92,11 @@ s
 日志：记录明细过程、数据
 ```
 
+## 缓存
+
+* 优先读redis,其次读数据库
+* 如果redis没有数据，数据库有，则更新数据到redis
+* 如果数据库数据变更，则更新数据到redis (权衡时效性 与 缓存穿透)
+
 <hr />
 {% include list.liquid all=true %}
