@@ -19,7 +19,7 @@
 
 ### 代码质量检测
 
-sonarLint
+sonarLint —— 严格审核模式, phpstorm自身也带有代码检查
 
 ### Http Client
 
