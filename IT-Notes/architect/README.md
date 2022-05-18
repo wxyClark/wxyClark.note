@@ -61,6 +61,28 @@ sort: 1
 | ---- | ---- |---- |---- |
 | epoll | kqueue | /dev/poll | icop |
 
+
+# 2.项目管理
+
+## git规则
+
+## 迭代节奏
+
+
+# 3.代码质量
+
+## 代码规范
+
+
+## 基类、统一接口
+
+
+## TDD-测试驱动开发
+
+
+## CodeReview-交叉评审
+
+
 <hr />
 
 {% include list.liquid all=true %}

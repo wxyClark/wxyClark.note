@@ -42,9 +42,10 @@ return $collection->pluck('name', 'product_id');
     }
 ```
 
-## DB::raw()
+## 原生SQL
 
-* 或条件需要用()包一次
 ```php
+【*】这是错误的用法
 $query->where(DB::raw("(is_reply = 2 OR (is_reply = 1 AND reply_at > '". '2022-5-14 00:00:00' ."'))"));
+$query->whereRaw("(is_reply = 2 OR (is_reply = 1 AND reply_at > '". '2022-5-14 00:00:00' ."'))");
 ```
