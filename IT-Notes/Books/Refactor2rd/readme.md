@@ -6,6 +6,10 @@ sort: 2
 
 [《重构改善既有代码的设计第2版》](https://refactoring.com/)
 
+[思维导图](https://www.processon.com/view/link/5cb5262ee4b059e209f987a9#map)
+
+[65个例子带你看懂什么是好代码](https://zhuanlan.zhihu.com/p/502130522)
+
 ```danger
 所谓好，就是更少的坏味道
 
