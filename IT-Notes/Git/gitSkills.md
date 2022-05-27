@@ -12,10 +12,32 @@
 
 ## 分支合并错误
 
-开发代码 错误的提交了到测试分支develop,使用stash迁移代码后，强制develop与远端同步
+* 开发代码 错误的提交了到测试分支develop,使用stash迁移代码后，强制develop与远端同步
 
 ```bash
 git reset --hard origin/master
+```
+
+* 回滚到上个版本
+
+```bash
+git reset --hard HEAD 
+git commit '回滚到上个版本XXX'
+git push origin HEAD --force
+```
+
+* 回滚到指定历史版本
+
+```bash
+git reset --hard <commit_id>  
+git commit '回滚到上个版本XXX'
+git push origin HEAD --force
+```
+
+* 把新建的本地分支推送到远端同名分支(建议在远端创建,本地pull)
+```bash
+git checkout -b <新分支名>
+git push --set-upstream origin <本地分支名>
 ```
 
 ## 重写最近commit message
@@ -49,7 +71,7 @@ git checkout branchName
 git stash pop
 
 # 删除误提交的代码
-git reset —hard <commit_id>
+git reset --hard <commit_id>
  ```
 
 phpstormIDE 选中要复制的若干分支，点击【cherry-pick】，到需要的分支上，点【推送】
@@ -65,6 +87,35 @@ phpstormIDE 选中要复制的若干分支，点击【cherry-pick】，到需要
 | 缺点 | 多人协作,log会出现分支交叉不方便回退 | rebase 为原分支上每一个提交创建一个新的提交，<br>重写了项目历史，并且不会带来合并提交<br>rebase 不会有合并提交中附带的信息——你看不到 feature 分支中并入了上游的哪些更改。 |
 | 命令 | git checkout feature<br>git merge master<br>也可以把它们压缩在一行里:<br>git merge master feature | git checkout feature<br>git rebase master<br >交互式的rebase:<br>git rebase -i master |
 
+
+* 将代码 Merge Request 到团队共用分支 master 前，需把 master 代码 rebase 到自己分支
+```bash
+git rebase master                      // 第一轮 rebase 
+git status                             // 看状态,如有冲突就处理
+git pull                               // 处理完冲突要执行这步
+git rebase --continue                  // 下一轮 rebase
+git rebase --skip                      // 执行 git status 发现没有冲突，则执行这一步
+git push -f origin <本地自己的开发分支> // 在 git rebase --skip 后，执行这一步
+```
+
+* 通过 git bisect 自动二分法快速定位问题
+> 某个系统，在开发过程中一直都没测试出问题，突然有一天，发现 Bug。
+
+> 这种蛮多情况是衰退，如果这个 Bug 的复现几率很大的话，就可以直接用二分法快速定位了。
+> 
+> git bisect 就可以辅助进行自动二分法。
+```bash
+git bisect start
+git bisect bad efa5cf
+git bisect good b6fcf0
+git bisect run grep -q UCONFIG Makefile
+```
+
+* 用 git fetch 取代 git clone，实现断点续传
+```bash
+git fetch <仓库地址>
+git checkout -b master FETCH_HEAD
+```
 
  ## 查看修改日志
 
@@ -87,7 +138,11 @@ phpstormIDE 选中要复制的若干分支，点击【cherry-pick】，到需要
 | git shortlog | 显示提交信息的第一行(做了什么) | 创建发布声明设计的 |
 | git log -stat <file> | 显示每次提交的文件增删数量 | 详情 |
 | git log -p <file> | 显示特定文件随时间的修改 | 详情 |
-| git blame <file> | 查看特定文件什么时间被什么人修改了什么内容 | 列表 |
+| git blame -L 50,50 <file> | 查看特定文件什么时间被什么人修改了什么内容 | 列表 |
+| git bisect | 自动二分法快速定位问题 | 突现BUG,定位 |
+| git fetch 仓库地址 | 用 git fetch 取代 git clone，实现断点续传 | 突现BUG,定位 |
+
+
 
 ## 配置
 
