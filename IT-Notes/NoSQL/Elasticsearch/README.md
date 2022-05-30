@@ -92,7 +92,6 @@ ELK分别表示：Elasticsearch , Logstash， Kibana , 它们都是开源软件�
 
 Elastic 本质上是一个分布式数据库，允许多台服务器协同工作， 每台服务器可以运行多个 Elastic 实例。
 
-<!-- prettier-ignore-start -->
 | 概念    | 定义  | 类比MySQL |
 | ------- | -------- | -------- |
 | 全文检索 | 从非结构化数据(文档)中提取出的然后重新组织（分词）的信息，我们称之索引。先建立索引，再对索引进行搜索的过程就叫全文检索。 |  |
@@ -104,7 +103,6 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 | 文档(document)|  索引(index)里面单条的记录称为 文档(document)|数据行(row)|
 | 映射(mapping)| 定义索引中的字段的名称、数据类型|约束(schema)|
 
-<!-- prettier-ignore-end -->
 
 ### 索引 index
 * Elastic 数据管理的顶层单位就叫做 Index（索引）。
