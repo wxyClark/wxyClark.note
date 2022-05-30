@@ -67,7 +67,7 @@ sort: 2
 
 ## 名词解释
 
-| 简称  | 全程  | 解释  |
+| 简称  | 全称  | 解释  |
 | ---- | ---- |---- |
 | CDN | Content Delivery Network | 内容分发网络 |
 | LBC/LB | Load balancing clusters | 负载均衡集群 |
