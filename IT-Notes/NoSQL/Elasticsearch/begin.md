@@ -25,8 +25,8 @@ sort: 1
 * 搜索全部         ：GET /index_name/type_name/_search
 * query查询       ：GET /index_name/type_name/_search?**q=last_name:Smith**
 * DSL语句查询      ：GET /index_name/type_name/_search **JSON**
+> GET /index_name/type_name/_search
 ```json
-# GET /index_name/type_name/_search
 {
     "query" : {
         "match" : {
@@ -37,3 +37,23 @@ sort: 1
 ```  
 * 匹配类型：match、过滤器filter、短语查询match_phrase、高亮highlight
 * 聚合(aggregations)aggs 类似于SQL的GROUP BY
+* 美化：在任意的查询字符串中增加pretty参数,除 _source 外，其他字段都会被美化
+> GET /index_name/type_name/_search?pretty
+```json
+{
+  "_index" :   "website",
+  "_type" :    "blog",
+  "_id" :      "123",
+  "_version" : 1,
+  "found" :    true,  //  数据是否存在
+  "_source" :  {
+    "title": "My first blog entry",
+    "text":  "Just trying this out...",
+    "date":  "2014/01/01"
+  }
+}
+```
+* 指定查询字段 _source , 返回值的 _source 只返回指定的字段 
+> GET /index_name/type_name/_search?source=title,text
+* 只想得到 _source 字段而不要其他的元数据
+> GET /index_name/type_name/_source
