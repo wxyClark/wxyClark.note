@@ -5,6 +5,8 @@
 
 [阮一峰 全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
 
+[Elasticsearch权威指南中文版(书栈网)](https://www.bookstack.cn/read/elasticsearch-definitive-guide-cn/)
+
 - Elasticsearch 是一个分布式、开源的、RESTful 风格的搜索和数据分析引擎。
 - 支持各种数据类型，包括文本、数字、地理、结构化、非结构化。
 - Elastic Search基于lucene， Lucene是apache下的一个开源的，一套用java写的全文检索的工具包。
