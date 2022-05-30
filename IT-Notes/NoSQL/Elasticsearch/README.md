@@ -1,20 +1,22 @@
 # ElasticSearch
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
+
 [官方 中文](https://www.elastic.co/cn/elasticsearch/)
+
 [阮一峰 全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
 
 - Elasticsearch 是一个分布式、开源的、RESTful 风格的搜索和数据分析引擎。
 - 支持各种数据类型，包括文本、数字、地理、结构化、非结构化。
 - Elastic Search基于lucene， Lucene是apache下的一个开源的，一套用java写的全文检索的工具包。
-- Lucene 中对文档检索基于倒排索引实现，并将它发挥到了极致。
+- Lucene 中对文档检索基于【**倒排索引**】实现，并将它发挥到了极致。
 
 ES集群对外提供RESTful API
 
 | 版本          | 差异          | date |
-| --------------- | -------------- | -------------- |
+| ------ | --------| ----- |
 | Elastic 5.x | Lucene 6.x 的支持，磁盘空间少一半；索引时间少一半；查询性能提升25%；支持IPV6       | 2016.10.26 |
-| Elastic 6.x          | 开始不支持一个 index 里面存在多个 type。  | 2017.08.31 |
-| Elastic 7.x    | 正式废除单个索引下多Type的支持，7.1开始，Security功能免费使用，支持k8s | 2019.04.10 |
+| Elastic 6.x | 开始不支持一个 index 里面存在多个 type。  | 2017.08.31 |
+| Elastic 7.x | 正式废除单个索引下多Type的支持，7.1开始，Security功能免费使用，支持k8s | 2019.04.10 |
 
 
 ```tip
@@ -23,6 +25,23 @@ ES集群对外提供RESTful API
 【string类型默认分词】对于String类型的字段，不需要analysis（分词）的也需要明确定义出来
 
 【选择有规律的ID很重要】随机性太大的ID（比如UUID）不利于查询
+```
+
+## ELK
+
+E: ElasticSearch
+
+```tip
+注意MySQL ES 时区配置是否一致
+
+mysql datetime 数据写入ES 会变成longInt类型 读取时手动格式化 
+```
+
+```php
+$dateTime = '-';
+if (isset($item['esDateTime']) && $item['esDateTime'] > 1000) {
+    $dateTime = date('Y-m-d H:i:s', $item['esDateTime']);
+}
 ```
 
 ## ES适合什么场景
@@ -74,7 +93,7 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 <!-- prettier-ignore-start -->
 | 概念    | 定义  | 类比MySQL |
 | ------- | -------- | -------- |
-| 全文检索 | 从非结构化数据(文档)中提取出的然后重新组织（分词）的信息，我们称之索引。先建立索引，再对索引进行搜索的过程就叫全文检索。 ||
+| 全文检索 | 从非结构化数据(文档)中提取出的然后重新组织（分词）的信息，我们称之索引。先建立索引，再对索引进行搜索的过程就叫全文检索。 |  |
 | 倒排索引 | 实现“单词-文档矩阵”的一种具体存储形式，可以根据单词快速获取包含这个单词的文档列表。 |字典|
 | 集群(cluster)| 一组节点构成一个集群(cluster) |集群|
 | 节点(node)| 一个 Elastic 实例称为一个节点(node) |服务器|
@@ -82,6 +101,7 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 | 分组(type)|虚拟的逻辑分组，用来过滤文档(document)，不同的 分组(type) 应该有相似的 结构(scheme)|表(table)|
 | 文档(document)|  索引(index)里面单条的记录称为 文档(document)|数据行(row)|
 | 映射(mapping)| 定义索引中的字段的名称、数据类型|约束(schema)|
+
 <!-- prettier-ignore-end -->
 
 ### 索引 index
@@ -90,14 +110,14 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 * 同一个 Index 里面的 Document，不要求有相同的结构(scheme)，但是最好保持相同，这样有利于提高搜索效率。
 
 ## 数据类型
-|      分类     | 数据类型          | 说明 |
-| --------------- | -------------- | ---- |
-| 字符串 | Thriller   text（分词），keyword（不分词）   |  |
-| 数值型          | long，integer，short，byte，double，float，half_flot，scaled_float    |  |
-| 布尔    |boolean |  |
-| 日期    |date |  |
-| 二进制    |binary |  |
-| 范围类型    |integer_range,float_range,long_range,double_range,date_range |  |
+|      分类     | 数据类型 | 说明 |
+| ---- | --- | ---- |
+| 字符串 | Thriller   text（分词） keyword（不分词）   |  |
+| 数值型 | long integer short byte double float half_flot scaled_float|  |
+| 布尔   | boolean |  |
+| 日期   | date |  |
+| 二进制 | binary |  |
+| 范围类型    | integer_range,float_range,long_range,double_range,date_range |  |
 
 ## 操作
 
@@ -203,7 +223,7 @@ $ curl -X DELETE 'localhost:9200/accounts/person/1'
 | --------------- | -------------- | 
 | match_all  | 查询简单的 匹配所有文档。在没有指定查询方式时，它是默认的查询       | 
 | match          | 用于全文搜索或者精确查询，如果在一个精确值的字段上使用它， 例如数字、日期、布尔或者一个 not_analyzed 字符串字段，那么它将会精确匹配给定的值    | 
-| range     | 查询找出那些落在指定区间内的数字或者时间 gt 大于；gte 大于等于；lt 小于；lte 小于等于 | 
+| range     | 查询找出那些落在指定区间内的数字或者时间<br> gt 大于 <br>gte 大于等于 <br>lt 小于 <br>lte 小于等于 | 
 | term     | 被用于精确值 匹配 | 
 | terms     | terms 查询和 term 查询一样，但它允许你指定多值进行匹配 | 
 | exists     | 查找那些指定字段中有值的文档 | 
@@ -215,8 +235,8 @@ $ curl -X DELETE 'localhost:9200/accounts/person/1'
 
 ### 返回结果字段解释	
 
-| 字段          | 说明          | 备注 |
-| --------------- | -------------- | ---- |
+| 字段          | 说明  | 备注 |
+| ------ | ---- | ---- |
 | took | 耗费了几毫秒       |  |
 | timed_out          | 是否超时    | true、false |
 | _shards    | 数据拆成5个分片，对于搜索请求，会打到所有的primary shard（或者是它的某个replica shard也可以），所以total和successful会是5； |  |
