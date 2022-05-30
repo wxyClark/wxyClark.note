@@ -110,14 +110,14 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 * 同一个 Index 里面的 Document，不要求有相同的结构(scheme)，但是最好保持相同，这样有利于提高搜索效率。
 
 ## 数据类型
-|      分类     | 数据类型 | 说明 |
-| ---- | --- | ---- |
-| 字符串 | Thriller   text（分词） keyword（不分词）   |  |
-| 数值型 | long integer short byte double float half_flot scaled_float|  |
-| 布尔   | boolean |  |
-| 日期   | date |  |
-| 二进制 | binary |  |
-| 范围类型    | integer_range,float_range,long_range,double_range,date_range |  |
+| 分类  | 数据类型 |
+| --- | --- | 
+| 字符串 | Thriller   text（分词） keyword（不分词）   | 
+| 数值型 | long integer short byte double float half_flot scaled_float| 
+| 布尔   | boolean |
+| 日期   | date |
+| 二进制 | binary |
+| 范围类型 | integer_range,float_range,long_range,double_range,date_range |
 
 ## 操作
 
@@ -133,33 +133,30 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 
 ### 新建 Index
 直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫weather的 Index
-```cs
-$ curl -X PUT 'localhost:9200/weather'
-```
+> curl -X PUT 'localhost:9200/weather'
+
 服务器返回一个 JSON 对象，里面的acknowledged字段表示操作成功。
 
 
 向指定的 /Index/Type 发送 PUT 请求，就可以在 Index 里面新增一条记录
 
 注：accounts/person/1 的1 是该条记录的 Id。它不一定是数字，任意字符串（比如abc）都可以
-
+>  curl -X PUT 'localhost:9200/accounts/person/1 -d'
 ```json
-$ curl -X PUT 'localhost:9200/accounts/person/1' -d '
 {
   "user": "张三",
   "title": "工程师",
   "desc": "数据库管理"
-}'
+}
 ```
 也可以不指定ID，使用POST新增记录
-
+> curl -X POST 'localhost:9200/accounts/person -d'
 ```json
-$ curl -X POST 'localhost:9200/accounts/person' -d '
 {
   "user": "李四",
   "title": "工程师",
   "desc": "系统管理"
-}'
+}
 ```
 ```tip
 注意，如果没有先创建 Index，直接执行新增记录的命令，Elastic 也不会报错，而是直接生成指定的 Index。
@@ -169,51 +166,35 @@ $ curl -X POST 'localhost:9200/accounts/person' -d '
 ### 查看 Index
 
 查看当前节点的所有 Index
-
-```cs
-$ curl -X GET 'http://localhost:9200/_cat/indices?v'
-```
+> curl -X GET 'http://localhost:9200/_cat/indices?v'
 
 列出每个 Index 所包含的 Type
-
-```cs
-$ curl 'localhost:9200/_mapping?pretty=true'
-```
+> curl 'localhost:9200/_mapping?pretty=true'
 
 ### 删除 Index
 
 发出 DELETE 请求，删除一个 Index
-
-```cs
-$ curl -X DELETE 'localhost:9200/weather'
-```
-
+> curl -X DELETE 'localhost:9200/weather'
 
 ### 查看记录
 发送GET请求。 pretty=true表示以易读的格式返回。如果 Id 不正确，就查不到数据，found字段就是false。
-
-```cs
-$ curl 'localhost:9200/accounts/person/1?pretty=true'
-```
+> curl 'localhost:9200/accounts/person/1?pretty=true'
 
 ### 更新记录
 使用 PUT 请求，重新发送一次数据。
-
+> curl -X PUT 'localhost:9200/accounts/person/1 -d '
 ```json
-$ curl -X PUT 'localhost:9200/accounts/person/1' -d '
 {
     "user" : "张三",
     "title" : "工程师",
     "desc" : "数据库管理，软件开发"
-}'
+}
 ```
 
 ### 删除记录
 发送DELETE请求
+> curl -X DELETE 'localhost:9200/accounts/person/1
 
-```cs
-$ curl -X DELETE 'localhost:9200/accounts/person/1'
-```
 
 ## 数据查询
 [CSDN博主21_Days的原创文章](https://blog.csdn.net/qq1592/article/details/119081067)
@@ -222,8 +203,8 @@ $ curl -X DELETE 'localhost:9200/accounts/person/1'
 | 关键字          | 说明         | 
 | --------------- | -------------- | 
 | match_all  | 查询简单的 匹配所有文档。在没有指定查询方式时，它是默认的查询       | 
-| match          | 用于全文搜索或者精确查询，如果在一个精确值的字段上使用它， 例如数字、日期、布尔或者一个 not_analyzed 字符串字段，那么它将会精确匹配给定的值    | 
-| range     | 查询找出那些落在指定区间内的数字或者时间<br> gt 大于 <br>gte 大于等于 <br>lt 小于 <br>lte 小于等于 | 
+| match | 用于全文搜索或者精确查询，如果在一个精确值的字段上使用它， 例如数字、日期、布尔或者一个 not_analyzed 字符串字段，那么它将会精确匹配给定的值    | 
+| range | 查询找出那些落在指定区间内的数字或者时间<br> gt 大于 <br> gte 大于等于 <br> lt 小于 <br> lte 小于等于 | 
 | term     | 被用于精确值 匹配 | 
 | terms     | terms 查询和 term 查询一样，但它允许你指定多值进行匹配 | 
 | exists     | 查找那些指定字段中有值的文档 | 
