@@ -236,36 +236,30 @@ Elastic 本质上是一个分布式数据库，允许多台服务器协同工作
 使用 GET 方法，直接请求/Index/Type/_search，就会返回所有记录。
 
 返回结果的 took字段表示该操作的耗时（单位为毫秒），timed_out字段表示是否超时;max_score：最高的匹配程度。
-
-```cs
-$ curl 'localhost:9200/accounts/person/_search'
-```
+> curl 'localhost:9200/accounts/person/_search'
 
 ### 全文搜索
 Elastic 的查询非常特别，使用自己的查询语法，要求 GET 请求带有数据体。size 默认10 类似limit,from类似offset指定位移
-
+> curl 'localhost:9200/accounts/person/_search  -d '
 ```json
-$ curl 'localhost:9200/accounts/person/_search'  -d '
 {
     "query" : { "match" : { "desc" : "软件" }},
     "from": 20,
     "size": 20,
-}'
+}
 ```
 
 ### 逻辑运算
 如果有多个搜索关键字， Elastic 认为它们是or关系。例： 软件 or 系统
-
+> curl 'localhost:9200/accounts/person/_search  -d '
 ```json
-$ curl 'localhost:9200/accounts/person/_search'  -d '
 {
     "query" : { "match" : { "desc" : "软件 系统" }}
-}'
+}
 ```
 如果要执行多个关键词的and搜索，必须使用布尔查询。
-
+> curl 'localhost:9200/accounts/person/_search  -d '
 ```json
-$ curl 'localhost:9200/accounts/person/_search'  -d '
 {
   "query": {
     "bool": {
@@ -275,7 +269,7 @@ $ curl 'localhost:9200/accounts/person/_search'  -d '
       ]
     }
   }
-}'
+}
 ```
 
 ## 中文分词设置
