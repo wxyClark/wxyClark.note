@@ -2,13 +2,15 @@
 sort: 1
 ---
 
+# 入门
+
+
 | 简写 | 全称 | 释意 | 备注 |
 | --- | --- | --- | --- |
 | JSON | JavaScript Object Notation | Javascript对象符号 | --- |
 | DSL | Domain Specific Language | 特定领域语言 | --- |
 
 
-# 入门
 
 * 天生支持分布式(大量非关键数据的存储首先考虑ES)
 * Elasticsearch是一个基于Apache Lucene(TM)的开源搜索引擎。无论在开源还是专有领域，Lucene可以被认为是迄今为止最先进、性能最好的、功能最全的搜索引擎库。

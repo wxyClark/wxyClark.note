@@ -2,13 +2,13 @@
 sort: 2
 ---
 
+# 集群
+
 Elasticsearch用于构建高可用和可扩展的系统。
 
 扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))
 
 或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。
-
-# 集群
 
 * 一个集群(cluster)由一个或多个节点组成，它们具有相同的cluster.name
 * 一个节点(node)就是一个Elasticsearch实例
