@@ -365,6 +365,58 @@ JSON形式的explain描述是难以阅读的
 }
 ```
 
+### 处理Null值
+
+[处理 Null 值(书栈网)](https://www.bookstack.cn/read/elasticsearch-definitive-guide-cn/080_Structured_Search-30_existsmissing.md)
+
+```danger
+本质上来说，null，[]（空数组）和 [null] 是相等的。它们都不存在于倒排索引中！
+```
+
+* SQL 语法中，我们可以用 IS NOT NULL 查询：
+```sql
+SELECT tags
+FROM   posts
+WHERE  tags IS NOT NULL 
+```
+> 在 Elasticsearch 中，我们使用 exists 过滤器
+
+```json
+{
+    "query": {
+        "exists": {
+            "field": "tags"
+        }
+    }
+}
+```
+
+```json
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "exists" : { "field" : "tags" }
+            }
+        }
+    }
+}
+```
+
+* 用 missing 过滤器来取代 exists, 获取没有标签的文档
+```json
+{
+    "query" : {
+        "filtered" : {
+            "filter": {
+                "missing" : { "field" : "tags" }
+            }
+        }
+    }
+}
+```
+
+
 ## ElasticSearch中的字段数据常被应用到以下场景
 
 * 对一个字段进行排序
