@@ -1,4 +1,5 @@
 # ElasticSearch
+
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
 
 [官方 中文](https://www.elastic.co/cn/elasticsearch/)
@@ -27,6 +28,18 @@ ES集群对外提供RESTful API
 【string类型默认分词】对于String类型的字段，不需要analysis（分词）的也需要明确定义出来
 
 【选择有规律的ID很重要】随机性太大的ID（比如UUID）不利于查询
+
+充分利用倒排索引机制，能 keyword 类型尽量 keyword
+
+数据量大时候，可以先基于时间敲定索引再检索 index_name_[date], 冷热数据分离
+
+禁用批量 terms（成百上千的场景）
+
+慎用 wildcard
+
+【倒排索引】，是通过分词策略，形成了词和文章的映射关系表，这种【词典 + 映射】表即为倒排索引。
+
+有了倒排索引，就能实现 o（1）时间复杂度的效率检索文章了，极大的提高了检索效率(空间占用小、查询速度快)。
 ```
 
 ## ELK
