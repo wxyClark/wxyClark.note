@@ -5,9 +5,9 @@ sort: 4
 # 搜索 query then fetch
 
 ```tip
-Es 模糊查询， 分词的用match； 
+Es 精确查询，term; terms 多个值是精确查询的 或 关系
 
-短语的用match_phrase；
+Es 模糊查询，分词的用match、短语的用match_phrase；
 
 查询任意的，用wildcard通配符，注意查询的内容是否分词，分词的添加keyword，查询非空的情况，用*。
 
