@@ -15,6 +15,11 @@ Laravel>=5.6 PHP对应的版本>=7.1.3
 
     # 加载依赖库
     composer update
+    
+    # 安装 maatwebsite/excel 组件
+    # simple-cache降级(3.0 ——> 2.0)
+    composer require psr/simple-cache ^2.0
+    composer require maatwebsite/excel
 ```
 
 ## 本地开发环境
