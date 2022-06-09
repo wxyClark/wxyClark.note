@@ -211,7 +211,7 @@ LEFT JOIN ic_product_tag T ON (V.goods_sn = T.goods_sn)
 WHERE T.tag IS NULL AND V.tenant_id = T.tenant_id  --【ON条件改 WHERE 条件】
 ```
 
- ## 子查询  
+## 子查询
 
 ```tip
 ⼀般来说，能⽤ exists 的⼦查询，绝对都能⽤ in 代替，所以 exists ⽤的少。推荐使用 in
