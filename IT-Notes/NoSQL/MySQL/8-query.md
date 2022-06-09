@@ -194,7 +194,22 @@ range
     左外链接：FROM 主表 LEFT JOIN b JOIN 从表
     右外连接：FROM 从表 RIGHT JOIN b JOIN 主表
 
-* left Join on 条件从表数据为 null 的数据**不会过滤**
+* LEFT JOIN ON 条件从表数据为 null 的数据**不会过滤**
+* LEFT JOIN ON 条件 剪切到 WHERE 后面； 从表数据为 null 的数据**【会被过滤掉】**，导致 NULL 判定取不到数据
+> ON 条件 【可以取到】 左表有,右表没有的数据
+```sql
+SELECT V.tenant_id, V.product_sn, V.goods_sn, V.STATUS, T.tag
+FROM ic_product_variation V
+LEFT JOIN ic_product_tag T ON (V.goods_sn = T.goods_sn AND V.tenant_id = T.tenant_id)
+WHERE T.tag IS NULL  --【ON条件 不过滤 NULL记录】
+```
+> ON 条件 改为WHERE 条件 【取不到】 左表有,右表没有的数据
+```sql
+SELECT V.tenant_id, V.product_sn, V.goods_sn, V.STATUS, T.tag
+FROM ic_product_variation V
+LEFT JOIN ic_product_tag T ON (V.goods_sn = T.goods_sn)
+WHERE T.tag IS NULL AND V.tenant_id = T.tenant_id  --【ON条件改 WHERE 条件】
+```
 
  ## 子查询  
 
