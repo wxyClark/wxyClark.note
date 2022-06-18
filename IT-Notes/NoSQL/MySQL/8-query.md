@@ -338,6 +338,10 @@ WHERE A.column_d condition AND B.column_e condition
 
 ## 刷数据
 
+```danger
+铁律：【刷数据之前先备份整个表】
+```
+
 ```sql
 insert into table_name(field1,field2,field3)
 SELECT colm1,colm2,colm3 FROM t1 WHERE condition 

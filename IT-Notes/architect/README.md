@@ -110,6 +110,13 @@ sort: 1
 * 接口返回 data 内部必须是数组格式
 * 方法的返回值 避免使用map, 返回多列更方便在调用处组装需要的各种map
 
+
+## 刷数据
+
+```danger
+铁律：【刷数据之前先备份整个表】
+```
+
 <hr />
 
 {% include list.liquid all=true %}
