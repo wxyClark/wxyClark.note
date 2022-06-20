@@ -332,7 +332,7 @@ WHERE JSON_CONTAINS(JSON_EXTRACT(`config`,'$.fieldModels'), JSON_OBJECT('valueMa
 ```sql
 UPDATE table_a AS A
 LEFT JOIN table_b AS B ON A.f_key = B.f_key
-UPDATE A.column_c = B.column_c
+SET A.column_c = B.column_c
 WHERE A.column_d condition AND B.column_e condition
 ```
 

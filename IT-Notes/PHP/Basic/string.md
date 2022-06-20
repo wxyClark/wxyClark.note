@@ -20,7 +20,11 @@ mb_substr(
 ): string
 
 //  去掉首个字符
-mb_substr($str, 1, -1);
 mb_substr($str, 1);
 mb_substr($str, 1, null);
+```
+
+```danger
+//  去掉【首、尾】各一个字符
+mb_substr($str, 1, -1);
 ```
