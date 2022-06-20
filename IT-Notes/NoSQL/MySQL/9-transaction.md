@@ -25,6 +25,12 @@ sort: 9
 
 ## 隔离级别
 
+```sql
+-- 查mysql隔离级别
+show variables like 'tx_isolation'
+SELECT @@tx_isolation;
+```
+
 ```danger
 MySQL服务器层不管理事务，事务是由下层的存储引擎实现的。所以在同一个事务中，使用多种存储引擎是不可靠的(非事务型的表上的变更就无法撤销)。
 
