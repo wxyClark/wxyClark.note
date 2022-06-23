@@ -198,17 +198,17 @@ range
 * LEFT JOIN ON 条件 剪切到 WHERE 后面； 从表数据为 null 的数据**【会被过滤掉】**，导致 NULL 判定取不到数据
 > ON 条件 【可以取到】 左表有,右表没有的数据
 ```sql
-SELECT V.tenant_id, V.product_sn, V.goods_sn, V.STATUS, T.tag
-FROM ic_product_variation V
-LEFT JOIN ic_product_tag T ON (V.goods_sn = T.goods_sn AND V.tenant_id = T.tenant_id)
+SELECT V.company_id, V.product_sn, V.goods_sn, V.STATUS, T.tag
+FROM product_sku V
+LEFT JOIN ic_product_tag T ON (V.goods_sn = T.goods_sn AND V.company_id = T.company_id)
 WHERE T.tag IS NULL  --【ON条件 不过滤 NULL记录】
 ```
 > ON 条件 改为WHERE 条件 【取不到】 左表有,右表没有的数据
 ```sql
-SELECT V.tenant_id, V.product_sn, V.goods_sn, V.STATUS, T.tag
-FROM ic_product_variation V
+SELECT V.company_id, V.product_sn, V.goods_sn, V.STATUS, T.tag
+FROM product_sku V
 LEFT JOIN ic_product_tag T ON (V.goods_sn = T.goods_sn)
-WHERE T.tag IS NULL AND V.tenant_id = T.tenant_id  --【ON条件改 WHERE 条件】
+WHERE T.tag IS NULL AND V.company_id = T.company_id  --【ON条件改 WHERE 条件】
 ```
 
 ## 子查询
@@ -345,4 +345,45 @@ WHERE A.column_d condition AND B.column_e condition
 ```sql
 insert into table_name(field1,field2,field3)
 SELECT colm1,colm2,colm3 FROM t1 WHERE condition 
+```
+
+* 跨多表统计并更新数据
+```sql
+UPDATE analysis_goods_sale T
+    
+JOIN (
+    SELECT 
+        a.company_id, a.goods_sn, IFNULL( a.total_quantity, 0 ) total_quantity,
+        IFNULL( b.real_quantity, 0 ) real_quantity, sum( b.order_sku_sale_amount ) sku_sale_amount
+        LEFT( c.payment_date, 10 ) `analysis_date`,
+        d.account_code,
+        e.product_sn,
+    FROM
+    (
+        (
+          SELECT id, company_id, goods_sn, sum( quantity ) total_quantity, dispatched_quantity, pay_price, order_code, account_code, product_sn, is_deleted
+          FROM order_sku
+          GROUP BY company_id, account_code, goods_sn
+        ) a
+        LEFT JOIN (
+          SELECT id, goods_sn, account_code, sum( quantity ) real_quantity, pay_price, sum( pay_price * quantity ) order_sku_sale_amount
+          FROM order_sku
+          WHERE pay_price > 0
+          GROUP BY company_id, account_code, goods_sn
+        ) b ON a.id = b.id AND a.goods_sn = b.goods_sn AND a.account_code = b.account_code
+    )
+    LEFT JOIN `oms_order` c ON a.company_id = c.company_id AND a.order_code = c.order_code AND a.account_code = c.account_code
+    LEFT JOIN `c_accounts` d ON c.company_id = d.company_id AND c.account_code = d.account_code AND a.account_code = d.account_code
+    LEFT JOIN `product_sku` e ON e.goods_sn = a.goods_sn AND e.company_id = a.company_id
+    WHERE
+        c.payment_date >= '2020-01-06 00:00:00' AND c.payment_date <= '2020-01-06 23:59:59'
+        AND a.is_deleted = 2 AND c.order_status IN ( 1, 2, 3 )
+    GROUP BY `analysis_date`, a.company_id, d.account_code, a.goods_sn
+) S ON T.company_id = S.company_id AND T.product_sn = S.product_sn AND T.goods_sn = S.goods_sn AND T.payment_date = S.analysis_date
+    
+SET T.sales = S.sales, T.sales_amount = S.pay_price
+WHERE 
+    T.company_id = S.company_id AND T.account_code = S.account_code 
+    AND T.product_sn = S.product_sn AND T.goods_sn = S.goods_sn
+    AND T.payment_date = S.analysis_date
 ```
