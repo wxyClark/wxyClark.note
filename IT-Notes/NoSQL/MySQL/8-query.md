@@ -387,3 +387,36 @@ WHERE
     AND T.product_sn = S.product_sn AND T.goods_sn = S.goods_sn
     AND T.payment_date = S.analysis_date
 ```
+
+## SQL高级用法
+
+* SQL_CALC_FOUND_ROWS
+
+```tip
+获取列表数据 + 获取列表总数量，常规用法需要两条SQL语句；通过一条SQL也可以办到
+```
+
+```sql
+-- 低配版本
+SELECT * FROM student WHERE id < 1000 LIMIT 10,10 ;
+SELECT count(id) FROM student WHERE id < 1000 ;
+
+-- 高配版本
+SELECT SQL_CALC_FOUND_ROWS *
+FROM student
+WHERE id < 1000
+LIMIT 10, 10;
+
+SELECT FOUND_ROWS() AS total_count;
+```
+
+```php
+//  laravel用法
+$list = $this->model->select([DB::raw("SQL_CALC_FOUND_ROWS [*|字段列表]")])
+    ->offset($offet)
+    ->limit($limit)
+    ->groupBy('column1','column2')
+    ->get();
+
+$total = DB::select(DB::raw('SELECT FOUND_ROWS() as total'))[0]->total;
+```
