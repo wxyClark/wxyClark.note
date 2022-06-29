@@ -2,7 +2,6 @@
 sort: 7
 ---
 
-{% include list.liquid all=true %}
 
 # 生存
 
@@ -21,3 +20,5 @@ sort: 7
 ## 育
 
 ## 交
+
+{% include list.liquid all=true %}

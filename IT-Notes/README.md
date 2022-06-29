@@ -4,7 +4,7 @@ sort: 2
 
 {% include list.liquid all=true %}
 
-# IT
+# IT笔记
 
 ## 资源推荐
 [CN 数据结构和算法动态可视化](https://visualgo.net/zh)
