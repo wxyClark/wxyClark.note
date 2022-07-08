@@ -3,6 +3,11 @@ sort: 5
 ---
 
 # 事件监听 event&listeners
+
+```tip
+默认是同步执行，可以继承ShouldQueue 实现异步执行
+```
+
 ## 绑定
 
 ## 触发
