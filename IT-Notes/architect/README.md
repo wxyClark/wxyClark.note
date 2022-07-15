@@ -92,6 +92,24 @@ sort: 1
 
 ## 代码规范
 
+## Controller && Console
+
+## Service
+
+* 数据读写逻辑分离
+* 多表操作走事务，事务保持简单
+* 多次读考虑使用合并读取(再使用Collect获取数据) 或 缓存(临时缓存、Redis缓存)
+* 多次写考虑使用批量更新
+* 记录日志
+
+## Repository
+
+## Model
+
+## Export
+
+## Event && Listener
+
 
 ## 基类、统一接口
 
