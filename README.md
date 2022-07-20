@@ -21,8 +21,11 @@
 
 
 ## 交个朋友
-<img src="./img/alipay.jpg" width = "300" alt="支付宝" align=center />
 <img src="./img/wechatAvata.jpg" width = "300" alt="微信" align=center />
+
+## 感谢支持
+<img src="./img/alipay.jpg" width = "300" alt="支付宝" align=center />
+
 <img src="./img/wechatPay.jpg" width = "300" alt="微信" align=center />
 
 
