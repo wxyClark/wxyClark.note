@@ -4,6 +4,12 @@ sort: 7
 
 # 查询
 
+```tip
+单表查询 结果集转数组：return $result ? $result->toArray(): [];
+
+联表查询 结果集转数组：return json_decode(json_encode($result), true);
+```
+
 ## collect()
 
 同一组数据需要按不同维度聚合，可以一次查询，对结果集再做分组计算
