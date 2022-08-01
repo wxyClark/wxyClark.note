@@ -21,11 +21,8 @@ sort: 7
 ```php
 $map = $this->model->where($condition)->distinct()->pluck('value'[, 'key']);
 //  toArray前判空
-if ($map) {
-    return $map->toArray();
-}
 
-return [];
+return $map ? $map->toArray() : [];
 ```
 
 二维数组使用pluck

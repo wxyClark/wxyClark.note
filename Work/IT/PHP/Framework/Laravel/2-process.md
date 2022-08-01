@@ -92,12 +92,8 @@ public function querySth(XxxModel $model)
 {
     $list = $model->all();
     $list = $model->pluck();
-
-    if (empty($list)) {
-        return [];
-    }
     
-    return $list->toArray();
+    return $list ? $list->toArray() : [];
 }
 ```
 
