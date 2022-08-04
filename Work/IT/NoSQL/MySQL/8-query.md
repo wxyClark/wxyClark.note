@@ -385,6 +385,26 @@ WHERE
     AND T.payment_date = S.analysis_date
 ```
 
+* 替换数据
+
+```danger
+REPLACE INTO 主键匹配，有则删除 然后插入；无则插入
+
+当有两个脚本处理同一个表的数据时，第一个脚本用REPLACE INTO方式更新
+
+则第二个脚本的更新过的数据大概率会丢失掉，需要重新计算
+
+【原则上】尽可能只用一个脚本更新一个表的数据，必须用两个脚本时，添加 更新表的 created_at > TODAY_START 作为条件，新增的数据都要更新
+```
+
+```sql
+REPLACE INTO table_name (column_name1, column_name2)
+  SELECT column1, column2 
+  FROM table1 
+  LEFT JOIN table2 ON condition 
+  WHERE condition 
+  GROUP BY union_unique_key
+```
 
 ## SQL高级用法
 
