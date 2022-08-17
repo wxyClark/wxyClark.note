@@ -31,7 +31,13 @@ https://www.evget.com/serializedetail/970
 
 https://github.com/xstnet/api-tests
 
+## 问题-解决
 
+* 解决phpstorm项目文件夹颜色变黄,代码无法跳转问题
+
+> 删除项目根目录中.idea文件夹(确保删除成功)
+> 
+> 重新打开项目即可
 
 ## xDebug设置
 
