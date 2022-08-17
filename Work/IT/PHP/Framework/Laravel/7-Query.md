@@ -52,3 +52,30 @@ return $collection->pluck('name', 'product_id');
 $query->where(DB::raw("(is_reply = 2 OR (is_reply = 1 AND reply_at > '". '2022-5-14 00:00:00' ."'))"));
 $query->whereRaw("(is_reply = 2 OR (is_reply = 1 AND reply_at > '". '2022-5-14 00:00:00' ."'))");
 ```
+
+## batch
+
+```danger
+尤其导入数据，支持部分列为空不更新时
+```
+* batchInsert 插入数据，【强烈建议】统一数组的长度（每个数据拥有的key是一致的，避免数据错位）。
+
+```sql
+-- 如：部分列没有 freight
+insert into `oms_order_shipping_fee`
+    (`country_code`, `freight`, `logistics_channel_code`, `logistics_no`, `occurrence_time`) 
+values
+    (CA, 1.23, CA, YH2081746307SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746312SZ, 1970-01-01 08:00:01),
+    (CA, CA,YH2081746308SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746306SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746315SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746303SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746304SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746309SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746313SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746314SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746311SZ, 1970-01-01 08:00:01),
+    (CA, CA, YH2081746305SZ, 1970-01-01 08:00:01)
+)
+```
