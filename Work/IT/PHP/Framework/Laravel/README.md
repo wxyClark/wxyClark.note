@@ -2,10 +2,6 @@
 sort: 1
 ---
 
-{% include list.liquid all=true %}
-
-<hr />
-
 # Laravel
 
 laravel框架的核心就是个Ioc容器即服务容器
@@ -173,3 +169,7 @@ get() 、 pluck() 的结果集，在->toArray() 之前应先判空
 ```danger
 batchUpdate方法批量更新数据时，如果被更新的字段有json类型的数据，中文json后的数据会被去掉'\' 变成乱码
 ```
+
+<hr />
+
+{% include list.liquid all=true %}
