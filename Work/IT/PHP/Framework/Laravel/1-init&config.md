@@ -308,5 +308,24 @@ Storage::delete(['file.jpg', 'file2.jpg']);
 
 ## 插件
 
-中文语言包：composer require caouecs/laravel-lang:~3.0
-ide助手 - PHPStrom：composer require barryvdh/laravel-ide-helper
+### 中文语言包
+```bash
+composer require caouecs/laravel-lang:~3.0
+```
+
+### ide助手 - PHPStorm
+
+可以实现 app(ClassName::class)->functionName($params); 跳转到方法所在位置
+
+```bash
+composer require barryvdh/laravel-ide-helper
+```
+
+* 配置 "IdeHelperServiceProvider::class," 到 config/app.php 的 providers
+* 安装插件的项目，在 PHPStorm PHP/laravel 勾选 Enable plugin for this project
+
+```bash
+php artisan ide-helper:generate   //  生成Facades注释 
+php artisan ide-helper:models     //  生成数据模型注释 -- 可以不执行
+php artisan ide-helper:meta       //  生成 PhpStorm Meta file 
+```
