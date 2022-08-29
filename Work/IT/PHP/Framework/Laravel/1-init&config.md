@@ -329,3 +329,6 @@ php artisan ide-helper:generate   //  生成Facades注释
 php artisan ide-helper:models     //  生成数据模型注释 -- 可以不执行
 php artisan ide-helper:meta       //  生成 PhpStorm Meta file 
 ```
+
+* PHPStorm 文件/从磁盘全部重新加载
+* PHPStorm 文件/清除缓存
