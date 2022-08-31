@@ -214,9 +214,11 @@ WHERE T.tag IS NULL AND V.company_id = T.company_id  --【ON条件改 WHERE 条�
 ## 子查询
 
 ```tip
-⼀般来说，能⽤ exists 的⼦查询，绝对都能⽤ in 代替，所以 exists ⽤的少。推荐使用 in
+⼀般来说，能⽤ exists 的⼦查询，绝对都能⽤ in 代替，所以 exists ⽤的少。推荐使用 in 具体值
 
 【大坑】not in 的情况下，⼦查询中列的值为 NULL 的时候，外查询的结果为空。
+
+in 子查询、 exists 的⼦查询 都推荐使用 join 方式 加过滤条件解决
 ```
 
 ⼦查询的执⾏优先于主查询执⾏，因为主查询的条件⽤到了⼦查询的结果。
@@ -249,6 +251,14 @@ WHERE (a.employee_id, a.salary) in
     (SELECT min(employee_id), max(salary) FROM employees);
 ```
 
+* 外部查询条件不能够下推到复杂的视图或子查询的情况有：
+> 1、聚合子查询；
+>
+> 2、含有 LIMIT 的子查询；
+>
+> 3、UNION 或 UNION ALL 子查询；
+>
+> 4、输出字段中的子查询；
 
 ## JSON
 
@@ -326,6 +336,39 @@ WHERE JSON_CONTAINS(JSON_EXTRACT(`config`,'$.fieldModels'), JSON_OBJECT('valueMa
 确保排序规则具有唯一性，在必要的时候追加 unique 列 或 group by 列 左右排序规则
 ```
 
+```danger
+MySQL8以下 混合排序 ASC、DESC 无法完全利用索引
+
+特例：某个排序字段只要少数几个值 可以取巧
+```
+
+```sql
+SELECT *
+FROMmy_order o
+INNER JOIN my_appraise a ON a.orderid = o.id
+ORDER BY a.is_reply ASC, a.appraise_time DESC
+LIMIT  0, 20
+```
+由于 is_reply 只有0和1两种状态，按照下面的方法重写后，执行时间骤降
+```sql
+SELECT *
+FROM (
+    (
+        SELECT *
+        FROM my_order o
+        INNER JOIN my_appraise a ON a.orderid = o.id AND is_reply = 0
+        ORDER BY appraise_time DESC LIMIT  0, 20
+    )
+    UNION ALL
+    (
+        SELECT *
+        FROM my_order o
+        INNER JOIN my_appraise a ON a.orderid = o.id AND is_reply = 1
+        ORDER BY appraise_time DESC LIMIT  0, 20)
+) t
+ORDER BY is_reply ASC, appraisetime DESC 
+LIMIT  20;
+```
 
 ## 跨表更新
 
@@ -437,4 +480,54 @@ $list = $this->model->select([DB::raw("SQL_CALC_FOUND_ROWS [*|字段列表]")])
     ->get();
 
 $total = DB::select(DB::raw('SELECT FOUND_ROWS() as total'))[0]->total;
+```
+
+## WITH 
+
+* 编写复杂SQL语句要养成使用 WITH 语句的习惯
+
+```sql
+SELECT    a.*,
+          c.allocated
+FROM      (
+                   SELECT   resourceid
+                   FROM     my_distribute d
+                   WHERE    isdelete = 0
+                   AND      cusmanagercode = '1234567'
+                   ORDER BY salecode limit 20) a
+LEFT JOIN
+          (
+                   SELECT   resourcesid， sum(ifnull(allocation, 0) * 12345) allocated
+                   FROM     my_resources r,
+                            (
+                                     SELECT   resourceid
+                                     FROM     my_distribute d
+                                     WHERE    isdelete = 0
+                                     AND      cusmanagercode = '1234567'
+                                     ORDER BY salecode limit 20) a
+                   WHERE    r.resourcesid = a.resourcesid
+                   GROUP BY resourcesid) c
+ON        a.resourceid = c.resourcesid
+```
+子查询 a 在我们的SQL语句中出现了多次。这种写法不仅存在额外的开销，还使得整个语句显的繁杂。使用 WITH 语句再次重写：
+```sql
+WITH a AS
+(
+         SELECT   resourceid
+         FROM     my_distribute d
+         WHERE    isdelete = 0
+         AND      cusmanagercode = '1234567'
+         ORDER BY salecode limit 20)
+SELECT    a.*,
+          c.allocated
+FROM      a
+LEFT JOIN
+          (
+                   SELECT   resourcesid， sum(ifnull(allocation, 0) * 12345) allocated
+                   FROM     my_resources r,
+                            a
+                   WHERE    r.resourcesid = a.resourcesid
+                   GROUP BY resourcesid) c
+ON        a.resourceid = c.resourcesid
+
 ```
