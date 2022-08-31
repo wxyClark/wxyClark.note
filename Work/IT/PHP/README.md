@@ -57,3 +57,18 @@ php-gui
 ## 争议
 
 * 单引号、双引号 区别非常小以至于根本不用在意，对于负载极其高的应用来说，是有点作用的。
+
+## 日志
+
+* 开发环境
+```config
+error_reporting = E_ALL | E_STRICT
+display_errors = On
+```
+
+* 生产环境
+```config
+display_errors = Off
+log_errors = On
+error_log = /path/to/php_error.log
+```

@@ -38,3 +38,15 @@
 
 * 刚向主库写数据，立即向从库读取数据可能读取不到刚创建的数据，主从同步需要时间
 > 需要用到刚入库的数据时，应直接取用入库的数据值，不走读取，使用事务保证原子性
+
+
+## 性能
+
+* EXPLAIN query 查看索引情况
+* 在MySQL 5.6 及之后的版本中，我们可以使用 optimizer trace 功能查看优化器生成执行计划的整个过程
+```sql
+SET optimizer_trace="enabled=on";        // 打开 optimizer_trace
+SELECT * FROM order_info where uid = 5837661 order by id asc limit 1
+SELECT * FROM information_schema.OPTIMIZER_TRACE;    // 查看执行计划表
+SET optimizer_trace="enabled=off"; // 关闭 optimizer_trace
+```
