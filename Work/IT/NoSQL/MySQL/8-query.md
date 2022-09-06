@@ -484,6 +484,10 @@ $total = DB::select(DB::raw('SELECT FOUND_ROWS() as total'))[0]->total;
 
 ## WITH 
 
+```tip
+mysql版本在8.0之前不能使用with的写法
+```
+
 * 编写复杂SQL语句要养成使用 WITH 语句的习惯
 
 ```sql
@@ -517,17 +521,16 @@ WITH a AS
          FROM     my_distribute d
          WHERE    isdelete = 0
          AND      cusmanagercode = '1234567'
-         ORDER BY salecode limit 20)
+         ORDER BY salecode 
+         LIMIT 20
+)
 SELECT    a.*,
           c.allocated
 FROM      a
-LEFT JOIN
-          (
-                   SELECT   resourcesid， sum(ifnull(allocation, 0) * 12345) allocated
-                   FROM     my_resources r,
-                            a
-                   WHERE    r.resourcesid = a.resourcesid
-                   GROUP BY resourcesid) c
-ON        a.resourceid = c.resourcesid
-
+LEFT JOIN(
+         SELECT   resourcesid, sum(ifnull(allocation, 0) * 12345) allocated
+         FROM     my_resources r,  a
+         WHERE    r.resourcesid = a.resourcesid
+         GROUP BY resourcesid
+    ) c ON        a.resourceid = c.resourcesid
 ```
