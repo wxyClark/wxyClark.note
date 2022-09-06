@@ -72,3 +72,10 @@ display_errors = Off
 log_errors = On
 error_log = /path/to/php_error.log
 ```
+
+## 原理
+
+* PHP-FPM 是什么架构模式
+> 它是一个master和worker的架构模式，work处理请求，master管理和回收子进程。
+> 
+> 支持更改过它的进程数的配置，默认 200 个进程数
