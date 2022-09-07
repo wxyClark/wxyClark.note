@@ -11,16 +11,18 @@ sort: 9
 
 {% include list.liquid all=true %}
 
-# 1.IDE插件
+## 1.IDE插件
 
-## 1.1 PHPstorm
+### 1.1 PHPstorm
 
 * [Copilot](https://copilot.github.com/)
 
-    [代码居然还能这样写 ](http://news.sohu.com/a/538064217_121124363)
+* [代码居然还能这样写 ](http://news.sohu.com/a/538064217_121124363)
 
-## 1.2 VScdoe
+### 1.2 VScdoe
 
-# 2.API工具
+## 2.API工具
 
-* https://apidocjs.com/
+## 3.装机必备
+
+* Iris 护眼防蓝光  https://iristech.co/
