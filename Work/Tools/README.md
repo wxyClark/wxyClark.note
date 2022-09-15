@@ -19,7 +19,7 @@ sort: 9
 
 * [代码居然还能这样写 ](http://news.sohu.com/a/538064217_121124363)
 
-### 1.2 VScdoe
+### 1.2 VScode
 
 ## 2.API工具
 
