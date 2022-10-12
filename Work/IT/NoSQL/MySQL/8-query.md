@@ -449,6 +449,15 @@ REPLACE INTO table_name (column_name1, column_name2)
   GROUP BY union_unique_key
 ```
 
+* 更新数据
+> 考虑并发问题，更新数据时指定条件要带上当前支持操作的条件。如：状态变更
+```sql
+-- 避免单一修改与批量修改同时操作导致数据不一致问题，单个修改时加锁，批量修改时加状态条件
+UPDATE table_name
+SET status = new_status
+WHERE status = can_handle_status AND uniq_code = 唯一编码
+```
+
 ## SQL高级用法
 
 * SQL_CALC_FOUND_ROWS
