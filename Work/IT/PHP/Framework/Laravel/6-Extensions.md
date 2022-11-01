@@ -56,6 +56,18 @@ $rowList = $reader->first()->toArray();
 $dataList = $reader->all()->toArray();
 ```
 
+* wps导入数据，日期时间类型会转变成数值，导入时需要处理转换
+> 如： 2022/4/6 14:16:42 在导入时得到：44657.594930556
+```php
+if (is_numeric($val)) {
+    $timeFormat = \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($val));
+    $timeFormat = json_decode(json_encode($timeFormat), true);
+    $checkedRow['occurrence_time'] = substr($timeFormat['date'], 0, 19);
+} else {
+    $checkedRow['occurrence_time'] = date('Y-m-d H:i:s', strtotime($val));
+}
+```
+
 ### 导出
 store(指定后缀名)保存到本地 storage/export 目录；export(指定后缀名)导出到页面
 
