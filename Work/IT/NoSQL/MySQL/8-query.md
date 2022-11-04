@@ -292,10 +292,13 @@ SELECT *
 FROM TABLE_NAME T
 WHERE T.json_column  like '[]'
 
---  判定json数组指定下表的元素
-SELECT *
-FROM TABLE_NAME T
-WHERE JSON_EXTRACT(`T.json_column`,'$[0].quantity')
+--  判定json数组指定下表的元素是否存在， json解析数据is null 判定无效
+SELECT
+  uniq_code ,biz_code, JSON_EXTRACT( column_name , '$.key' )
+FROM
+  table_name 
+WHERE
+  JSON_EXTRACT( column_name, '$.key' ) > ''
 
 
 
