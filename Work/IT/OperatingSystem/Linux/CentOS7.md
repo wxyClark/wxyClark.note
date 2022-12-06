@@ -118,3 +118,13 @@ chattr -i /etc/passwd /etc/shadow /etc/group /etc/gshadow /etc/inittab
 ```bash
 echo "net.ipv4.icmp_echo_ignore_all=1" >> /etc/sysctl.conf
 ```
+
+## 工具
+
+### 中文支持
+
+### zsh
+
+```bash
+
+```
