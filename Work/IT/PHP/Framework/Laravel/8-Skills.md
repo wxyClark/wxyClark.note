@@ -20,6 +20,21 @@ use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 $number = '一个数值';
 $number = StringHelper::formatNumber($number);
 
+//  设置文字颜色
+    $color = new Color(Color::COLOR_BLUE);
+    $event->sheet->getDelegate()->getStyle('E2:E'.$this->column)->getFont()->setColor($color);
+//  E列 展示图片URL超链接
+    foreach ($this->data as $key => &$item) {
+        if (empty($item['cover_image'])) {
+            continue;
+        }
+    
+        $excelRowCount = $key + 2;
+        $event->getSheet()->setCellValue('E' . $excelRowCount, $item['cover_image']);
+        $hyperLink = new Hyperlink($item['cover_image'], '');
+        $event->getSheet()->getDelegate()->getCell('E' . $excelRowCount)->setHyperlink($hyperLink);
+    }
+    unset($item);
 ```
 
 ## 嵌套事务
