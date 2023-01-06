@@ -58,7 +58,7 @@ source ~/.zshrc
 cd ~/.oh-my-zsh/custom/plugins
 git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 # 打开~/.zshrc文件
-plugins=(git zsh-syntax-highlighting)
+plugins=(git z extract zsh-syntax-highlighting)
 ```
 
 ## 必备软件

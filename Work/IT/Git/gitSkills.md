@@ -48,7 +48,7 @@ git commit --amend '新的注释'
 ```
  
 
- ## 移花接木
+## 移花接木
 
  ```bash
 # 复制一个特定的提交到当前分支
@@ -148,6 +148,14 @@ git checkout -b master FETCH_HEAD
 
 * 查看全部Git配置   git config --list
 * 显示颜色提示      git config --global color.ui true
+
+## 使用token 替换 ssh-key
+
+* git remote set-url origin https://@github.com/<USERNAME>/<REPO>.git
+
+## .gitignore修改无效
+
+* git rm -r --cache .
 
 ## 工作流
 

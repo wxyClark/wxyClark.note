@@ -6,7 +6,7 @@ sort: 2
 
 ## 卓越性能模式
 - 管理员模式命令行
-```angular2html
+```bsh
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 ```
 - 控制面板-电源选项  选择 卓越性能模式
