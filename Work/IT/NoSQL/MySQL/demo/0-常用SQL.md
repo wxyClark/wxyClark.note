@@ -105,7 +105,9 @@ SELECT
         ...
         ELSE <命令>
     END CASE;
-
+    
+    --  一对多的数据，groupBy后 拼接在一起
+    IFNULL(GROUP_CONCAT(TAG.goods_sn, ':', TAG.tag, ';'),'') as '标签'
 FROM table_a AS A
 LEFT JOIN table_b AS B ON A.xx_id = B.xx_id
 --  WHERE 条件顺序：
@@ -145,6 +147,15 @@ SELECT id,
             THEN '4'
         ELSE '99'
     END [CASE] AS `status`
+    -- =前后不用有空格
+    CASE 
+        WHEN SPU.status='1' THEN '待做货'
+        WHEN SPU.status='2' THEN '打版中'
+        WHEN SPU.status='3' THEN '做货成功'
+        WHEN SPU.status='4' THEN '移除'
+        WHEN SPU.status='5' THEN '做货中'
+        ELSE SPU.status
+    END  as 'SPU状态',
 FROM t_household 
 WHERE  del_flag = '0';
 ```
