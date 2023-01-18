@@ -6,44 +6,52 @@ OKR的两个核心原则：在精不在多和全体公开、透明。
 
 
 ```mermaid
-graph LR
+graph TD
 
         O ==1==> P 
         A ==> KRs
         
     subgraph PDCA循环
-        P((Plan<br>计划 <br>目标设定)) ---> D  
-        D[Do Design<br>方案 执行<br>实施管理] ---> C
-        C[Check Control Clean <br>检查 沟通 控制<br>考核评价] --> A
-        A{{Act Aim<br>处理 改善 清理<br>结果应用 激励}}
+        P((Plan<br>计划 <br>目标设定)) -.-> D  
+        D[Do Design<br>方案 执行<br>实施管理] -.-> C
+        C[Check Control Clean <br>检查 沟通 控制<br>考核评价] -.-> A
+        A{{Act Aim<br>处理 改善 清理<br>结果应用 激励}}-.-> R1
         
         R1{improve<br>改进 优化}-.-> P
     end
     
         A --> W1
-        H -.->R1
+        H -->R1
 
-    subgraph 5W1H
-        W1((What<br>对象 问题定义))-->W2
-        W2[Where<br>场所 地点]-->W3
-        W3[When<br>时间 程序]-->W4
-        W4[Who<br>责任人 谁干的]-->W5
-        W5[Why<br>为什么 原因]-->H
-        H{{How<br>这么办 经验}}
-    end
+        SMART[用SMART方法写出目标] --> O 
 
     subgraph OKR
-        O((Objective<br>目标))--> O1[OKR敏捷目标设定]
+        
+        O((Objective<br>目标))-.-> O1[OKR敏捷目标设定]
         O1-.->O2[持续反馈与教练]
         O2-.->O3[考核与薪酬]
         O3-.->O4[激励与认可]
         O4--> KRs>Key Results<br>关键结果]
-    end
+
+        Review[复盘]
 
         O4-.->Review-.->O1
-        SMART --> O 
+    end
 
-    subgraph SMART原则
+    subgraph 5W1H
+        W1((What<br>对象 问题定义))-.->W2
+        W2[Where<br>场所 地点]-.->W3
+        W3[When<br>时间 程序]-.->W4
+        W4[Who<br>责任人 谁干的]-.->W5
+        W5[Why<br>为什么 原因]-.->H
+        H{{How<br>这么办 经验}}
+    end
+```
+
+
+```mermaid
+graph LR
+subgraph SMART原则
         SMART[用SMART方法写出目标]
         SMART --> S[Specific 具体的 需要改进的区域]
         SMART --> M[Measurable 可衡量的 数量结果或参考系]
@@ -51,26 +59,28 @@ graph LR
         SMART --> R[Relevant 相关性 目标要与承担目标者的工作相关]
         SMART --> T[Time-related 限时的 有明确的完成时间]
     end
+```
 
+```mermaid
+graph LR
     subgraph 美军AfterActionReview复盘流程
-        Review[复盘]
-        Review-->RV1[回顾目标]
-            RV1-->RV11[分清目的和目标]
-            RV1-->RV12[确定量化模板或里程碑标志]
-            RV1-->RV13[预先行动构想]
-        Review-->RV2[评估结果]
-            RV2-->RV21[坦诚 不抱怨 不指责]
-            RV2-->RV22[重现关键事件情景]
-            RV2-->RV23[找出成功和不足]
-        Review-->RV3[分析原因]
-            RV3-->RV31[检视 目的/目标 设定]
-            RV3-->RV32[分析成功 多客观]
-            RV3-->RV33[分析不足 多主观]
-        Review-->RV4[总结经验]
-            RV4-->RV41[尽可能扩展 不要就事论事]
-            RV4-->RV42[小心谨慎 不能吧一时认识作为规律]
-    end
-
+            Review[复盘]
+            Review-->RV1[回顾目标]
+                RV1-->RV11[分清目的和目标]
+                RV1-->RV12[确定量化模板或里程碑标志]
+                RV1-->RV13[预先行动构想]
+            Review-->RV2[评估结果]
+                RV2-->RV21[坦诚 不抱怨 不指责]
+                RV2-->RV22[重现关键事件情景]
+                RV2-->RV23[找出成功和不足]
+            Review-->RV3[分析原因]
+                RV3-->RV31[检视 目的/目标 设定]
+                RV3-->RV32[分析成功 多客观]
+                RV3-->RV33[分析不足 多主观]
+            Review-->RV4[总结经验]
+                RV4-->RV41[尽可能扩展 不要就事论事]
+                RV4-->RV42[小心谨慎 不能吧一时认识作为规律]
+        end
 ```
 
 ## WHAT
@@ -95,6 +105,8 @@ graph LR
 > 对需求不明、变化快的项目(如：IT),敏捷开发是最佳实践
 > 
 > 传统金字塔组织容易导致官僚主义，敏捷组织扁平高效、领导力体现为方向和赋能
+> 
+> “千禧一代”引领的时代习惯于在生活中收获即使反馈，可以说是敏捷时代的一个体现
 
 ### O(目标Objective)
 
@@ -147,9 +159,9 @@ graph LR
 * OKR敏捷绩效管理模型
   > OKR敏捷目标设定(SMART原则)
   > 
-  > 持续反馈与教练(及时反馈、把控)
+  > 持续反馈与教练(及时反馈、把控) —— 反馈能够促进目标更好地实现
   > 
-  > 考核与薪酬(参考，不直接画等号)
+  > 考核与薪酬(参考，不直接画等号) —— OKR执行结果不做业绩考核
   > 
   > 激励与认可(提升主动性、积极性)
 
@@ -220,6 +232,8 @@ graph LR
 * 公开透明
 * 保持流程简洁，找到合适的工具
 * 让每位员工觉得自己很重要
+
+### 沟通与面谈
 
 ## 企业文化
 
