@@ -292,13 +292,16 @@ SELECT *
 FROM TABLE_NAME T
 WHERE T.json_column  like '[]'
 
---  判定json数组指定下表的元素是否存在， json解析数据is null 判定无效
-SELECT
-  uniq_code ,biz_code, JSON_EXTRACT( column_name , '$.key' )
-FROM
-  table_name 
-WHERE
-  JSON_EXTRACT( column_name, '$.key' ) > ''
+--  判定json数组指定下表的元素是否存在
+SELECT uniq_code, json_extract(column_name,'$.key')
+FROM table_name
+where JSON_EXTRACT(column_name,'$.key')  IS NULL
+-- IS NOT NULL
+SELECT uniq_code, json_extract(column_name,'$.key')
+FROM table_name
+where JSON_EXTRACT(column_name,'$.key') > ''
+
+
 
 
 
@@ -313,7 +316,7 @@ WHERE
         "field": "Id",
         "dataType": 1,
         "showName": "标识",
-        "textFormat": "",
+        "textFormat": "",f
         "valueMapping": 17
     }, {
         "key": 1,
