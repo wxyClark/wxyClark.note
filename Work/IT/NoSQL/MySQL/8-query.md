@@ -301,7 +301,20 @@ SELECT uniq_code, json_extract(column_name,'$.key')
 FROM table_name
 where JSON_EXTRACT(column_name,'$.key') > ''
 
+-- json字段的IN条件是数值数组时
+$array = [];
+if (count($array) == 1) {
+    $string = "'".current($array)."'";
+} else {
+    foreach ($array as &$item) {
+        $string = implode(',', (int)item);
+    }
+    unset($item);
+}
 
+SELECT uniq_code, json_extract(column_name,'$.key')
+FROM table_name
+where JSON_EXTRACT(column_name,'$.key') in ($string)
 
 
 
@@ -331,6 +344,18 @@ where JSON_EXTRACT(column_name,'$.key') > ''
 */
 SELECT id, config FROM `sql_model` 
 WHERE JSON_CONTAINS(JSON_EXTRACT(`config`,'$.fieldModels'), JSON_OBJECT('valueMapping', @valueMapping)) > 0;
+
+
+-- 时间格式
+SELECT
+  id, JSON_EXTRACT( origin_data, '$.completedAt' ) as completedAtTime , CONVERT_TZ(TRIM('"' from JSON_EXTRACT( origin_data, '$.completedAt' )),'+00:00','+08:00') as completedAt,
+  JSON_EXTRACT( origin_data, '$.createdAt' ) as createdAtTime , CONVERT_TZ(TRIM('"' from JSON_EXTRACT( origin_data, '$.createdAt' )),"+08:00","+08:00") as createdAt,
+  origin_data
+FROM
+  `shopify_checkouts`
+WHERE
+    CONVERT_TZ(TRIM('"' from JSON_EXTRACT( origin_data, '$.createdAt' )),"+08:00","+08:00") > CONVERT_TZ(TRIM('"' from JSON_EXTRACT( origin_data, '$.completedAt' )),'+00:00','+08:00')
+  limit 10
 ```
 
 
