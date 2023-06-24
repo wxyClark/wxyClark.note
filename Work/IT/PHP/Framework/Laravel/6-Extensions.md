@@ -44,6 +44,42 @@ php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"
     'slug_whitelist'       => '._（）() */',    //  -
 ```
 
+* excel 导出 pdf 图片丢失问题
+
+    [Missing image when convert to pdf file](https://github.com/PHPOffice/PHPWord/issues/306)
+```php
+use PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf as OriginalMpdf;
+class Mpdf extends OriginalMpdf
+{
+    private $_embedImagesFixRollback;
+
+    private function applyImageFix()
+    {
+        $this->isPdf = false;
+        $this->_embedImagesFixRollback = $this->getEmbedImages();
+        $this->setEmbedImages(true);
+    }
+
+    private function rollbackImageFix()
+    {
+        $this->isPdf = true;
+        $this->setEmbedImages($this->_embedImagesFixRollback);
+    }
+
+    /**
+     * Save Spreadsheet as html to variable.
+     *
+     * @return string
+     */
+    public function generateHtmlAll()
+    {
+        $this->applyImageFix();
+        $html = parent::generateHtmlAll();
+        $this->rollbackImageFix();
+        return $html;;
+    }
+}
+```
 ### 导入
 
 ```php
