@@ -4,10 +4,21 @@ sort: 7
 
 # 查询
 
+**【定义$query 至少应调用一个函数：】**
+```danger
+$query = $this->model; 会导致后面的 $query->条件时效
+$query = $this->model->select($fields);
+$query = $this->model->newQuery();
+```
+
 ```tip
-单表查询 结果集转数组：return $result ? $result->toArray(): [];
+单表查询 单挑结果转数组：
+$result = $query->first();
+return $result ? $result->toArray(): [];
 
 联表查询 结果集转数组：return json_decode(json_encode($result), true);
+
+
 ```
 
 ## collect()
