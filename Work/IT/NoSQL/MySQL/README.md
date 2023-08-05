@@ -50,3 +50,33 @@ SELECT * FROM order_info where uid = 5837661 order by id asc limit 1
 SELECT * FROM information_schema.OPTIMIZER_TRACE;    // 查看执行计划表
 SET optimizer_trace="enabled=off"; // 关闭 optimizer_trace
 ```
+
+## 支持扩展的设计
+
+### 单据主表 xx_order
+* 字段尽量少，必须通用 tenant_code、uniq_code、source_code、f_key、type、tag、level、status
+* 主表用于列表展示，尽量不出现json类型字段
+
+### 单据详情表 xx_order_detail
+* 跟进业务差异大小 考虑是否依据 xx_order.type 对应不同的detail表，未来有较大可能会改变数据格式的数据用json
+* detail里的json需要用于查询时 果断上ES
+
+
+### 单据详情表 xx_order_ext
+* json、text 内容很长的字段，基本不用于查询 独立到一个表中，提升查询效率
+
+### 日志
+
+```danger
+明细数据先删后增，日志记录时，old_value取原样数据的json_encode,new_value取新数据的json_encode，跟进业务需求在展示时再翻译
+```
+
+* 方案一：所有日志用同一个表——推荐3
+> 1、一行记录表示一个单据的一次完整操作 日志的变更项带上表名， ['xx_order.column_name' => value, 'xx_order_detail.column_name' => value,]
+> 
+> 2、一行记录表示一个单据的一个数据项变更 column_name 字段带上表名 xx_order.column_name
+> 
+> 3、(1+2)日志表分两个：主日志表记录一个单据一次操作的类型、简要翻译、时间、操作人；日志详情表 记录每个数据项的变更，old_value new_value 用json记录枚举值的 key、value
+> 
+> 日志明细标记字段是否是json
+* 方案二：不同的表独立对应一个日志表——最详细，最繁琐

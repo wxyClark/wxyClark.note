@@ -130,5 +130,5 @@ public function commit()
 ```shell
 php artisan queue:work --timeout=60 --tries=3 --queue=mes:push_to_erp_job
 --  重试执行失败的JOB：ID 是 failed_jobs 表的ID
-php artisan queue:retry ID
+php artisan queue:retry ID值
 ```
