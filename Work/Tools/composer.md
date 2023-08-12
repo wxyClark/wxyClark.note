@@ -96,6 +96,7 @@ composer设置环境变量之后，可使用 composer 替换下面的 php compos
 ```shell
   composer require "packageName/appName:指定版本号"
   composer require "packageName/appName:~最低版本号"
+  composer require simplesoftwareio/simple-qrcode:1.3 --ignore-platform-reqs // 忽略依赖
 ```
 
 > 指定安装包降级,只需指定低版本号 安装即可
