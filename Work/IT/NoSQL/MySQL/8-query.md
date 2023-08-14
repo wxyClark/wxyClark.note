@@ -574,3 +574,11 @@ LEFT JOIN(
          GROUP BY resourcesid
     ) c ON        a.resourceid = c.resourcesid
 ```
+
+## Danger
+
+```danger
+delete、update 要命中索引，强烈推荐使用limit参数限制影响数量，避免锁表(多个事务并行时，即使每条影响数量不多也可能锁表)
+
+统计类数据的 delete 锁表问题可通过 增加版本号来解决，每次刷新数据使用新的版本号，定期清理过期的统计数据，避免更新时删除数据 
+```
