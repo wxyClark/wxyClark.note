@@ -489,6 +489,17 @@ SET status = new_status
 WHERE status = can_handle_status AND uniq_code = 唯一编码
 ```
 
+* 清理数据
+
+> 如果是清空表数据建议直接用 truncate
+
+```tip
+效率上 truncate 远高于 delete，应为 truncate 不走事务，不会锁表，也不会生产大量日志写入日志文件；
+truncate table table_name 后立刻释放磁盘空间，并重置 auto_increment 的值。
+
+delete 删除不释放磁盘空间，但后续 insert 会覆盖在之前删除的数据上。
+```
+
 ## SQL高级用法
 
 * SQL_CALC_FOUND_ROWS
