@@ -416,6 +416,37 @@ WHERE  tags IS NOT NULL
 }
 ```
 
+### 统计
+
+* terms.size有默认值 = 10
+> 不手动设置会导致统计数据缺少xx_status对应数据而展示统计结果为0 且sum_other_doc_count > 0
+
+```php
+private function es()
+{
+$query = [];
+$esParams = [
+            'size' => 0,
+            'query' => $query,
+            'aggs' => [
+                'total_group_by_xx_status' => [
+                    'terms' => [
+                        'field' => 'xx_status',
+                        'size' => '60',
+                    ],
+                    'aggs' => [
+                        'count' => [
+                            'value_count' => [
+                                'field' => 'xx_status'
+                            ]
+                        ]
+                    ]
+                ],
+            ],
+        ];
+}
+
+```
 
 ## ElasticSearch中的字段数据常被应用到以下场景
 
