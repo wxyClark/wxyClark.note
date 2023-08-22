@@ -14,3 +14,36 @@
 | A | B |C |
 | A | B |C |
 | A | B |C |
+
+## 中文
+
+* 文件路径有中文，修改文件路径
+```php
+$pattern = "/[\x{4E00}-\x{9FA5}]+/u";
+preg_match($pattern, $relativePath, $match);
+if (!empty($match)) {
+    $pathinfo = pathinfo($relativePath);
+    $relativePath = '/temp/'.microtime(true).rand(0,9999).'.'.$pathinfo['extension'];
+    $url = formatFileUrl($relativePath);
+}
+```
+
+* 特殊符号会导致oss地址无法访问,规范文件名
+```php
+function ossSafetyFileName(string $fileName)
+{
+    $pattern = "/[\x{4E00}-\x{9FA5}A-Za-z0-9-_.()]+$/u";
+    $char_arr = mb_str_split($fileName);
+    $matches = [];
+    foreach ($char_arr as $char) {
+        if (!preg_match($pattern, $char)) {
+            $matches[] = $char;
+        }
+    }
+    if ($matches) {
+        $fileName = str_replace($matches, '', $fileName);
+    }
+
+    return $fileName;
+}
+```
