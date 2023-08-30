@@ -448,6 +448,38 @@ $esParams = [
 
 ```
 
+### 子查询and条件(默认OR条件)
+```php
+$term = [];
+$range = [];
+$wildcard = [];
+$handler_query = [];
+$handler_must = [];
+if (!empty($params['operator_type_arr'])) {
+    $handler_query = ES::term($handler_query, 'handler.operator_type',array_values($params['operator_type_arr']));
+}
+
+//  节点负责人搜索
+if (!empty($params['handler_flag_arr']) && !empty($params['handler_user_name_arr'])) {
+    $handler_query = ES::term($handler_query, 'handler.flag', array_values($params['handler_flag_arr']));
+    $handler_query = ES::term($handler_query, 'handler.user_name', array_values($params['handler_user_name_arr']));
+}
+
+if (!empty($handler_query)) {
+    $handler_must = ES::nestedQuery($handler_must, 'handler', ["bool" => ["must" => $handler_query]]);
+}
+
+
+$query = [];
+$must = array_merge($term,$range,$wildcard,$handler_must);
+$must_not = [];
+
+$query['bool'] = [
+    'must' => $must,
+    'must_not' => $must_not,
+];
+```
+
 ## ElasticSearch中的字段数据常被应用到以下场景
 
 * 对一个字段进行排序
