@@ -452,7 +452,7 @@ $esParams = [
 ```php
 public function getSummaryByMultiColumns($params, $columns, $sort_by = 'asc')
     {
-        $query = $this->getFobMakeTimeCostEsQuery($params['mes_account_code'], $params);
+        $query = $this->getFobMakeTimeCostEsQuery($params['APP_USER_CODE'], $params);
 
         $aggs_key = 'group_by_multiple_fields';
         $sources = [];
@@ -524,7 +524,7 @@ public function getSummaryByMultiColumns($params, $columns, $sort_by = 'asc')
 ```php
 public function countTimeCostByOneColumn($params, $field, $sort_type = 'asc')
     {
-        $query = $this->getFobMakeTimeCostEsQuery($params['mes_account_code'], $params);
+        $query = $this->getFobMakeTimeCostEsQuery($params['APP_USER_CODE'], $params);
 
         $aggs_key = 'group_by_enum';
         $esParams = [
@@ -572,7 +572,7 @@ public function countTimeCostByOneColumn($params, $field, $sort_type = 'asc')
 ```php
 public function getCountByDay($params)
     {
-        $query = $this->getFobMakeTimeCostEsQuery($params['mes_account_code'], $params);
+        $query = $this->getFobMakeTimeCostEsQuery($params['APP_USER_CODE'], $params);
 
         $aggs_key = 'count_by_TIME_COLUMN';
         $esParams = [
@@ -610,6 +610,59 @@ public function getCountByDay($params)
         foreach ($aggregations as $item) {
             $count_list[] = [
                 'TIME_COLUMN' => DatetimeHelper::timestampMsToTimeStr($item['key']),
+                'cnt' => $item['doc_count'],
+            ];
+        }
+
+        return  $count_list;
+    }
+```
+
+### 按子文档单一字段维度统计数据
+```php
+public function getCountByWebsiteCode($params)
+    {
+        $query = $this->getFobMakeTimeCostEsQuery($params['APP_USER_CODE'], $params);
+
+        $aggs_key = 'group_by_enum';
+        $field = 'website_code';
+        $path = 'p_make_sample_order';
+        $nested_aggs_key = 'group_by_website_code';
+        $esParams = [
+            "size" => 0,
+            'query' => $query,
+            'aggs' => [
+                $aggs_key => [
+                    'nested' => [
+                        'path' => 'p_make_sample_order',
+                    ],
+
+                    'aggs' => [
+                        $nested_aggs_key => [
+                            'terms' => [
+                                'field' => $path.'.'.$field,
+                                'size' => '1000',   //  站点数量
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            'sort' =>[
+                [
+                    $path .'.'. $field => ['order' => 'asc'],
+                ]
+            ],
+        ];
+
+        $index = config('esindex.mes_fob_time_cost.' . env('APP_ENV'));
+        $list = ES::connection()->index($index)->query($esParams);
+
+        $aggregations = !empty($list['aggregations'][$aggs_key][$nested_aggs_key]['buckets']) ? $list['aggregations'][$aggs_key][$nested_aggs_key]['buckets'] : [];
+
+        $count_list = [];
+        foreach ($aggregations as $item) {
+            $count_list[] = [
+                $field => $item['key'],
                 'cnt' => $item['doc_count'],
             ];
         }
