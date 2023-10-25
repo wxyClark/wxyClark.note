@@ -205,6 +205,13 @@ MySQL InnoDB 的 REPEATABLE-READ（可重读）并不保证避免幻读，需要
 而这个加锁度使用到的机制就是 Next-Key Locks。
 ```
 
+
+```danger
+MySQL InnoDB 的 delete 使用 业务条件 删除数据 即使是 uniq_key 也会造成间隙锁 导致并行死锁问题
+事务中的删除操作 尽可能 先查询数据记录的id，再通过id删除数据
+```
+
+
 ### 如何加锁
 
 ```danger
