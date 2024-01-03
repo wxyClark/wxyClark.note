@@ -73,6 +73,7 @@ yum install gcc gcc-c++ autoconf automake
 
 pecl install Xdebug
 
+dnf install mlocate
 locate php.ini
 # 添加如下代码
 zend_extension="/usr/lib64/php/modules/xdebug.so"
@@ -85,4 +86,18 @@ chmod +x xdebug.so
 cp modules/xdebug.so /usr/local/php/lib/php/extensions/no-debug-non-zts-20210902
 # Create /usr/local/php/conf.d/99-xdebug.ini and add the line:
 zend_extension = xdebug
+```
+
+## 安装Docker
+
+```shell
+ sudo yum update
+ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+ sudo yum list docker-ce --showduplicates | sort -r
+ sudo yum install docker-ce-3:24.0.6-1.el8
+ 
+ # 启动并加入开机启动
+ sudo systemctl start docker
+ sudo systemctl enable docker
 ```

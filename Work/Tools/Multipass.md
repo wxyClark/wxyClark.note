@@ -7,7 +7,8 @@
 * 设置 虚拟机名称 -n; CPU数量 -c; 内存 -m; 硬盘 -d
 ```shell
 cd /c/Multipass/bin
-./multipass launch -n devTest -c 1 -m 2G -d 32G
+./multipass launch -n devTest -c 2 -m 6G -d 32G
+-- 宝塔安装Mysql8要求6G以上内存
 
 # 挂载宿主机共享目录
 ./multipass set local.privileged-mounts=true
@@ -58,11 +59,12 @@ sudo apt update
 sudo apt install php8.2
 
 # 安装扩展
-apt-get install php-mcrypt
-apt-get install php-curl
-apt-get install php-gd
-apt-get install php-mbstring
-apt-get install php8.2-simplexml
+sudo apt-get install php-mcrypt
+sudo apt-get install php-curl
+sudo apt-get install php-gd
+sudo apt-get install php-mbstring
+sudo apt-get install php8.2-simplexml
+sudo apt-get install php-zip
 ```
 
 ## 宝塔
