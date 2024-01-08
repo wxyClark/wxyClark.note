@@ -8,6 +8,8 @@
 分组之间使用 sleep
 
 记录总耗时,写入日志，不要在webmin页面输出
+
+页面默认排序是[update_at => DESC]，脚本更新时不修改update_at，查出原值用于update使得update_at不受脚本影响
 ```
 
 ## 遍历方式

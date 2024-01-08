@@ -13,7 +13,7 @@ memory=4GB
 swap=0
 localhostForwarding=true
 ```
-在用户目录下新建文件 .wslconfig
+
 
 ## 基础命令
 
