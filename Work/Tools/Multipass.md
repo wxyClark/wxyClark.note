@@ -7,12 +7,12 @@
 * 设置 虚拟机名称 -n; CPU数量 -c; 内存 -m; 硬盘 -d
 ```shell
 cd /c/Multipass/bin
-./multipass launch -n devTest -c 2 -m 6G -d 32G
+./multipass launch -n devTest -c 2 -m 8G -d 50G
 -- 宝塔安装Mysql8要求6G以上内存
 
 # 挂载宿主机共享目录
 ./multipass set local.privileged-mounts=true
-./multipass mount e:\multipassData devTest:/opt/data
+./multipass mount e:\DevMultipassData dev:/data
 
 # 取消挂载
 ./multipass unmount 虚拟机名
