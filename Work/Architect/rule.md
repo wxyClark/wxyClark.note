@@ -40,3 +40,5 @@ sort: 1
 ## 数据精度
 * number_format 多保留一位小数，或转为整数
 * 加bcadd() 、减 bcsub() 、 乘bcmul() 、除 bcdiv() 的第三个参数 $scale 保留小数位数是直接截取，不进行四舍五入
+* 金额比较应使用 bccomp(string $num1, string $num2, ?int $scale = null): int 指定精度，避免浮点数影响
+> 两个数相等时返回 0； num1 比 num2 大时返回 1； 其他则返回 -1。
