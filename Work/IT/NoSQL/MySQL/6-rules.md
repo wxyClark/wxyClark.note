@@ -113,6 +113,10 @@ varchar最多存65535字节(在utf8字符集下最多存21844个字符,超过会
 
 ```sql
 INSERT INTO user (`username`,`age`) VALUES ('alicfeng',23);
+
+INSERT INTO NEW_TABLE_NAME 
+SELECT * FROM OLD_TABLE_ANME
+WHERE CONDITION ;
 ```
 
 ### 【UPDATE】
