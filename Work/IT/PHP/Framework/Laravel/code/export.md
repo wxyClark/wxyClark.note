@@ -33,6 +33,10 @@ public function getExportData($params)
         throw new Excepiton('超出导出最大数量限制，请缩小范围后再试', $errCode);
     }
 
+    //  导出要求是和页面保持相同的排序规则——默认是按更新时间逆序 会导致数据不准:
+    //  读取第1页数据的时候 单据A是第一页的最后一条数据
+    //  读取第2页数据的时候 因为其他单据AA 操作过 出现在分页的第1页导致获取不到，单据A出现在了第2页 导致重复读取
+    //  【结论】导出数据应按id排序，补充参数min_id, 不能按当前查询的总数据指定获取数据条数，导出过程中数据状态可能变化
     $list = $repository->getList($params, $fields);
 
     //  格式化导出数据，注意bigIng转为string
