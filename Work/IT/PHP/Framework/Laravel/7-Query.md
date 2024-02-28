@@ -18,8 +18,13 @@ return $result ? $result->toArray(): [];
 
 联表查询 结果集转数组：return json_decode(json_encode($result), true);
 
+打印SQL：
+$sql = str_replace('?', '%s', $query->toSql());
+$sql = sprintf($sql, ...$query->getBindings());
+dd($sql);
 
 ```
+[快捷打印 Laravel 中的数据库查询（SQL）语句](https://learnku.com/articles/5166/quick-print-laravel-database-query-sql-statement)
 
 ## collect()
 
