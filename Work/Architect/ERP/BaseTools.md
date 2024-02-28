@@ -3,14 +3,18 @@
 ## Helpers 数据处理帮助类
 
 * 和数据库无交互的数据处理方法、算法按类型封装
-> CacheHelper
+> ArrayHelper 数组处理(比较、排序、计算、过滤、转换)
+> CacheHelper 缓存处理(读取、更新)
+> Captcha 验证码处理
+> ColorHelper 颜色定义
 > DatetimeHelper
-> NumberHelper
-> StringHelper
-> ArrayHelper
-> FileHelper
-> XxxBusinessHelper
+> ExcelHelper 导入导出的通用方法
+> FileHelper 文件处理
 > ListHelper 数据集合补充公共数据的映射(如xx_code需要获取xx_name等，在系统内多个列表都需要处理，须封装)
+> NumberHelper  数值处理
+> StringHelper  字符串处理
+> ValidateHelper 特殊的数据校验
+> XxxBusinessHelper 业务相关的通用处理
 
 ## Excel导入
 
@@ -52,4 +56,14 @@
 
 * 层级数据  缓存，可分成多套：铺平、组装成树状结构、组装成父子结构 (如：地址、无限级分类)
 * 流程类数据 区分版本号缓存，兼容多版本数据并行  (如：流转路径、触发规则)
-* 标识类数据 通过静态方法读取缓存得到map (如：状态、类型、标签)
+* 标识类数据 通过静态方法读取(指定参数)缓存得到map (如：状态、类型、标签)
+
+参考：
+标识类常量主表 tag_const_table字段：const_code(PK)、app、module、table、column、version
+标识类常量明细 ag_const_detail字段：(const_code、value)UNIQUE、const_key、name、desc、remark
+
+流程类数据主表 process_const_table字段：process_code(PK)、app、module、name、desc
+流程类数据操作 process_const_action字段：process_code、action_code(PK)、name、desc、remark
+流程类数据明细 process_const_detail字段：(process_code、action_code、version)UNIQUE、column、start、end、config(JSON配置触发的数据处理)
+
+层级数据表 xx_category_table字段：xx_code、parent_code、depth、sort、name、desc、remark
