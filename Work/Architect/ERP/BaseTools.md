@@ -71,3 +71,29 @@
 流程类数据明细 process_const_detail字段：(process_code、action_code、version)UNIQUE、column、start、end、config(JSON配置触发的数据处理)
 
 层级数据表 xx_category_table字段：xx_code、parent_code、depth、sort、name、desc、remark
+
+## 日志
+
+```danger
+数据流转、金额变更 等一定要记录日志，记录变更前、变更后的数据
+```
+
+### 单据日志
+```tips
+order_detail 变更怎么记录,数据处理是先删后增的
+```
+* 单据日志表 order_code、action_type、remark、old_value(JOSN)、new_value(JOSN)、changed_at(与主表的updated_at取同一个值)、changed_by
+
+### 明细日志
+
+* 明细日志表 table_name、order_code、from_app、action_type、column、old_value(JOSN)、new_value(JOSN)、changed_at(与主表的updated_at取同一个值)、changed_by
+
+### 时间触发日志
+
+* event_name、params、result、event_at、handle_at
+
+
+### 父子日志表
+
+* 主日志 log_code、order_code、action_type、remark、changed_at(与主表的updated_at取同一个值)、changed_by
+* 子日志 log_code、order_code、table、column、old_value(JOSN)、new_value(JOSN)
