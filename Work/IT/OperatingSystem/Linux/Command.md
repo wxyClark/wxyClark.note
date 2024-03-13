@@ -23,7 +23,9 @@
 
 | 命令    | 用途  | 注释  |
 | ---- | ---- |---- |
-| grep 'keywords' target.file | 在制定文件中查找文本 | |
+| grep 'keywords' target.file | 在指定单文件中查找文本 | |
+| grep -r PO202312051010206533 ./ | 在指定目录中查找文本 | |
+| find . -type f -name "*2024-01-16*" -print0 | xargs -0 grep "PO202312051010206533" | 在指定多文件中查找文本 | |
 
 
 ## 统计
