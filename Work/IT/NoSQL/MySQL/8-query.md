@@ -345,6 +345,9 @@ where JSON_EXTRACT(column_name,'$.key') in ($string)
 SELECT id, config FROM `sql_model` 
 WHERE JSON_CONTAINS(JSON_EXTRACT(`config`,'$.fieldModels'), JSON_OBJECT('valueMapping', @valueMapping)) > 0;
 
+-- 查询JSON字段(数组)中是否包含某个值
+SELECT * FROM menus
+WHERE JSON_CONTAINS(support_coop_mode, '3');
 
 -- 时间格式
 SELECT
