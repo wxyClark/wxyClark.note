@@ -20,12 +20,13 @@ laravel框架的核心就是个Ioc容器即服务容器
 
 | 类 | 注入 | 处理 | 常用方法 |
 | ---- | ---- | ---- | ---- |
-| Controller | Request <br> Service | 权限校验，参数校验 <br> 调用 service 处理业务逻辑 <br> 返回 | index、detail、add、edit、export、changeStatus | 
-| Service | Repository | 接收参数，处理业务逻辑 <br> 复杂业务使用事务处理 <br> 调用 repository 与数据库交互 | getIndex、getDetail、add、edit、exportData、changeStatus | 
-| Repository | Model | 与数据库交互 <br> 封装基础方法 | insert、batchUpdate、totalCount、getList、getMap、delete、condition、 | 
+| Controller | Request <br> Service | 权限校验，参数校验 <br> 调用 service 处理业务逻辑 <br> 返回 | index、detail、report、add、edit、export、changeStatus | 
+| SearchService <br> 查询、导出 | Repository | 接收参数，处理查询逻辑 <br> 外键参数转换 <br> 调用 repository 与数据库交互 | getIndex、getDetail、getDetailList、report、exportData | 
+| ProcessService <br> 编辑、流转 | Repository | 接收参数，处理业务逻辑 <br> 复杂业务使用事务处理 <br> 调用 repository 与数据库交互 | add、edit、changeStatus | 
+| Repository | Model | 与数据库交互 <br> 封装基础方法 | insert、batchUpdate、total、list、getMap、delete、condition、getListByMinId | 
 | Model |  | 定义关联的数据表、主键、更新时间字段名 |  | 
 | Request |  | 定义校验规则 <br> 校验参数 | rules | 
-| Enums |  | 定义常量 <br> 获取常量映射 <br> 定义常量分组 | getNameByconst() | 
+| Enums |  | 定义常量 <br> 获取常量映射 <br> 定义常量分组 | getNameByConst() | 
 | Helper |  | 分装常用数据处理 func | getSth | 
 
 * 使用社区认可的标准Laravel工具

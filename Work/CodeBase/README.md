@@ -9,3 +9,9 @@
 
 * 只记录业务数据变更，不记录 id,updated_at、updated_by
 * 设置通用的日志数据格式、日志生成方式
+
+## 代码组织
+
+* Controllers
+> 一级目录：web api middleware openApi
+> 二级目录：模块/子项
