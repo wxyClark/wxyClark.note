@@ -317,7 +317,6 @@ FROM table_name
 where JSON_EXTRACT(column_name,'$.key') in ($string)
 
 
-
 -- 需求：查找 config JSON字段（对象类型）中 fieldModels（数组类型）数组字段中 valueMapping（整形）值等于 17 的记录
 -- 表字段：id, config
 -- config字段格式：
@@ -360,6 +359,26 @@ WHERE
     CONVERT_TZ(TRIM('"' from JSON_EXTRACT( origin_data, '$.createdAt' )),"+08:00","+08:00") > CONVERT_TZ(TRIM('"' from JSON_EXTRACT( origin_data, '$.completedAt' )),'+00:00','+08:00')
   limit 10
 ```
+
+* JSON数组中是否包含某个值
+> JSON_CONTAINS() 用于判断一个 JSON 文档是否包含另一个 JSON 文档作为子文档
+```sql
+SELECT *  
+FROM users  
+WHERE JSON_CONTAINS(info->'$.addresses', '{"city": "New York"}', '$.addresses[*]');
+```
+```php
+$uq = 'unique_code';
+$query = $this->model->where('uq', $uq);
+if (!empty($params['duty_handler_arr'])) {
+    $sub_query_arr = [];
+    foreach ($params['duty_handler_arr'] as $duty_handler) {
+        $sub_query_arr[] = " JSON_CONTAINS(duty_handler, '{$duty_handler}') ";;
+    }
+    $query->whereRaw('('.implode(' or ', $sub_query_arr).')');
+}
+```
+
 
 
 ## 排序
