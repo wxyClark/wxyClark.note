@@ -379,6 +379,38 @@ if (!empty($params['duty_handler_arr'])) {
 }
 ```
 
+* 复杂json查询
+> 多维对象数据下 某个对象数组 下的某个key值条件
+```mysql
+SELECT
+  id, xx_code, xx_info
+FROM
+  xx_order
+WHERE
+  `id` > 0  AND (
+  JSON_CONTAINS( xx_info -> '$[0].rows[*].xx_key', JSON_ARRAY( 'xx_value' )) OR
+  JSON_CONTAINS( xx_info -> '$[1].rows[*].xx_key', JSON_ARRAY( 'xx_value' ))
+  )
+ORDER BY id ASC LIMIT 100 OFFSET 0
+
+# xx_info数据示例：
+# [
+#     
+#     {
+#         "rows":[{"xx_no":"202409150044","xx_name":"xx_name1"},{"xx_no":"202409150045","xx_name":"绿蓝"}],
+#         "columns":[{"key":"xx_no","hide":true,"value":"xx编号","required":false},{"key":"xx_name","hide":true,"value":"xx代码","required":false}]
+#     },
+#     {
+#         "rows":[{"xx_no":"202409060044","xx_name":"xx_name2"},{"xx_no":"202308230002","xx_name":"通用"},{"xx_no":"202308230003","xx_name":"通用"},{"xx_no":"202409150047","xx_name":"墨绿色"},{"xx_no":"202308231597","xx_name":"米白色"}],
+#         "columns":[{"key":"xx_no","hide":true,"value":"xx编号","required":false},{"key":"xx_name","hide":true,"value":"xx代码","required":false}]
+#     },
+#     {
+#         "rows":[],
+#         "columns":[{"key":"unit","hide":false,"value":"单位","required":false}]
+#     }
+# ]
+```
+
 
 
 ## 排序
