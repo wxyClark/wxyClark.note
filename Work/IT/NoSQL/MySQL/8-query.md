@@ -389,7 +389,8 @@ FROM
 WHERE
   `id` > 0  AND (
   JSON_CONTAINS( xx_info -> '$[0].rows[*].xx_key', JSON_ARRAY( 'xx_value' )) OR
-  JSON_CONTAINS( xx_info -> '$[1].rows[*].xx_key', JSON_ARRAY( 'xx_value' ))
+  # JSON_ARRAY( 'xx_value' ) 与 '"xx_value"' 写法 等价
+  JSON_CONTAINS( xx_info -> '$[1].rows[*].xx_key', '"xx_value"')
   )
 ORDER BY id ASC LIMIT 100 OFFSET 0
 
@@ -409,6 +410,25 @@ ORDER BY id ASC LIMIT 100 OFFSET 0
 #         "columns":[{"key":"unit","hide":false,"value":"单位","required":false}]
 #     }
 # ]
+
+## 优化效率
+SELECT
+  id, xx_code, xx_info
+FROM
+  (
+    SELECT
+      id, xx_code, xx_info,
+      JSON_CONTAINS(xx_info -> '$[0].rows[*].xx_key', '"xx_value"') AS contains_0,
+      JSON_CONTAINS(xx_info -> '$[1].rows[*].xx_key', '"xx_value"') AS contains_1
+    FROM
+      xx_order
+    WHERE
+      `id` > 0
+  ) AS subquery
+WHERE
+  contains_0 OR contains_1
+ORDER BY id ASC
+LIMIT 100 OFFSET 0;
 ```
 
 
