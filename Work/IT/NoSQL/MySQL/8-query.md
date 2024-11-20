@@ -660,6 +660,18 @@ LEFT JOIN(
     ) c ON        a.resourceid = c.resourcesid
 ```
 
+## 刷数而不影响updated_at字段的值
+> 避免影响数据排序
+```mysql
+UPDATE table_name
+SET column_key = 'value',
+    updated_at = CASE
+       WHEN 0 THEN	NOW()
+       ELSE updated_at
+    END
+WHERE condition_column = 'condition'
+```
+
 ## Danger
 
 ```danger
