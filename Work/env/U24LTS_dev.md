@@ -14,6 +14,7 @@ sudo add-apt-repository ppa:ondrej/php
 sudo apt update
 
 sudo apt install php8.3-common php8.3-fpm php8.3-{curl,redis,mysql,bcmath,imagick,mbstring,gd,xml,zip}
+sudo apt install php8.3-sqlite3
 ```
 
 * 基础软件安装
@@ -98,4 +99,18 @@ vim /etc/docker/daemon.json
 ```shell
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
+```
+
+## laravel sail
+
+* sqlite配置
+```shell
+cd laravel_PATH
+cp .env.sample .env
+php artisan key:generate
+php artisan sail:install
+./vendor/bin/sail up -d
+# vim /etc/hosts 添加 127.0.0.1 mysql 
+php artisan migrate
+# route/web.php 测试
 ```
