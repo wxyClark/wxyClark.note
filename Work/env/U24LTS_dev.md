@@ -2,13 +2,13 @@
 
 ## 基础环境
 
-* 软件源更新
+### 软件源更新
 ```shell
 sudo apt upgrade
 sudo apt update
 ```
 
-* php8.3安装
+### php8.3安装
 ```shell
 sudo add-apt-repository ppa:ondrej/php
 sudo apt update
@@ -17,7 +17,7 @@ sudo apt install php8.3-common php8.3-fpm php8.3-{curl,redis,mysql,bcmath,imagic
 sudo apt install php8.3-sqlite3
 ```
 
-* 基础软件安装
+### 基础软件安装
 ```shell
 sudo apt install git
 sudo apt install composer
@@ -27,11 +27,14 @@ sudo apt-get install terminator
 VSCode,Chrome,Typora
 ```
 
-* oh-my-zsh安装于配置
+### oh-my-zsh安装于配置
 ```shell
-sudo apt-get install -y zsh #安装
-which zsh                   #查看路径
-chsh -s /bin/zsh            #设为默认
+#安装
+sudo apt-get install -y zsh
+#查看路径
+which zsh
+#设为默认
+chsh -s /bin/zsh
 
 #安装oh-my-zsh
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
@@ -45,12 +48,13 @@ git clone https://gitee.com/Annihilater/zsh-syntax-highlighting.git ${ZSH_CUSTOM
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-#配置文件~/.zshrc
-#个人引入的插件
+#配置文件~/.zshrc 个人引入的插件
 plugins=(git sudo web-search zsh-autosuggestions zsh-syntax-highlighting)
 ```
 
-* Docker安装
+### Docker安装
+
+#### 安装
 ```shell
 # Run the following command to uninstall all conflicting packages:
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -79,14 +83,14 @@ sudo docker run hello-world
 systemctl start docker
 ```
 
-* 创建docker用户组并添加用户
+#### 创建docker用户组并添加用户
 ```shell
 sudo groupadd docker 
 sudo usermod -aG docker $USER
 docker run hello-world
 ```
 
-* 镜像源配置
+#### 镜像源配置
 ```shell
 vim /etc/docker/daemon.json
 { 
@@ -94,7 +98,7 @@ vim /etc/docker/daemon.json
 }
 ```
 
-* 开机启动
+#### 开机启动
 ```shell
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
