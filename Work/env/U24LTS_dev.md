@@ -23,7 +23,6 @@ sudo apt install git
 sudo apt install composer
 sudo apt install vim
 sudo apt-get install terminator
-sudo snap install todolist
 
 VSCode,Chrome,Typora
 ```
@@ -99,6 +98,23 @@ vim /etc/docker/daemon.json
 ```shell
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
+```
+
+* 如果提示缺少依赖，则执行如下命令解决：
+```shell
+sudo apt -f install
+```
+
+* 清理垃圾
+```shell
+# 清理缓存文件
+sudo apt-get clean
+# 清理旧版本的软件包
+sudo apt-get autoremove
+# 清理临时文件
+sudo apt-get autoclean
+# 清理无用的依赖关系
+sudo apt itude clean
 ```
 
 ## laravel sail
