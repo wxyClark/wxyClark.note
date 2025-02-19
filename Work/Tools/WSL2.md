@@ -2,7 +2,7 @@
 
 https://www.jianshu.com/p/5936e132061b
 
-* 使用Oracle Linux 8.5
+* 使用 Linux 8.5
 
 ## 修改默认登录用户为root
 
