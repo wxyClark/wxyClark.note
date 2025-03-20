@@ -70,3 +70,9 @@ print_r($array);
 > '0.000' > 0 => false;
 > 
 > '0' => true;
+
+
+* null 是一个空值，直接json_encode 会变成字符串 'null'
+```php
+$model['json_column'] = empty($column) ? null : json_encode($column, JSON_UNESCAPED_UNICODE);
+```
