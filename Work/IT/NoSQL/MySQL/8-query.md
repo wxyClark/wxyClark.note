@@ -431,6 +431,12 @@ ORDER BY id ASC
 LIMIT 100 OFFSET 0;
 ```
 
+* json为空或空数组
+```sql
+SELECT *  
+FROM table_name  
+WHERE JSON_LENGTH(json_column) = 0
+```
 
 
 ## 排序
