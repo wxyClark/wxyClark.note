@@ -1,7 +1,7 @@
 title: 学而实习之
 description: PHP GO NoSQL 学 而 实习 之
 
-theme: jekyll-rtd-theme  
+theme: null 
 
 # 评论功能
 gitalk:
