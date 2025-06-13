@@ -678,6 +678,15 @@ SET column_key = 'value',
 WHERE condition_column = 'condition'
 ```
 
+
+## 刷数更新SET类型数据
+> 避免影响数据排序
+```mysql
+UPDATE TABLE_NAME
+SET COLUMN = TRIM(BOTH ',' FROM REPLACE(CONCAT(',', COLUMN, ','), ',3,', ',3,8,'))
+WHERE FIND_IN_SET('3', COLUMN) > 0;
+```
+
 ## Danger
 
 ```danger
