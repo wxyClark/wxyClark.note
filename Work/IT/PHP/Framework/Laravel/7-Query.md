@@ -26,6 +26,23 @@ dd($sql);
 ```
 [快捷打印 Laravel 中的数据库查询（SQL）语句](https://learnku.com/articles/5166/quick-print-laravel-database-query-sql-statement)
 
+
+## 打印整个function中的所有SQL：
+```php
+function yourFunction() {
+    DB::enableQueryLog(); // 开启日志记录
+
+    // 你的业务逻辑（如：User::where('status', 1)->get()）
+    // 如果存在遍历，设置条件让遍历只走一次
+    
+    $queries = DB::getQueryLog(); // 获取日志
+    foreach ($queries as &$query_sql) {
+        $query_sql['full_sql'] = vsprintf(str_replace('?', "'%s'", $query_sql['query']), $query_sql['bindings']);
+    }
+    dd($queries); // 打印所有SQL及绑定参数
+}
+```
+
 ## collect()
 
 同一组数据需要按不同维度聚合，可以一次查询，对结果集再做分组计算
