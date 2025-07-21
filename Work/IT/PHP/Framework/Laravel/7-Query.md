@@ -38,6 +38,7 @@ function yourFunction() {
     $queries = DB::getQueryLog(); // 获取日志
     foreach ($queries as &$query_sql) {
         $query_sql['full_sql'] = vsprintf(str_replace('?', "'%s'", $query_sql['query']), $query_sql['bindings']);
+        unset($query_sql['bindings'], $query_sql['query'], $query_sql['time']);
     }
     dd($queries); // 打印所有SQL及绑定参数
 }
