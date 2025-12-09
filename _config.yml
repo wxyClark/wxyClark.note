@@ -1,14 +1,11 @@
-remote_theme: pages-themes/minimal@v0.2.0 
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+- jekyll-remote-theme
 title: 学而实习之
 description: PHP GO NoSQL 学 而 实习 之
 
 theme: null 
 
-markdown: kramdown  # GitHub Pages 唯一支持的引擎
-kramdown:
-  input: GFM  # 兼容 GitHub Flavored Markdown
-  syntax_highlighter: rouge  # 替代已废弃的 pygments
-permalink: /:title.html  # 统一链接格式，避免 404 错误
 
 # 评论功能
 gitalk:
