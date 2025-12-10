@@ -1,53 +1,41 @@
-DEBUG=JEKYLL_GITHUB_TOKEN=blank PAGES_API_URL=http://0.0.0.0
-ALIAS=jekyll-rtd-theme
-# checkout 	@git checkout assets/css/theme.min.css
-help:
-	@echo "HomePage: https://github.com/rundocs/${ALIAS}\n"
-	@echo "Usage:"
-	@echo "    make [subcommand]\n"
-	@echo "Subcommands:"
-	@echo "    install   Install the theme dependencies"
-	@echo "    format    Format all files"
-	@echo "    report    Make a report from Google lighthouse"
-	@echo "    clean     Clean the workspace"
-	@echo "    dist      Build the theme css and script"
-	@echo "    status    Display status before push"
-	@echo "    theme     Make theme as gem and install"
-	@echo "    build     Build the test site"
-	@echo "    server    Make a livereload jekyll server to development"
-	@echo "    checkout  Reset the theme minified css and script to last commit"
+# 基础配置
+JEKYLL_VERSION := 4.3.2
+SITE_DIR := _site
+GITHUB_REPO := https://github.com/wxyClark/wxyClark.github.io.git
+BRANCH := gh-pages
 
-checkout:
-	@git checkout _config.yml
-	@git checkout assets/js/theme.min.js
-
+# 安装依赖（首次运行或 Gemfile 更新时使用）
 install:
-	@gem install jekyll bundler
-	@npm install
-	@bundle install
+	bundle install --path vendor/bundle
 
-format:
-	@npm run format
+# 本地预览（带自动刷新）
+serve:
+	bundle exec jekyll serve --livereload --port 4000
 
-report:
-	@npm run report
+# 构建静态文件（生成到 _site 目录）
+build:
+	bundle exec jekyll build --future --unpublished
 
+# 清理构建产物
 clean:
-	@bundle exec jekyll clean
+	rm -rf $(SITE_DIR)
+	bundle exec jekyll clean
 
-dist: format clean
-	@npm run build
+# 部署到 GitHub Pages（需提前配置 Git 仓库）
+deploy: build
+	cd $(SITE_DIR) && \
+	git init && \
+	git add . && \
+	git commit -m "Deploy $(shell date +'%Y-%m-%d %H:%M')" && \
+	git push -f $(GITHUB_REPO) master:$(BRANCH) && \
+	cd .. && \
+	rm -rf $(SITE_DIR)/.git
 
-status: format clean checkout
-	@git status
-
-theme: dist
-	@gem uninstall ${ALIAS}
-	@gem build *.gemspec
-	@gem install *.gem && rm -f *.gem
-
-build: dist
-	@${DEBUG} bundle exec jekyll build --safe --profile
-
-server: dist
-	@${DEBUG} bundle exec jekyll server --safe --livereload
+# 帮助信息
+help:
+	@echo "可用命令:"
+	@echo "  make install   - 安装依赖（首次运行）"
+	@echo "  make serve     - 本地预览（访问 http://localhost:4000）"
+	@echo "  make build     - 构建静态文件到 _site 目录"
+	@echo "  make clean     - 清理构建产物"
+	@echo "  make deploy    - 构建并部署到 GitHub Pages"

@@ -14,13 +14,11 @@
 
 补救方式：恢复目录+README.md文件，git提交；删除旧目录，git提交；
 
-## jekyll-rtd-theme
+## jekyll-theme
 [Jekyll使用教程笔记](https://blog.csdn.net/weixin_34236869/article/details/91476448)
 
 README.MD文件 标识 当前目录是否自动展示的左侧目录上
 
-![CI](https://github.com/rundocs/jekyll-rtd-theme/workflows/CI/badge.svg?branch=develop)
-![jsDelivr](https://data.jsdelivr.com/v1/package/gh/rundocs/jekyll-rtd-theme/badge)
 
 Just another documentation theme compatible with GitHub Pages
 
@@ -40,7 +38,7 @@ This theme is inspired by [sphinx-rtd-theme](https://github.com/readthedocs/sphi
 ## Quick start
 
 ```yml
-remote_theme: rundocs/jekyll-rtd-theme
+remote_theme: pages-themes/cayman@v0.2.0
 ```
 
 You can [generate](https://github.com/rundocs/starter-slim/generate) with the same files and folders from [rundocs/starter-slim](https://github.com/rundocs/starter-slim/)
