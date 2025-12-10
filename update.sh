@@ -51,12 +51,7 @@ cp node_modules/roboto-fontface/fonts/roboto-slab/Roboto-Slab-Regular.woff2  ass
 cp -r node_modules/font-awesome/fonts/* assets/css/fonts && rm -f assets/css/fonts/FontAwesome.otf
 
 # jquery
-rm -f assets/js/jquery.min.js
-cp node_modules/jquery/dist/jquery.min.js assets/js
 
-# mermaid
-rm -f assets/js/mermaid.min.js
-cp node_modules/mermaid/dist/mermaid.min.js assets/js && sed -i '$d' assets/js/mermaid.min.js
 
 # format
 npm run format
