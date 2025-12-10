@@ -43,4 +43,3 @@ exclude:
   - package.json
   - package-lock.json
   - webpack.config.js
-  - jekyll-rtd-theme.gemspec
